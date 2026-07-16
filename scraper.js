@@ -66,7 +66,7 @@ const twitterUsernames = [
       console.log("Waiting for Apify to finish scraping (checking status in 15 seconds)...");
       await new Promise(resolve => setTimeout(resolve, 15000));
 
-      const statusResponse = await fetch(`https://api.apify.com/v2/acts/${actorName}/runs/${runId}?token=${APIFY_TOKEN}`);
+      const statusResponse = await fetch(`https://api.apify.com/v2/runs/${runId}?token=${APIFY_TOKEN}`);
       if (statusResponse.ok) {
         const statusData = await statusResponse.json();
         status = statusData.data.status;
@@ -78,8 +78,8 @@ const twitterUsernames = [
     if (status !== 'SUCCEEDED') {
       console.log(`\n[!] Run failed with status: ${status}. Fetching internal Apify logs for diagnostics...`);
       try {
-        // פנייה לכתובת ה-API הרשמית והנכונה של לוג הריצה
-        const logResponse = await fetch(`https://api.apify.com/v2/runs/${runId}/log?token=${APIFY_TOKEN}`);
+        // פנייה לכתובת ה-API הרשמית והמתוקנת עבור קבלת לוגים של ריצה ב-Apify
+        const logResponse = await fetch(`https://api.apify.com/v2/run-logs/${runId}?token=${APIFY_TOKEN}`);
         const logText = await logResponse.text();
         
         console.log("\n=================== APIFY INTERNAL LOGS ===================");
