@@ -17,21 +17,23 @@ const twitterUsernames = [
 ];
 
 (async () => {
-  console.log(`Starting Apify Twitter User Scraper for ${twitterUsernames.length} users...`);
+  console.log(`Starting Free Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // הגדרת הפרמטרים לבוט הפרופילים הייעודי (apidojo/twitter-user-scraper)
+  // המרת המשתמשים לשאילתות חיפוש בפורמט "from:username"
+  const searchQueries = twitterUsernames.map(username => `from:${username}`);
+
+  // הגדרת הפרמטרים ל-Actor החינמי (microworlds/twitter-scraper)
   const input = {
-    "twitterHandles": twitterUsernames,
-    "maxTweets": 40,             // סך הכל ציוצים לשלוף
-    "maxTweetsPerQuery": 2,      // עד 2 ציוצים מכל פרופיל
-    "scrapeType": "tweets"
+    "searchTerms": searchQueries,
+    "maxTweets": 40,
+    "tweetsSearchMode": "Latest"
   };
 
-  // שם ה-Actor הייעודי לפרופילים ב-Apify
-  const actorName = "apidojo~twitter-user-scraper"; 
+  // מזהה ה-Actor החינמי ב-Apify API
+  const actorName = "microworlds~twitter-scraper"; 
 
   try {
-    console.log(`Calling Apify Actor (${actorName.replace('~', '/')})...`);
+    console.log(`Calling Free Apify Actor (${actorName.replace('~', '/')})...`);
     
     // 1. הפעלת הריצה (Run) ב-Apify
     const runResponse = await fetch(`https://api.apify.com/v2/acts/${actorName}/runs?token=${APIFY_TOKEN}`, {
@@ -53,7 +55,7 @@ const twitterUsernames = [
     // 2. המתנה לסיום הריצה ב-Apify
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 5 * 60 * 1000; 
+    const timeoutLimit = 7 * 60 * 1000; // הגדלנו ל-7 דקות כי בוטים חינמיים לפעמים לוקחים קצת יותר זמן
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
@@ -87,40 +89,46 @@ const twitterUsernames = [
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
     // 4. עיבוד וסינון המידע למבנה הרצוי
+    // יצרנו מנגנון חילוץ סופר-גמיש (Robust Extraction) שמחפש שדות תחת כל השמות האפשריים שלהם
     const formattedTweets = rawItems
       .map(item => {
-        if (!item || item.noResults) return null;
+        if (!item || item.noResults || item.demo) return null;
 
-        // חילוץ טקסט
-        const text = item.full_text || item.text || (item.legacy && item.legacy.full_text) || '';
+        // איתור טקסט הציוץ
+        const text = item.fullText || item.text || item.full_text || (item.legacy && item.legacy.full_text) || '';
         if (!text) return null;
 
-        // חילוץ שם המשתמש
+        // איתור שם המשתמש
         let username = 'unknown';
-        if (item.user && item.user.screen_name) {
-          username = item.user.screen_name;
+        if (item.user && (item.user.screenName || item.user.screen_name || item.user.username)) {
+          username = item.user.screenName || item.user.screen_name || item.user.username;
+        } else if (item.username || item.screenName) {
+          username = item.username || item.screenName;
         } else if (item.core && item.core.user_results && item.core.user_results.result && item.core.user_results.result.legacy) {
           username = item.core.user_results.result.legacy.screen_name;
-        } else if (item.legacy && item.legacy.user_id_str) {
-          username = item.legacy.user_id_str;
         }
 
-        // חילוץ תאריך
-        const createdAt = item.created_at || (item.legacy && item.legacy.created_at) || new Date().toUTCString();
+        // איתור תאריך וחתימת זמן
+        const createdAt = item.createdAt || item.created_at || item.date || (item.legacy && item.legacy.created_at) || new Date().toUTCString();
         const timestamp = new Date(createdAt).getTime() || Date.now();
 
-        // חילוץ תמונות וסרטונים
-        const media = [];
-        const mediaSource = item.extended_entities || item.entities || (item.legacy && item.legacy.extended_entities) || (item.legacy && item.legacy.entities);
-        
-        if (mediaSource && mediaSource.media) {
-          mediaSource.media.forEach(m => {
-            if (m.media_url_https) media.push(m.media_url_https);
-          });
+        // איתור תמונות/סרטונים במבנה של Microworlds (בדרך כלל במערך בשם images או media)
+        let media = [];
+        if (item.images && Array.isArray(item.images)) {
+          media = item.images;
+        } else if (item.media && Array.isArray(item.media)) {
+          media = item.media.map(m => typeof m === 'string' ? m : (m.url || m.media_url_https));
+        } else {
+          const legacyMedia = item.extended_entities || item.entities || (item.legacy && item.legacy.extended_entities);
+          if (legacyMedia && legacyMedia.media) {
+            legacyMedia.media.forEach(m => {
+              if (m.media_url_https) media.push(m.media_url_https);
+            });
+          }
         }
 
         return {
-          id: item.id_str || (item.legacy && item.legacy.id_str) || String(item.id),
+          id: item.id_str || item.idStr || (item.legacy && item.legacy.id_str) || String(item.id || ''),
           username: username,
           text: text,
           created_at: createdAt,
@@ -139,7 +147,7 @@ const twitterUsernames = [
       console.log(`\nFinished! Successfully updated tweets.json with ${formattedTweets.length} tweets.`);
     } else {
       if (rawItems.length > 0) {
-        console.log("Raw item example:", JSON.stringify(rawItems[0], null, 2));
+        console.log("Raw item example to help debug:", JSON.stringify(rawItems[0], null, 2));
       }
       throw new Error("Scraping finished but no valid tweets could be parsed from the dataset.");
     }
