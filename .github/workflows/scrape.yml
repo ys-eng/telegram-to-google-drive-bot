@@ -19,10 +19,12 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-on-version: '18'
+        node-version: '18'
 
-    # 3. מתקין את התלויות (Puppeteer)
+    # 3. מתקין את התלויות בלי להוריד דפדפן כבד מחדש
     - name: Install Dependencies
+      env:
+        PUPPETEER_SKIP_DOWNLOAD: 'true'
       run: npm install
 
     # 4. מריץ את הסקריפט
