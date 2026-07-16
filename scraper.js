@@ -18,19 +18,22 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // הגדרת הפרמטרים לבוט הרשמי והמעודכן של Apidojo (Twitter Scraper)
+  // הגדרות הקלט ל-Scraper
   const input = {
     "twitterHandles": twitterUsernames,
-    "maxTweets": 40, // סך הכל ציוצים שנרצה לאסוף בריצה הזו
-    "maxTweetsPerQuery": 2, // 2 ציוצים אחרונים מכל פרופיל (חוסך המון קרדיט וזמן)
+    "maxTweets": 40, 
+    "maxTweetsPerQuery": 2, 
     "scrapeType": "tweets"
   };
 
+  // נשתמש ב-Actor ID הקבוע של ה-Twitter Scraper של Apidojo
+  const actorId = "2sS2ZmqE6v0g797gC"; 
+
   try {
-    console.log("Calling Apify Actor (apidojo/twitter-scraper)...");
+    console.log(`Calling Apify Actor by ID (${actorId})...`);
     
-    // 1. הפעלת ה-Actor המעודכן
-    const runResponse = await fetch(`https://api.apify.com/v2/acts/apidojo~twitter-scraper/runs?token=${APIFY_TOKEN}`, {
+    // 1. הפעלת ה-Actor באמצעות ה-ID שלו
+    const runResponse = await fetch(`https://api.apify.com/v2/acts/${actorId}/runs?token=${APIFY_TOKEN}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(input)
@@ -59,7 +62,7 @@ const twitterUsernames = [
       console.log("Waiting for Apify to finish scraping (checking status in 15 seconds)...");
       await new Promise(resolve => setTimeout(resolve, 15000));
 
-      const statusResponse = await fetch(`https://api.apify.com/v2/acts/apidojo~twitter-scraper/runs/${runId}?token=${APIFY_TOKEN}`);
+      const statusResponse = await fetch(`https://api.apify.com/v2/acts/${actorId}/runs/${runId}?token=${APIFY_TOKEN}`);
       if (statusResponse.ok) {
         const statusData = await statusResponse.json();
         status = statusData.data.status;
@@ -82,13 +85,11 @@ const twitterUsernames = [
     const rawItems = await datasetResponse.json();
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-    // 4. מיפוי וניקוי המידע למבנה המוכר של גוגל שיטס
+    // 4. מיפוי וניקוי המידע
     const formattedTweets = rawItems
-      .filter(item => item && (item.full_text || item.text)) // סינון פריטים ריקים
+      .filter(item => item && (item.full_text || item.text))
       .map(item => {
         const text = item.full_text || item.text || '';
-        
-        // חילוץ מדיה (תמונות/סרטונים)
         const media = [];
         if (item.extended_entities && item.extended_entities.media) {
           item.extended_entities.media.forEach(m => {
@@ -110,7 +111,7 @@ const twitterUsernames = [
         };
       });
 
-    // מיון מהחדש ביותר לישן ביותר
+    // מיון
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
 
     // שמירה
@@ -123,6 +124,6 @@ const twitterUsernames = [
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
-    process.exit(1); // מעביר איקס אדום ל-GitHub Actions במקרה של כשל
+    process.exit(1);
   }
 })();
