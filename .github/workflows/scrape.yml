@@ -2,36 +2,28 @@ name: Run Twitter Scraper
 
 on:
   schedule:
-    # מריץ את האקשן בכל שעה עגולה (לפי שעון UTC)
     - cron: '0 * * * *'
-  workflow_dispatch: # מאפשר לך להפעיל את זה גם ידנית בלחיצת כפתור
+  workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. מוריד את הקוד מה-Repository (משודרג ל-v4)
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # 2. מתקין את סביבת Node.js (משודרג ל-v4)
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '24' # מעודכן לסטנדרט של 2026
 
-    # 3. מתקין את התלויות בלי להוריד דפדפן כבד מחדש
     - name: Install Dependencies
-      env:
-        PUPPETEER_SKIP_DOWNLOAD: 'true'
       run: npm install
 
-    # 4. מריץ את הסקריפט
     - name: Run Scraper Script
       run: node scraper.js
 
-    # 5. דוחף את קובץ ה-JSON המעודכן בחזרה לפרויקט שלך
     - name: Commit and Push Changes
       run: |
         git config --global user.name "github-actions[bot]"
