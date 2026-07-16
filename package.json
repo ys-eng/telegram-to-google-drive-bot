@@ -1,9 +1,7 @@
 {
   "name": "twitter-scraper",
   "version": "1.0.0",
-  "description": "Scrapes Twitter using Puppeteer on GitHub Actions",
+  "description": "",
   "main": "scraper.js",
-  "dependencies": {
-    "puppeteer": "^21.6.0"
-  }
+  "dependencies": {}
 }
