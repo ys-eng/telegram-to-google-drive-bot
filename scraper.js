@@ -19,11 +19,14 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // הגדרת הפרמטרים לבוט הרשמי
+  // המרת שמות המשתמשים לפורמט שאילתת חיפוש של טוויטר (למשל: "from:amit_segal")
+  const searchQueries = twitterUsernames.map(username => `from:${username}`);
+
+  // הגדרת הפרמטרים המדויקים לבוט apidojo/tweet-scraper
   const input = {
-    "twitterHandles": twitterUsernames,
-    "maxTweets": 40, 
-    "maxTweetsPerQuery": 2, 
+    "queries": searchQueries,
+    "maxTweets": 46,             // סך הכל ציוצים מקסימלי לכל הריצה
+    "maxTweetsPerQuery": 2,      // 2 ציוצים אחרונים מכל משתמש (23 משתמשים * 2 = 46 ציוצים)
     "scrapeType": "tweets"
   };
 
@@ -85,15 +88,14 @@ const twitterUsernames = [
     const rawItems = await datasetResponse.json();
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-    // 4. עיבוד וסינון המידע למבנה הרצוי (מותאם למבנה החדש של Apidojo)
+    // 4. עיבוד וסינון המידע למבנה הרצוי
     const formattedTweets = rawItems
       .map(item => {
-        if (!item) return null;
+        if (!item || item.noResults) return null; // דילוג על הודעות ריקות כמו noResults
 
-        // חילוץ טקסט - מנסה ממספר מקומות אפשריים ב-JSON של Apidojo
+        // חילוץ טקסט - מנסה ממספר מקומות אפשריים
         const text = item.full_text || item.text || (item.legacy && item.legacy.full_text) || '';
         
-        // אם אין טקסט בכלל, נתעלם מהפריט הזה
         if (!text) return null;
 
         // חילוץ שם המשתמש
@@ -103,7 +105,7 @@ const twitterUsernames = [
         } else if (item.core && item.core.user_results && item.core.user_results.result && item.core.user_results.result.legacy) {
           username = item.core.user_results.result.legacy.screen_name;
         } else if (item.legacy && item.legacy.user_id_str) {
-          username = item.legacy.user_id_str; // גיבוי
+          username = item.legacy.user_id_str;
         }
 
         // חילוץ תאריך
@@ -129,7 +131,7 @@ const twitterUsernames = [
           media: media
         };
       })
-      .filter(item => item !== null); // מסנן החוצה פריטים שלא הצלחנו לחלץ מהם טקסט
+      .filter(item => item !== null); // מסנן החוצה פריטים שלא הצלחנו לחלץ מהם טקסט או שהיו ריקים
 
     // מיון מהחדש ביותר לישן ביותר
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
@@ -139,8 +141,9 @@ const twitterUsernames = [
       fs.writeFileSync('tweets.json', JSON.stringify(formattedTweets, null, 2));
       console.log(`\nFinished! Successfully updated tweets.json with ${formattedTweets.length} tweets.`);
     } else {
-      // הדפסת דוגמה קטנה מהמבנה הגולמי ללוג כדי שנוכל לחקור במקרה של כשל
-      console.log("Raw item example:", JSON.stringify(rawItems[0], null, 2));
+      if (rawItems.length > 0) {
+        console.log("Raw item example:", JSON.stringify(rawItems[0], null, 2));
+      }
       throw new Error("Scraping finished but no valid tweets could be parsed from the dataset.");
     }
 
