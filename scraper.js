@@ -7,8 +7,8 @@ if (!APIFY_TOKEN) {
   process.exit(1);
 }
 
-// רשימת המשתמשים שאתה עוקב אחריהם
-const twitterUsernames = [
+// רשימת כל המשתמשים
+const allTwitterUsernames = [
   'yoelituv', 'avi__blum', 'arivlin1', 'AryeErlich', 'moshe_nayes', 
   'Israelcohen911', 'ishaycoen', 'yankihebrew', 'yossilevii', 'YakiAdamker', 
   'YinonMagal', 'amit_segal', 'AviMoskov', 'avrahamFriend', 'BismuthBoaz', 
@@ -16,18 +16,27 @@ const twitterUsernames = [
   'KemachIsrael', 'Machon_Haredi', 'yehuditmiletzky', 'mk_moshe_gafni'
 ];
 
-(async () => {
-  console.log(`Starting Free Apify Twitter Scraper for ${twitterUsernames.length} users...`);
+// פונקציה לבחירת X משתמשים אקראיים מהרשימה
+function getRandomBatch(arr, size) {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, size);
+}
 
-  // המרת המשתמשים למבנה ה-startUrls הסטנדרטי של Apify
-  const startUrls = twitterUsernames.map(username => ({
+// נבחר 3 משתמשים אקראיים בכל ריצה כדי שהסריקה תסתיים תוך 2 דקות
+const activeBatch = getRandomBatch(allTwitterUsernames, 3);
+
+(async () => {
+  console.log(`Starting Free Apify Twitter Scraper for a random batch of ${activeBatch.length} users:`);
+  console.log(`Selected users: ${activeBatch.join(', ')}`);
+
+  // המרת המשתמשים שנבחרו למבנה ה-startUrls הסטנדרטי
+  const startUrls = activeBatch.map(username => ({
     url: `https://x.com/${username}`
   }));
 
-  // הגדרת הפרמטרים במבנה התקני ביותר של Apify
   const input = {
     "startUrls": startUrls,
-    "maxTweets": 40
+    "maxTweets": 15 // 15 ציוצים למשתמש זה מעל ומעבר כדי לקבל את העדכונים האחרונים
   };
 
   const actorName = "motx11~twitter-x-scraper-fxtwitter"; 
@@ -53,19 +62,18 @@ const twitterUsernames = [
     const defaultDatasetId = runData.data.defaultDatasetId;
     console.log(`Run started successfully! Run ID: ${runId}`);
 
-    // 2. המתנה לסיום הריצה ב-Apify
+    // 2. המתנה לסיום הריצה ב-Apify (עם מגבלת זמן שפויה של 8 דקות כעת)
     let status = 'RUNNING';
     const startTime = Date.now();
-    // הגדלנו את מגבלת הזמן ל-15 דקות כדי לתת לטוויטר לעבד את כל 23 המשתמשים
-    const timeoutLimit = 15 * 60 * 1000; 
+    const timeoutLimit = 8 * 60 * 1000; 
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
-        throw new Error("Timeout reached while waiting for Apify to finish (exceeded 15 minutes).");
+        throw new Error("Timeout reached while waiting for Apify to finish.");
       }
 
-      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Waiting 20 seconds for next check...`);
-      await new Promise(resolve => setTimeout(resolve, 20000));
+      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Waiting 15 seconds for next check...`);
+      await new Promise(resolve => setTimeout(resolve, 15000));
 
       const statusResponse = await fetch(`https://api.apify.com/v2/runs/${runId}?token=${APIFY_TOKEN}`);
       if (statusResponse.ok) {
@@ -76,7 +84,7 @@ const twitterUsernames = [
 
     console.log(`Apify run finished with status: ${status}`);
 
-    // אם הריצה נכשלה בסופו של דבר - נשלוף את הלוגים הפנימיים מתוך ה-Run עצמו ב-Apify
+    // אם הריצה נכשלה
     if (status !== 'SUCCEEDED') {
       console.log(`\n[!] Run failed with status: ${status}. Fetching internal Apify logs for diagnostics...`);
       try {
@@ -113,11 +121,9 @@ const twitterUsernames = [
       .map(item => {
         if (!item || item.noResults || item.demo) return null;
 
-        // איתור טקסט הציוץ
         const text = item.text || item.fullText || item.full_text || (item.legacy && item.legacy.full_text) || '';
         if (!text) return null;
 
-        // איתור שם המשתמש
         let username = 'unknown';
         if (item.author && item.author.screen_name) {
           username = item.author.screen_name;
@@ -127,11 +133,9 @@ const twitterUsernames = [
           username = item.username;
         }
 
-        // איתור תאריך וחתימת זמן
         const createdAt = item.createdAt || item.created_at || item.date || (item.legacy && item.legacy.created_at) || new Date().toUTCString();
         const timestamp = new Date(createdAt).getTime() || Date.now();
 
-        // איתור תמונות/מדיה
         let media = [];
         if (item.media && Array.isArray(item.media)) {
           media = item.media.map(m => typeof m === 'string' ? m : (m.url || m.media_url_https || m.thumbnail_url));
@@ -153,16 +157,29 @@ const twitterUsernames = [
     // מיון מהחדש ביותר לישן ביותר
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
 
-    // 5. שמירת המידע לקובץ מקומי
-    if (formattedTweets.length > 0) {
-      fs.writeFileSync('tweets.json', JSON.stringify(formattedTweets, null, 2));
-      console.log(`\nFinished! Successfully updated tweets.json with ${formattedTweets.length} tweets.`);
-    } else {
-      if (rawItems.length > 0) {
-        console.log("Raw item example to help debug:", JSON.stringify(rawItems[0], null, 2));
+    // 5. שמירת המידע לקובץ מקומי (במצב של Append/Merge חכם כדי לא למחוק ציוצים קודמים)
+    let existingTweets = [];
+    if (fs.existsSync('tweets.json')) {
+      try {
+        existingTweets = JSON.parse(fs.readFileSync('tweets.json', 'utf8'));
+      } catch (e) {
+        existingTweets = [];
       }
-      throw new Error("Scraping finished but no valid tweets could be parsed from the dataset.");
     }
+
+    // מיזוג ציוצים חדשים עם ישנים ומניעת כפילויות לפי ה-ID של הציוץ
+    const allTweetsMap = new Map();
+    existingTweets.forEach(t => allTweetsMap.set(t.id, t));
+    formattedTweets.forEach(t => allTweetsMap.set(t.id, t));
+
+    const mergedTweets = Array.from(allTweetsMap.values());
+    mergedTweets.sort((a, b) => b.timestamp - a.timestamp);
+
+    // נשמור רק את 100 הציוצים הכי אחרונים בסך הכל כדי שהקובץ לא יתנפח
+    const finalTweets = mergedTweets.slice(0, 100);
+
+    fs.writeFileSync('tweets.json', JSON.stringify(finalTweets, null, 2));
+    console.log(`\nFinished! Successfully updated tweets.json. Total tweets in database: ${finalTweets.length}`);
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
