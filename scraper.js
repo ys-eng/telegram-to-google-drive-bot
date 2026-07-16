@@ -1,5 +1,12 @@
 const fs = require('fs');
 
+const APIFY_TOKEN = process.env.APIFY_TOKEN;
+
+if (!APIFY_TOKEN) {
+  console.error("Critical Error: APIFY_TOKEN is missing in environment variables!");
+  process.exit(1);
+}
+
 const twitterUsernames = [
   'yoelituv', 'avi__blum', 'arivlin1', 'AryeErlich', 'moshe_nayes', 
   'Israelcohen911', 'ishaycoen', 'yankihebrew', 'yossilevii', 'YakiAdamker', 
@@ -9,71 +16,105 @@ const twitterUsernames = [
 ];
 
 (async () => {
-  console.log(`Starting Robust Twitter Scraper for ${twitterUsernames.length} users...`);
-  let allTweets = [];
+  console.log(`Starting Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  for (const username of twitterUsernames) {
-    console.log(`Fetching updates for: @${username}...`);
-    
-    // רשימת פלטפורמות חלופיות שעוקפות את החסימה בדרכים שונות
-    const apiEndpoints = [
-      `https://api.fxtwitter.com/${username}`,
-      `https://api.fixupx.com/${username}`
-    ];
-    
-    let userTweets = [];
-    
-    for (const url of apiEndpoints) {
-      try {
-        const response = await fetch(url, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-          },
-          signal: AbortSignal.timeout(7000)
-        });
+  // הגדרת הפרמטרים לבוט של Apify
+  const input = {
+    handle: twitterUsernames,
+    tweetsDesired: 3, // מושך את ה-3 האחרונים מכל אחד (חוסך זמן ומשאבים)
+    addParentTweets: false,
+    maxItems: 80,
+    proxyConfig: { useApifyProxy: true } // שימוש בפרוקסי של Apify לעקיפת חסימות
+  };
 
-        if (response.ok) {
-          const data = await response.json();
-          // ה-API של fxtwitter מחזיר את הציוצים בתוך מערך בשם tweets או בתוך אובייקט המשתמש
-          const rawTweets = data.tweets || (data.user && data.user.tweets) || [];
-          
-          if (rawTweets.length > 0) {
-            userTweets = rawTweets.map(t => ({
-              id: t.id_str || String(t.tweetID || t.id),
-              username: username,
-              text: t.text || t.description || '',
-              created_at: t.date || new Date().toUTCString(),
-              timestamp: t.date_epoch ? (t.date_epoch * 1000) : Date.now(),
-              media: t.media_urls || (t.media && t.media.all ? t.media.all.map(m => m.url) : [])
-            }));
-            break; // מצאנו ציוצים, אין צורך להמשיך לכתובת הבאה עבור המשתמש הזה
-          }
-        }
-      } catch (err) {
-        // שגיאה זמנית בשרת הספציפי הזה, ננסה את הבא
+  try {
+    console.log("Calling Apify Actor (apify/twitter-scraper)...");
+    
+    // 1. הפעלת ה-Actor ב-Apify
+    const runResponse = await fetch(`https://api.apify.com/v2/acts/apify~twitter-scraper/runs?token=${APIFY_TOKEN}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(input)
+    });
+
+    if (!runResponse.ok) {
+      throw new Error(`Failed to start Apify run: ${runResponse.statusText}`);
+    }
+
+    const runData = await runResponse.json();
+    const runId = runData.data.id;
+    const defaultDatasetId = runData.data.defaultDatasetId;
+    console.log(`Run started successfully. Run ID: ${runId}`);
+
+    // 2. המתנה לסיום הריצה (פולר/Polling פשוט)
+    let status = 'RUNNING';
+    const startTime = Date.now();
+    const timeoutLimit = 4 * 60 * 1000; // הגבלת המתנה ל-4 דקות
+
+    while (status === 'RUNNING' || status === 'READY') {
+      if (Date.now() - startTime > timeoutLimit) {
+        throw new Error("Timeout reached while waiting for Apify to finish.");
+      }
+
+      console.log("Waiting for Apify to finish scraping (checking status in 15s)...");
+      await new Promise(resolve => setTimeout(resolve, 15000));
+
+      const statusResponse = await fetch(`https://api.apify.com/v2/acts/apify~twitter-scraper/runs/${runId}?token=${APIFY_TOKEN}`);
+      if (statusResponse.ok) {
+        const statusData = await statusResponse.json();
+        status = statusData.data.status;
+        console.log(`Current status: ${status}`);
       }
     }
 
-    if (userTweets.length > 0) {
-      console.log(`  -> Success! Found ${userTweets.length} tweets.`);
-      allTweets = allTweets.concat(userTweets);
-    } else {
-      console.log(`  -> Warning: No live data retrieved for @${username}`);
+    if (status !== 'SUCCEEDED') {
+      throw new Error(`Apify run finished with non-success status: ${status}`);
     }
 
-    // השהייה קלה בין משתמשים למניעת חסימות קצב (Rate Limiting)
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
+    // 3. שליפת התוצאות ממאגר המידע (Dataset) של הריצה
+    console.log("Downloading scraped data from dataset...");
+    const datasetResponse = await fetch(`https://api.apify.com/v2/datasets/${defaultDatasetId}/items?token=${APIFY_TOKEN}`);
+    
+    if (!datasetResponse.ok) {
+      throw new Error("Failed to download dataset items.");
+    }
 
-  // מיון - מהחדש לישן
-  allTweets.sort((a, b) => b.timestamp - a.timestamp);
+    const rawItems = await datasetResponse.json();
+    console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-  // שינוי קריטי: אנחנו שומרים את הקובץ בכל מצב! 
-  // גם אם רק חלק מהמשתמשים החזירו מידע, נעדכן את הקובץ כדי שגוגל יקבל את מה שיש
-  if (allTweets.length > 0) {
-    fs.writeFileSync('tweets.json', JSON.stringify(allTweets, null, 2));
-    console.log(`\nFinished! Successfully updated tweets.json with ${allTweets.length} tweets.`);
-  } else {
-    console.log("\nCritical: All endpoints failed to return data. File not updated.");
+    // 4. מיפוי וניקוי המידע למבנה המוכר שלך
+    const formattedTweets = rawItems
+      .filter(item => item && item.text) // סינון פריטים ריקים
+      .map(item => {
+        const media = [];
+        if (item.media && Array.isArray(item.media)) {
+          item.media.forEach(m => {
+            if (m.media_url_https) media.push(m.media_url_https);
+          });
+        }
+
+        return {
+          id: item.id_str || String(item.id),
+          username: item.user ? item.user.screen_name : 'unknown',
+          text: item.text,
+          created_at: item.created_at || new Date().toUTCString(),
+          timestamp: item.created_at ? new Date(item.created_at).getTime() : Date.now(),
+          media: media
+        };
+      });
+
+    // מיון מהחדש ביותר לישן ביותר
+    formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
+
+    // שמירה
+    if (formattedTweets.length > 0) {
+      fs.writeFileSync('tweets.json', JSON.stringify(formattedTweets, null, 2));
+      console.log(`\nFinished! Successfully updated tweets.json with ${formattedTweets.length} tweets.`);
+    } else {
+      console.log("\nNo valid tweets were processed from Apify.");
+    }
+
+  } catch (error) {
+    console.error("Critical Scraping Error:", error.message);
   }
 })();
