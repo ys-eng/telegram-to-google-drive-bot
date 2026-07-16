@@ -19,7 +19,7 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // הגדרת הפרמטרים לבוט הרשמי (apidojo/tweet-scraper)
+  // הגדרת הפרמטרים לבוט הרשמי
   const input = {
     "twitterHandles": twitterUsernames,
     "maxTweets": 40, 
@@ -27,7 +27,6 @@ const twitterUsernames = [
     "scrapeType": "tweets"
   };
 
-  // השם המדויק של ה-Actor ב-API של Apify
   const actorName = "apidojo~tweet-scraper"; 
 
   try {
@@ -53,7 +52,7 @@ const twitterUsernames = [
     // 2. המתנה לסיום הריצה ב-Apify
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 5 * 60 * 1000; // הגבלת המתנה ל-5 דקות מקסימום
+    const timeoutLimit = 5 * 60 * 1000; 
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
@@ -86,33 +85,51 @@ const twitterUsernames = [
     const rawItems = await datasetResponse.json();
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-    // 4. עיבוד וסינון המידע למבנה הרצוי
+    // 4. עיבוד וסינון המידע למבנה הרצוי (מותאם למבנה החדש של Apidojo)
     const formattedTweets = rawItems
-      .filter(item => item && (item.full_text || item.text)) // משאיר רק ציוצים עם טקסט
       .map(item => {
-        const text = item.full_text || item.text || '';
+        if (!item) return null;
+
+        // חילוץ טקסט - מנסה ממספר מקומות אפשריים ב-JSON של Apidojo
+        const text = item.full_text || item.text || (item.legacy && item.legacy.full_text) || '';
         
-        // שליפת קישורי תמונות/סרטונים במידה וקיימים
+        // אם אין טקסט בכלל, נתעלם מהפריט הזה
+        if (!text) return null;
+
+        // חילוץ שם המשתמש
+        let username = 'unknown';
+        if (item.user && item.user.screen_name) {
+          username = item.user.screen_name;
+        } else if (item.core && item.core.user_results && item.core.user_results.result && item.core.user_results.result.legacy) {
+          username = item.core.user_results.result.legacy.screen_name;
+        } else if (item.legacy && item.legacy.user_id_str) {
+          username = item.legacy.user_id_str; // גיבוי
+        }
+
+        // חילוץ תאריך
+        const createdAt = item.created_at || (item.legacy && item.legacy.created_at) || new Date().toUTCString();
+        const timestamp = new Date(createdAt).getTime() || Date.now();
+
+        // חילוץ תמונות וסרטונים
         const media = [];
-        if (item.extended_entities && item.extended_entities.media) {
-          item.extended_entities.media.forEach(m => {
-            if (m.media_url_https) media.push(m.media_url_https);
-          });
-        } else if (item.entities && item.entities.media) {
-          item.entities.media.forEach(m => {
+        const mediaSource = item.extended_entities || item.entities || (item.legacy && item.legacy.extended_entities) || (item.legacy && item.legacy.entities);
+        
+        if (mediaSource && mediaSource.media) {
+          mediaSource.media.forEach(m => {
             if (m.media_url_https) media.push(m.media_url_https);
           });
         }
 
         return {
-          id: item.id_str || String(item.id),
-          username: item.user ? item.user.screen_name : 'unknown',
+          id: item.id_str || (item.legacy && item.legacy.id_str) || String(item.id),
+          username: username,
           text: text,
-          created_at: item.created_at || new Date().toUTCString(),
-          timestamp: item.created_at ? new Date(item.created_at).getTime() : Date.now(),
+          created_at: createdAt,
+          timestamp: timestamp,
           media: media
         };
-      });
+      })
+      .filter(item => item !== null); // מסנן החוצה פריטים שלא הצלחנו לחלץ מהם טקסט
 
     // מיון מהחדש ביותר לישן ביותר
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
@@ -122,11 +139,13 @@ const twitterUsernames = [
       fs.writeFileSync('tweets.json', JSON.stringify(formattedTweets, null, 2));
       console.log(`\nFinished! Successfully updated tweets.json with ${formattedTweets.length} tweets.`);
     } else {
-      throw new Error("Scraping finished but no valid tweets were found in the dataset.");
+      // הדפסת דוגמה קטנה מהמבנה הגולמי ללוג כדי שנוכל לחקור במקרה של כשל
+      console.log("Raw item example:", JSON.stringify(rawItems[0], null, 2));
+      throw new Error("Scraping finished but no valid tweets could be parsed from the dataset.");
     }
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
-    process.exit(1); // גורם ל-GitHub Action להיכשל ולהציג שגיאה ברורה
+    process.exit(1); 
   }
 })();
