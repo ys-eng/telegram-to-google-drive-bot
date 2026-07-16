@@ -16,14 +16,13 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # 2. הגדרת סביבת Node.js עדכנית (גרסה 24 כדי למנוע אזהרות)
+    # 2. הגדרת סביבת Node.js עדכנית (גרסה 24) ללא מטמון שמכשיל את הריצה
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '24'
-        cache: 'npm'
 
-    # 3. התקנת חבילות (ירוץ בשניות בודדות כי package.json עכשיו רזה ונקי)
+    # 3. התקנת חבילות
     - name: Install Dependencies
       run: npm install
 
@@ -39,12 +38,12 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
-        # בדיקה אם יש שינויים בקובץtweets.json
+        # בדיקה אם יש שינויים בקובץ tweets.json
         if git status --porcelain | grep -q "tweets.json"; then
-          console.log("New tweets found! Updating repository...");
+          echo "New tweets found! Updating repository..."
           git add tweets.json
           git commit -m "Automated update: Scraped new tweets via Apify"
           git push
         else
-          console.log("No new tweets or changes detected. Skipping push.");
+          echo "No new tweets or changes detected. Skipping push."
         fi
