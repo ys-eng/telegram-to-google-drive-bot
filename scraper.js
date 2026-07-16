@@ -56,35 +56,35 @@ const twitterUsernames = [
     // 2. המתנה לסיום הריצה ב-Apify
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 5 * 60 * 1000; 
+    // הגדלנו את מגבלת הזמן ל-15 דקות כדי לתת לטוויטר לעבד את כל 23 המשתמשים
+    const timeoutLimit = 15 * 60 * 1000; 
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
-        throw new Error("Timeout reached while waiting for Apify to finish.");
+        throw new Error("Timeout reached while waiting for Apify to finish (exceeded 15 minutes).");
       }
 
-      console.log("Waiting for Apify to finish scraping (checking status in 15 seconds)...");
-      await new Promise(resolve => setTimeout(resolve, 15000));
+      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Waiting 20 seconds for next check...`);
+      await new Promise(resolve => setTimeout(resolve, 20000));
 
       const statusResponse = await fetch(`https://api.apify.com/v2/runs/${runId}?token=${APIFY_TOKEN}`);
       if (statusResponse.ok) {
         const statusData = await statusResponse.json();
         status = statusData.data.status;
-        console.log(`Current status: ${status}`);
       }
     }
 
-    // אם הריצה נכשלה - נשלוף את הלוגים הפנימיים מתוך ה-Run עצמו ב-Apify
+    console.log(`Apify run finished with status: ${status}`);
+
+    // אם הריצה נכשלה בסופו של דבר - נשלוף את הלוגים הפנימיים מתוך ה-Run עצמו ב-Apify
     if (status !== 'SUCCEEDED') {
       console.log(`\n[!] Run failed with status: ${status}. Fetching internal Apify logs for diagnostics...`);
       try {
-        // פנייה לכתובת ה-API הרשמית והמתוקנת עבור קבלת לוגים של ריצה ב-Apify
         const logResponse = await fetch(`https://api.apify.com/v2/run-logs/${runId}?token=${APIFY_TOKEN}`);
         const logText = await logResponse.text();
         
         console.log("\n=================== APIFY INTERNAL LOGS ===================");
         if (logText) {
-          // הדפסת 40 השורות האחרונות של הלוג כדי לראות את השגיאה המדויקת
           console.log(logText.split('\n').slice(-40).join('\n'));
         } else {
           console.log("No logs returned from Apify or logs are empty.");
