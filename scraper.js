@@ -7,6 +7,7 @@ if (!APIFY_TOKEN) {
   process.exit(1);
 }
 
+// רשימת המשתמשים שאתה עוקב אחריהם
 const twitterUsernames = [
   'yoelituv', 'avi__blum', 'arivlin1', 'AryeErlich', 'moshe_nayes', 
   'Israelcohen911', 'ishaycoen', 'yankihebrew', 'yossilevii', 'YakiAdamker', 
@@ -18,7 +19,7 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // הגדרות הקלט ל-Scraper
+  // הגדרת הפרמטרים לבוט הרשמי (apidojo/tweet-scraper)
   const input = {
     "twitterHandles": twitterUsernames,
     "maxTweets": 40, 
@@ -26,14 +27,14 @@ const twitterUsernames = [
     "scrapeType": "tweets"
   };
 
-  // נשתמש ב-Actor ID הקבוע של ה-Twitter Scraper של Apidojo
-  const actorId = "2sS2ZmqE6v0g797gC"; 
+  // השם המדויק של ה-Actor ב-API של Apify
+  const actorName = "apidojo~tweet-scraper"; 
 
   try {
-    console.log(`Calling Apify Actor by ID (${actorId})...`);
+    console.log(`Calling Apify Actor (${actorName.replace('~', '/')})...`);
     
-    // 1. הפעלת ה-Actor באמצעות ה-ID שלו
-    const runResponse = await fetch(`https://api.apify.com/v2/acts/${actorId}/runs?token=${APIFY_TOKEN}`, {
+    // 1. הפעלת הריצה (Run) ב-Apify
+    const runResponse = await fetch(`https://api.apify.com/v2/acts/${actorName}/runs?token=${APIFY_TOKEN}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(input)
@@ -49,10 +50,10 @@ const twitterUsernames = [
     const defaultDatasetId = runData.data.defaultDatasetId;
     console.log(`Run started successfully! Run ID: ${runId}`);
 
-    // 2. המתנה לסיום הריצה
+    // 2. המתנה לסיום הריצה ב-Apify
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 5 * 60 * 1000; // הגבלת המתנה ל-5 דקות
+    const timeoutLimit = 5 * 60 * 1000; // הגבלת המתנה ל-5 דקות מקסימום
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
@@ -62,7 +63,7 @@ const twitterUsernames = [
       console.log("Waiting for Apify to finish scraping (checking status in 15 seconds)...");
       await new Promise(resolve => setTimeout(resolve, 15000));
 
-      const statusResponse = await fetch(`https://api.apify.com/v2/acts/${actorId}/runs/${runId}?token=${APIFY_TOKEN}`);
+      const statusResponse = await fetch(`https://api.apify.com/v2/acts/${actorName}/runs/${runId}?token=${APIFY_TOKEN}`);
       if (statusResponse.ok) {
         const statusData = await statusResponse.json();
         status = statusData.data.status;
@@ -74,7 +75,7 @@ const twitterUsernames = [
       throw new Error(`Apify run finished with non-success status: ${status}`);
     }
 
-    // 3. שליפת התוצאות ממאגר המידע
+    // 3. שליפת המידע הגולמי שנאסף (Dataset)
     console.log("Downloading scraped data from dataset...");
     const datasetResponse = await fetch(`https://api.apify.com/v2/datasets/${defaultDatasetId}/items?token=${APIFY_TOKEN}`);
     
@@ -85,11 +86,13 @@ const twitterUsernames = [
     const rawItems = await datasetResponse.json();
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-    // 4. מיפוי וניקוי המידע
+    // 4. עיבוד וסינון המידע למבנה הרצוי
     const formattedTweets = rawItems
-      .filter(item => item && (item.full_text || item.text))
+      .filter(item => item && (item.full_text || item.text)) // משאיר רק ציוצים עם טקסט
       .map(item => {
         const text = item.full_text || item.text || '';
+        
+        // שליפת קישורי תמונות/סרטונים במידה וקיימים
         const media = [];
         if (item.extended_entities && item.extended_entities.media) {
           item.extended_entities.media.forEach(m => {
@@ -111,10 +114,10 @@ const twitterUsernames = [
         };
       });
 
-    // מיון
+    // מיון מהחדש ביותר לישן ביותר
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
 
-    // שמירה
+    // 5. שמירת המידע לקובץ מקומי
     if (formattedTweets.length > 0) {
       fs.writeFileSync('tweets.json', JSON.stringify(formattedTweets, null, 2));
       console.log(`\nFinished! Successfully updated tweets.json with ${formattedTweets.length} tweets.`);
@@ -124,6 +127,6 @@ const twitterUsernames = [
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
-    process.exit(1);
+    process.exit(1); // גורם ל-GitHub Action להיכשל ולהציג שגיאה ברורה
   }
 })();
