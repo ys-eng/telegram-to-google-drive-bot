@@ -18,7 +18,7 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // הגדרת הפרמטרים לבוט המעודכן של Apidojo
+  // הגדרת הפרמטרים לבוט הרשמי והמעודכן של Apidojo (Twitter Scraper)
   const input = {
     "twitterHandles": twitterUsernames,
     "maxTweets": 40, // סך הכל ציוצים שנרצה לאסוף בריצה הזו
@@ -27,10 +27,10 @@ const twitterUsernames = [
   };
 
   try {
-    console.log("Calling Apify Actor (apidojo/tweets-scraper)...");
+    console.log("Calling Apify Actor (apidojo/twitter-scraper)...");
     
-    // 1. הפעלת ה-Actor המעודכן של Apidojo
-    const runResponse = await fetch(`https://api.apify.com/v2/acts/apidojo~tweets-scraper/runs?token=${APIFY_TOKEN}`, {
+    // 1. הפעלת ה-Actor המעודכן
+    const runResponse = await fetch(`https://api.apify.com/v2/acts/apidojo~twitter-scraper/runs?token=${APIFY_TOKEN}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(input)
@@ -59,7 +59,7 @@ const twitterUsernames = [
       console.log("Waiting for Apify to finish scraping (checking status in 15 seconds)...");
       await new Promise(resolve => setTimeout(resolve, 15000));
 
-      const statusResponse = await fetch(`https://api.apify.com/v2/acts/apidojo~tweets-scraper/runs/${runId}?token=${APIFY_TOKEN}`);
+      const statusResponse = await fetch(`https://api.apify.com/v2/acts/apidojo~twitter-scraper/runs/${runId}?token=${APIFY_TOKEN}`);
       if (statusResponse.ok) {
         const statusData = await statusResponse.json();
         status = statusData.data.status;
@@ -86,10 +86,9 @@ const twitterUsernames = [
     const formattedTweets = rawItems
       .filter(item => item && (item.full_text || item.text)) // סינון פריטים ריקים
       .map(item => {
-        // לפעמים המפתח נקרא text ולפעמים full_text ב-API החדש
         const text = item.full_text || item.text || '';
         
-        // חילוץ תמונות וסרטונים
+        // חילוץ מדיה (תמונות/סרטונים)
         const media = [];
         if (item.extended_entities && item.extended_entities.media) {
           item.extended_entities.media.forEach(m => {
@@ -124,6 +123,6 @@ const twitterUsernames = [
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
-    process.exit(1); // גורם ל-GitHub Actions להציג איקס אדום אם הריצה באמת נכשלה!
+    process.exit(1); // מעביר איקס אדום ל-GitHub Actions במקרה של כשל
   }
 })();
