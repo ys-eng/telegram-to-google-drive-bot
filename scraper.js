@@ -16,27 +16,19 @@ const allTwitterUsernames = [
   'KemachIsrael', 'Machon_Haredi', 'yehuditmiletzky', 'mk_moshe_gafni'
 ];
 
-// פונקציה לבחירת X משתמשים אקראיים מהרשימה
-function getRandomBatch(arr, size) {
-  const shuffled = [...arr].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, size);
-}
-
-// נבחר 3 משתמשים אקראיים בכל ריצה כדי שהסריקה תסתיים תוך 2 דקות
-const activeBatch = getRandomBatch(allTwitterUsernames, 3);
+// בחירת משתמש אקראי אחד בלבד לריצה מהירה ובטוחה
+const randomUser = allTwitterUsernames[Math.floor(Math.random() * allTwitterUsernames.length)];
 
 (async () => {
-  console.log(`Starting Free Apify Twitter Scraper for a random batch of ${activeBatch.length} users:`);
-  console.log(`Selected users: ${activeBatch.join(', ')}`);
+  console.log(`[Safe Mode] Starting Free Apify Twitter Scraper for exactly 1 user: @${randomUser}`);
 
-  // המרת המשתמשים שנבחרו למבנה ה-startUrls הסטנדרטי
-  const startUrls = activeBatch.map(username => ({
-    url: `https://x.com/${username}`
-  }));
+  const startUrls = [{
+    url: `https://x.com/${randomUser}`
+  }];
 
   const input = {
     "startUrls": startUrls,
-    "maxTweets": 15 // 15 ציוצים למשתמש זה מעל ומעבר כדי לקבל את העדכונים האחרונים
+    "maxTweets": 10 // 10 ציוצים אחרונים מספיקים בהחלט לריצה שוטפת
   };
 
   const actorName = "motx11~twitter-x-scraper-fxtwitter"; 
@@ -62,17 +54,17 @@ const activeBatch = getRandomBatch(allTwitterUsernames, 3);
     const defaultDatasetId = runData.data.defaultDatasetId;
     console.log(`Run started successfully! Run ID: ${runId}`);
 
-    // 2. המתנה לסיום הריצה ב-Apify (עם מגבלת זמן שפויה של 8 דקות כעת)
+    // 2. המתנה לסיום הריצה ב-Apify (מגבלת זמן של 6 דקות)
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 8 * 60 * 1000; 
+    const timeoutLimit = 6 * 60 * 1000; 
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
         throw new Error("Timeout reached while waiting for Apify to finish.");
       }
 
-      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Waiting 15 seconds for next check...`);
+      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Waiting 15 seconds...`);
       await new Promise(resolve => setTimeout(resolve, 15000));
 
       const statusResponse = await fetch(`https://api.apify.com/v2/runs/${runId}?token=${APIFY_TOKEN}`);
@@ -116,7 +108,7 @@ const activeBatch = getRandomBatch(allTwitterUsernames, 3);
     const rawItems = await datasetResponse.json();
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-    // 4. עיבוד וסינון המידע למבנה הרצוי
+    // 4. עיבוד וסינון המידע למבנה הרצוי (כולל חילוץ וידאו ותמונות מורחב)
     const formattedTweets = rawItems
       .map(item => {
         if (!item || item.noResults || item.demo) return null;
@@ -136,11 +128,43 @@ const activeBatch = getRandomBatch(allTwitterUsernames, 3);
         const createdAt = item.createdAt || item.created_at || item.date || (item.legacy && item.legacy.created_at) || new Date().toUTCString();
         const timestamp = new Date(createdAt).getTime() || Date.now();
 
+        // מערך המדיה המאוחד - יכיל תמונות וסרטונים
         let media = [];
+
+        // 1. ניסיון לחלץ סרטונים (MP4) במידה וקיימים
+        if (item.videoInfo || item.video_info) {
+          const info = item.videoInfo || item.video_info;
+          if (info.variants && Array.isArray(info.variants)) {
+            // סינון של קבצי mp4 בלבד ומיון לפי bitrate כדי לקבל את האיכות הכי גבוהה
+            const mp4Videos = info.variants
+              .filter(v => v.content_type === 'video/mp4' || (v.url && v.url.includes('.mp4')))
+              .sort((a, b) => (b.bitrate || 0) - (a.bitrate || 0));
+            
+            if (mp4Videos.length > 0) {
+              media.push(mp4Videos[0].url); // הוספת הקישור הישיר לסרטון
+            }
+          }
+        }
+
+        // 2. ניסיון לחלץ תמונות רגילות
         if (item.media && Array.isArray(item.media)) {
-          media = item.media.map(m => typeof m === 'string' ? m : (m.url || m.media_url_https || m.thumbnail_url));
+          item.media.forEach(m => {
+            if (typeof m === 'string') {
+              media.push(m);
+            } else {
+              // לפעמים הסרטון מתחבא בתוך ה-media array תחת סוג video
+              if (m.type === 'video' && m.video_info && m.video_info.variants) {
+                const mp4s = m.video_info.variants
+                  .filter(v => v.url && v.url.includes('.mp4'))
+                  .sort((a, b) => (b.bitrate || 0) - (a.bitrate || 0));
+                if (mp4s.length > 0) media.push(mp4s[0].url);
+              } else {
+                media.push(m.url || m.media_url_https || m.thumbnail_url);
+              }
+            }
+          });
         } else if (item.images && Array.isArray(item.images)) {
-          media = item.images;
+          media = media.concat(item.images);
         }
 
         return {
@@ -157,7 +181,7 @@ const activeBatch = getRandomBatch(allTwitterUsernames, 3);
     // מיון מהחדש ביותר לישן ביותר
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
 
-    // 5. שמירת המידע לקובץ מקומי (במצב של Append/Merge חכם כדי לא למחוק ציוצים קודמים)
+    // 5. שמירת המידע לקובץ מקומי במצב של Merge
     let existingTweets = [];
     if (fs.existsSync('tweets.json')) {
       try {
@@ -167,7 +191,7 @@ const activeBatch = getRandomBatch(allTwitterUsernames, 3);
       }
     }
 
-    // מיזוג ציוצים חדשים עם ישנים ומניעת כפילויות לפי ה-ID של הציוץ
+    // מיזוג ציוצים חדשים ומניעת כפילויות
     const allTweetsMap = new Map();
     existingTweets.forEach(t => allTweetsMap.set(t.id, t));
     formattedTweets.forEach(t => allTweetsMap.set(t.id, t));
@@ -175,11 +199,11 @@ const activeBatch = getRandomBatch(allTwitterUsernames, 3);
     const mergedTweets = Array.from(allTweetsMap.values());
     mergedTweets.sort((a, b) => b.timestamp - a.timestamp);
 
-    // נשמור רק את 100 הציוצים הכי אחרונים בסך הכל כדי שהקובץ לא יתנפח
-    const finalTweets = mergedTweets.slice(0, 100);
+    // הגבלת כמות הציוצים הכללית במאגר ל-150 כדי שהקובץ יישאר קל ומהיר
+    const finalTweets = mergedTweets.slice(0, 150);
 
     fs.writeFileSync('tweets.json', JSON.stringify(finalTweets, null, 2));
-    console.log(`\nFinished! Successfully updated tweets.json. Total tweets in database: ${finalTweets.length}`);
+    console.log(`\nFinished! Successfully processed @${randomUser}. Total tweets in database: ${finalTweets.length}`);
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
