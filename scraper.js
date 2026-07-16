@@ -17,20 +17,18 @@ const twitterUsernames = [
 ];
 
 (async () => {
-  console.log(`Starting Apify Twitter Scraper for ${twitterUsernames.length} users...`);
+  console.log(`Starting Apify Twitter User Scraper for ${twitterUsernames.length} users...`);
 
-  // המרת שמות המשתמשים לפורמט שאילתת חיפוש של טוויטר (למשל: "from:amit_segal")
-  const searchQueries = twitterUsernames.map(username => `from:${username}`);
-
-  // הגדרת הפרמטרים המדויקים לבוט apidojo/tweet-scraper
+  // הגדרת הפרמטרים לבוט הפרופילים הייעודי (apidojo/twitter-user-scraper)
   const input = {
-    "queries": searchQueries,
-    "maxTweets": 46,             // סך הכל ציוצים מקסימלי לכל הריצה
-    "maxTweetsPerQuery": 2,      // 2 ציוצים אחרונים מכל משתמש (23 משתמשים * 2 = 46 ציוצים)
+    "twitterHandles": twitterUsernames,
+    "maxTweets": 40,             // סך הכל ציוצים לשלוף
+    "maxTweetsPerQuery": 2,      // עד 2 ציוצים מכל פרופיל
     "scrapeType": "tweets"
   };
 
-  const actorName = "apidojo~tweet-scraper"; 
+  // שם ה-Actor הייעודי לפרופילים ב-Apify
+  const actorName = "apidojo~twitter-user-scraper"; 
 
   try {
     console.log(`Calling Apify Actor (${actorName.replace('~', '/')})...`);
@@ -91,11 +89,10 @@ const twitterUsernames = [
     // 4. עיבוד וסינון המידע למבנה הרצוי
     const formattedTweets = rawItems
       .map(item => {
-        if (!item || item.noResults) return null; // דילוג על הודעות ריקות כמו noResults
+        if (!item || item.noResults) return null;
 
-        // חילוץ טקסט - מנסה ממספר מקומות אפשריים
+        // חילוץ טקסט
         const text = item.full_text || item.text || (item.legacy && item.legacy.full_text) || '';
-        
         if (!text) return null;
 
         // חילוץ שם המשתמש
@@ -131,7 +128,7 @@ const twitterUsernames = [
           media: media
         };
       })
-      .filter(item => item !== null); // מסנן החוצה פריטים שלא הצלחנו לחלץ מהם טקסט או שהיו ריקים
+      .filter(item => item !== null);
 
     // מיון מהחדש ביותר לישן ביותר
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
