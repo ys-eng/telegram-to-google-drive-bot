@@ -18,48 +18,48 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // הגדרת הפרמטרים לבוט של Apify
+  // הגדרת הפרמטרים לבוט המעודכן של Apidojo
   const input = {
-    handle: twitterUsernames,
-    tweetsDesired: 3, // מושך את ה-3 האחרונים מכל אחד (חוסך זמן ומשאבים)
-    addParentTweets: false,
-    maxItems: 80,
-    proxyConfig: { useApifyProxy: true } // שימוש בפרוקסי של Apify לעקיפת חסימות
+    "twitterHandles": twitterUsernames,
+    "maxTweets": 40, // סך הכל ציוצים שנרצה לאסוף בריצה הזו
+    "maxTweetsPerQuery": 2, // 2 ציוצים אחרונים מכל פרופיל (חוסך המון קרדיט וזמן)
+    "scrapeType": "tweets"
   };
 
   try {
-    console.log("Calling Apify Actor (apify/twitter-scraper)...");
+    console.log("Calling Apify Actor (apidojo/tweets-scraper)...");
     
-    // 1. הפעלת ה-Actor ב-Apify
-    const runResponse = await fetch(`https://api.apify.com/v2/acts/apify~twitter-scraper/runs?token=${APIFY_TOKEN}`, {
+    // 1. הפעלת ה-Actor המעודכן של Apidojo
+    const runResponse = await fetch(`https://api.apify.com/v2/acts/apidojo~tweets-scraper/runs?token=${APIFY_TOKEN}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(input)
     });
 
     if (!runResponse.ok) {
-      throw new Error(`Failed to start Apify run: ${runResponse.statusText}`);
+      const errorText = await runResponse.text();
+      throw new Error(`Failed to start Apify run: ${runResponse.status} - ${errorText}`);
     }
 
     const runData = await runResponse.json();
     const runId = runData.data.id;
     const defaultDatasetId = runData.data.defaultDatasetId;
-    console.log(`Run started successfully. Run ID: ${runId}`);
+    console.log(`Run started successfully! Run ID: ${runId}`);
 
-    // 2. המתנה לסיום הריצה (פולר/Polling פשוט)
+    // 2. המתנה לסיום הריצה
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 4 * 60 * 1000; // הגבלת המתנה ל-4 דקות
+    const timeoutLimit = 5 * 60 * 1000; // הגבלת המתנה ל-5 דקות
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
         throw new Error("Timeout reached while waiting for Apify to finish.");
       }
 
-      console.log("Waiting for Apify to finish scraping (checking status in 15s)...");
+      console.log("Waiting for Apify to finish scraping (checking status in 15 seconds)...");
       await new Promise(resolve => setTimeout(resolve, 15000));
 
-      const statusResponse = await fetch(`https://api.apify.com/v2/acts/apify~twitter-scraper/runs/${runId}?token=${APIFY_TOKEN}`);
+      const statusResponse = await fetch(`https://api.apify.com/v2/acts/apidojo~tweets-scraper/runs/${runId}?token=${APIFY_TOKEN}`);
       if (statusResponse.ok) {
         const statusData = await statusResponse.json();
         status = statusData.data.status;
@@ -71,7 +71,7 @@ const twitterUsernames = [
       throw new Error(`Apify run finished with non-success status: ${status}`);
     }
 
-    // 3. שליפת התוצאות ממאגר המידע (Dataset) של הריצה
+    // 3. שליפת התוצאות ממאגר המידע
     console.log("Downloading scraped data from dataset...");
     const datasetResponse = await fetch(`https://api.apify.com/v2/datasets/${defaultDatasetId}/items?token=${APIFY_TOKEN}`);
     
@@ -82,13 +82,21 @@ const twitterUsernames = [
     const rawItems = await datasetResponse.json();
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-    // 4. מיפוי וניקוי המידע למבנה המוכר שלך
+    // 4. מיפוי וניקוי המידע למבנה המוכר של גוגל שיטס
     const formattedTweets = rawItems
-      .filter(item => item && item.text) // סינון פריטים ריקים
+      .filter(item => item && (item.full_text || item.text)) // סינון פריטים ריקים
       .map(item => {
+        // לפעמים המפתח נקרא text ולפעמים full_text ב-API החדש
+        const text = item.full_text || item.text || '';
+        
+        // חילוץ תמונות וסרטונים
         const media = [];
-        if (item.media && Array.isArray(item.media)) {
-          item.media.forEach(m => {
+        if (item.extended_entities && item.extended_entities.media) {
+          item.extended_entities.media.forEach(m => {
+            if (m.media_url_https) media.push(m.media_url_https);
+          });
+        } else if (item.entities && item.entities.media) {
+          item.entities.media.forEach(m => {
             if (m.media_url_https) media.push(m.media_url_https);
           });
         }
@@ -96,7 +104,7 @@ const twitterUsernames = [
         return {
           id: item.id_str || String(item.id),
           username: item.user ? item.user.screen_name : 'unknown',
-          text: item.text,
+          text: text,
           created_at: item.created_at || new Date().toUTCString(),
           timestamp: item.created_at ? new Date(item.created_at).getTime() : Date.now(),
           media: media
@@ -111,10 +119,11 @@ const twitterUsernames = [
       fs.writeFileSync('tweets.json', JSON.stringify(formattedTweets, null, 2));
       console.log(`\nFinished! Successfully updated tweets.json with ${formattedTweets.length} tweets.`);
     } else {
-      console.log("\nNo valid tweets were processed from Apify.");
+      throw new Error("Scraping finished but no valid tweets were found in the dataset.");
     }
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
+    process.exit(1); // גורם ל-GitHub Actions להציג איקס אדום אם הריצה באמת נכשלה!
   }
 })();
