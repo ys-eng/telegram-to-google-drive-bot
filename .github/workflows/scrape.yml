@@ -11,15 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. מוריד את הקוד מה-Repository למכונה הווירטואלית
+    # 1. מוריד את הקוד מה-Repository (משודרג ל-v4)
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    # 2. מתקין את סביבת Node.js
+    # 2. מתקין את סביבת Node.js (משודרג ל-v4)
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
 
     # 3. מתקין את התלויות בלי להוריד דפדפן כבד מחדש
     - name: Install Dependencies
