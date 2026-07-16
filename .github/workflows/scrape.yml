@@ -1,34 +1,50 @@
-name: Run Twitter Scraper
+name: Twitter Scraper CI
 
 on:
+  # מאפשר לך להריץ את הסקריפט ידנית בלחיצת כפתור (Run workflow)
+  workflow_dispatch:
+  # מריץ את הסקריפט באופן אוטומטי (למשל, כל שעה עגולה)
   schedule:
     - cron: '0 * * * *'
-  workflow_dispatch:
 
 jobs:
-  scrape:
+  scrape-and-update:
     runs-on: ubuntu-latest
 
     steps:
+    # 1. משיכת הקוד העדכני מהמאגר שלך
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    # 2. הגדרת סביבת Node.js עדכנית (גרסה 24 כדי למנוע אזהרות)
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '24' # מעודכן לסטנדרט של 2026
+        node-version: '24'
+        cache: 'npm'
 
+    # 3. התקנת חבילות (ירוץ בשניות בודדות כי package.json עכשיו רזה ונקי)
     - name: Install Dependencies
       run: npm install
 
-    - name: Run Scraper Script
+    # 4. הרצת הסקריפט החכם שפונה ל-Apify עם הטוקן המאובטח
+    - name: Run Apify Scraper Script
       run: node scraper.js
+      env:
+        APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
 
+    # 5. בדיקה אם הקובץ tweets.json השתנה, ואם כן - דחיפת העדכון ל-GitHub
     - name: Commit and Push Changes
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add tweets.json
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update tweets.json" && git push)
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+        # בדיקה אם יש שינויים בקובץtweets.json
+        if git status --porcelain | grep -q "tweets.json"; then
+          console.log("New tweets found! Updating repository...");
+          git add tweets.json
+          git commit -m "Automated update: Scraped new tweets via Apify"
+          git push
+        else
+          console.log("No new tweets or changes detected. Skipping push.");
+        fi
