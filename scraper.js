@@ -19,17 +19,19 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Free Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // המרת המשתמשים לכתובות פרופיל מלאות בטוויטר כפי שהאקטור הזה דורש
-  const profileUrls = twitterUsernames.map(username => `https://x.com/${username}`);
+  // המרת המשתמשים למבנה ה-startUrls הסטנדרטי של Apify
+  const startUrls = twitterUsernames.map(username => ({
+    url: `https://x.com/${username}`
+  }));
 
-  // הגדרת הפרמטרים ל-Actor (motx11/twitter-x-scraper-fxtwitter)
+  // הגדרת הפרמטרים במבנה התקני ביותר של Apify
   const input = {
-    "urls": profileUrls,
+    "startUrls": startUrls,
     "maxTweets": 40
   };
 
-  // מזהה ה-Actor החינמי החדש
   const actorName = "motx11~twitter-x-scraper-fxtwitter"; 
+  let runId = null;
 
   try {
     console.log(`Calling Free Apify Actor (${actorName.replace('~', '/')})...`);
@@ -47,7 +49,7 @@ const twitterUsernames = [
     }
 
     const runData = await runResponse.json();
-    const runId = runData.data.id;
+    runId = runData.data.id;
     const defaultDatasetId = runData.data.defaultDatasetId;
     console.log(`Run started successfully! Run ID: ${runId}`);
 
@@ -72,7 +74,22 @@ const twitterUsernames = [
       }
     }
 
+    // אם הריצה נכשלה - נשלוף את הלוגים הפנימיים מ-Apify כדי להבין למה
     if (status !== 'SUCCEEDED') {
+      console.log(`\n[!] Run failed with status: ${status}. Fetching internal Apify logs for diagnostics...`);
+      try {
+        const logResponse = await fetch(`https://api.apify.com/v2/acts/${actorName}/runs/${runId}/log?token=${APIFY_TOKEN}`);
+        if (logResponse.ok) {
+          const logText = await logResponse.text();
+          console.log("\n=================== APIFY INTERNAL LOGS ===================");
+          // מדפיס את 30 השורות האחרונות של הלוג כדי לראות את השגיאה המדויקת
+          console.log(logText.split('\n').slice(-30).join('\n'));
+          console.log("===========================================================\n");
+        }
+      } catch (logErr) {
+        console.error("Could not fetch Apify run logs:", logErr.message);
+      }
+      
       throw new Error(`Apify run finished with non-success status: ${status}`);
     }
 
@@ -88,7 +105,6 @@ const twitterUsernames = [
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
     // 4. עיבוד וסינון המידע למבנה הרצוי
-    // מנגנון הפיענוח כאן מותאם אישית למבנה השדות של fxtwitter
     const formattedTweets = rawItems
       .map(item => {
         if (!item || item.noResults || item.demo) return null;
