@@ -19,18 +19,17 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Free Apify Twitter Scraper for ${twitterUsernames.length} users...`);
 
-  // המרת המשתמשים לשאילתות חיפוש בפורמט "from:username"
-  const searchQueries = twitterUsernames.map(username => `from:${username}`);
+  // המרת המשתמשים לכתובות פרופיל מלאות בטוויטר כפי שהאקטור הזה דורש
+  const profileUrls = twitterUsernames.map(username => `https://x.com/${username}`);
 
-  // הגדרת הפרמטרים ל-Actor החינמי (microworlds/twitter-scraper)
+  // הגדרת הפרמטרים ל-Actor (motx11/twitter-x-scraper-fxtwitter)
   const input = {
-    "searchTerms": searchQueries,
-    "maxTweets": 40,
-    "tweetsSearchMode": "Latest"
+    "urls": profileUrls,
+    "maxTweets": 40
   };
 
-  // מזהה ה-Actor החינמי ב-Apify API
-  const actorName = "microworlds~twitter-scraper"; 
+  // מזהה ה-Actor החינמי החדש
+  const actorName = "motx11~twitter-x-scraper-fxtwitter"; 
 
   try {
     console.log(`Calling Free Apify Actor (${actorName.replace('~', '/')})...`);
@@ -55,7 +54,7 @@ const twitterUsernames = [
     // 2. המתנה לסיום הריצה ב-Apify
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 7 * 60 * 1000; // הגדלנו ל-7 דקות כי בוטים חינמיים לפעמים לוקחים קצת יותר זמן
+    const timeoutLimit = 5 * 60 * 1000; 
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
@@ -89,51 +88,44 @@ const twitterUsernames = [
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
     // 4. עיבוד וסינון המידע למבנה הרצוי
-    // יצרנו מנגנון חילוץ סופר-גמיש (Robust Extraction) שמחפש שדות תחת כל השמות האפשריים שלהם
+    // מנגנון הפיענוח כאן מותאם אישית למבנה השדות של fxtwitter
     const formattedTweets = rawItems
       .map(item => {
         if (!item || item.noResults || item.demo) return null;
 
         // איתור טקסט הציוץ
-        const text = item.fullText || item.text || item.full_text || (item.legacy && item.legacy.full_text) || '';
+        const text = item.text || item.fullText || item.full_text || (item.legacy && item.legacy.full_text) || '';
         if (!text) return null;
 
         // איתור שם המשתמש
         let username = 'unknown';
-        if (item.user && (item.user.screenName || item.user.screen_name || item.user.username)) {
-          username = item.user.screenName || item.user.screen_name || item.user.username;
-        } else if (item.username || item.screenName) {
-          username = item.username || item.screenName;
-        } else if (item.core && item.core.user_results && item.core.user_results.result && item.core.user_results.result.legacy) {
-          username = item.core.user_results.result.legacy.screen_name;
+        if (item.author && item.author.screen_name) {
+          username = item.author.screen_name;
+        } else if (item.user && (item.user.screen_name || item.user.username)) {
+          username = item.user.screen_name || item.user.username;
+        } else if (item.username) {
+          username = item.username;
         }
 
         // איתור תאריך וחתימת זמן
         const createdAt = item.createdAt || item.created_at || item.date || (item.legacy && item.legacy.created_at) || new Date().toUTCString();
         const timestamp = new Date(createdAt).getTime() || Date.now();
 
-        // איתור תמונות/סרטונים במבנה של Microworlds (בדרך כלל במערך בשם images או media)
+        // איתור תמונות/מדיה
         let media = [];
-        if (item.images && Array.isArray(item.images)) {
+        if (item.media && Array.isArray(item.media)) {
+          media = item.media.map(m => typeof m === 'string' ? m : (m.url || m.media_url_https || m.thumbnail_url));
+        } else if (item.images && Array.isArray(item.images)) {
           media = item.images;
-        } else if (item.media && Array.isArray(item.media)) {
-          media = item.media.map(m => typeof m === 'string' ? m : (m.url || m.media_url_https));
-        } else {
-          const legacyMedia = item.extended_entities || item.entities || (item.legacy && item.legacy.extended_entities);
-          if (legacyMedia && legacyMedia.media) {
-            legacyMedia.media.forEach(m => {
-              if (m.media_url_https) media.push(m.media_url_https);
-            });
-          }
         }
 
         return {
-          id: item.id_str || item.idStr || (item.legacy && item.legacy.id_str) || String(item.id || ''),
+          id: item.id_str || item.idStr || String(item.id || ''),
           username: username,
           text: text,
           created_at: createdAt,
           timestamp: timestamp,
-          media: media
+          media: media.filter(Boolean)
         };
       })
       .filter(item => item !== null);
