@@ -74,18 +74,22 @@ const twitterUsernames = [
       }
     }
 
-    // אם הריצה נכשלה - נשלוף את הלוגים הפנימיים מ-Apify כדי להבין למה
+    // אם הריצה נכשלה - נשלוף את הלוגים הפנימיים מתוך ה-Run עצמו ב-Apify
     if (status !== 'SUCCEEDED') {
       console.log(`\n[!] Run failed with status: ${status}. Fetching internal Apify logs for diagnostics...`);
       try {
-        const logResponse = await fetch(`https://api.apify.com/v2/acts/${actorName}/runs/${runId}/log?token=${APIFY_TOKEN}`);
-        if (logResponse.ok) {
-          const logText = await logResponse.text();
-          console.log("\n=================== APIFY INTERNAL LOGS ===================");
-          // מדפיס את 30 השורות האחרונות של הלוג כדי לראות את השגיאה המדויקת
-          console.log(logText.split('\n').slice(-30).join('\n'));
-          console.log("===========================================================\n");
+        // פנייה לכתובת ה-API הרשמית והנכונה של לוג הריצה
+        const logResponse = await fetch(`https://api.apify.com/v2/runs/${runId}/log?token=${APIFY_TOKEN}`);
+        const logText = await logResponse.text();
+        
+        console.log("\n=================== APIFY INTERNAL LOGS ===================");
+        if (logText) {
+          // הדפסת 40 השורות האחרונות של הלוג כדי לראות את השגיאה המדויקת
+          console.log(logText.split('\n').slice(-40).join('\n'));
+        } else {
+          console.log("No logs returned from Apify or logs are empty.");
         }
+        console.log("===========================================================\n");
       } catch (logErr) {
         console.error("Could not fetch Apify run logs:", logErr.message);
       }
