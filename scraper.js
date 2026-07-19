@@ -19,15 +19,13 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Stable Apify Twitter Scraper (altimis/scweet) for ${twitterUsernames.length} users...`);
 
-  // המרת שמות המשתמשים לכתובות URL בפורמט שהאקטורים של Apify מצפים לקבל
-  const startUrls = twitterUsernames.map(username => ({
-    url: `https://x.com/${username}`
-  }));
+  // המרת שמות המשתמשים לשאילתות חיפוש בפורמט שהאקטור scweet דורש (from:username)
+  const searchQueries = twitterUsernames.map(username => `from:${username}`);
 
-  // הגדרת הקלט (Input) המעודכן עם startUrls במקום profiles
+  // הגדרת הקלט (Input) המדויק עבור altimis/scweet
   const input = {
-    "startUrls": startUrls,
-    "tweetsDesired": 15, // במידה והוא דורש משהו אחר לשליטה בכמות נעדכן, אבל זה מה שהיה מקודם
+    "searchQueries": searchQueries,
+    "tweetsDesired": 15,
     "proxyConfig": {
       "useApifyProxy": true
     }
@@ -56,7 +54,7 @@ const twitterUsernames = [
     const defaultDatasetId = runData.data.defaultDatasetId;
     console.log(`Run started successfully! Run ID: ${runId}`);
 
-    // 2. המתנה לסיום הריצה ב-Apify (12 דקות למקסימום בטיחות)
+    // 2. המתנה לסיום הריצה ב-Apify
     let status = 'RUNNING';
     const startTime = Date.now();
     const timeoutLimit = 12 * 60 * 1000; 
