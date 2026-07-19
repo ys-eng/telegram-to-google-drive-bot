@@ -7,14 +7,14 @@ if (!APIFY_TOKEN) {
   process.exit(1);
 }
 
-// תיקון: שימוש ב-~ במקום / כדי שה-API של Apify יזהה את המשימה כראוי
-const APIFY_TASK_ID = 'sunbeamed_honeybee~scweet-task'; 
+// TODO: החלף את המחרוזת הזו ב-Task ID האלפאנומרי האמיתי שלך מה-Console (למשל: 'HG7ML7M8z78ycAPEB')
+const APIFY_TASK_ID = 'YOUR_ALPHANUMERIC_TASK_ID_HERE'; 
 
 // היעד שלנו: 23 משתמשים כפול 15 ציוצים = 345.
 const TARGET_ITEMS = 345; 
 
 (async () => {
-  console.log(`Starting Apify Twitter Scraper via Task [${APIFY_TASK_ID}]...`);
+  console.log(`Starting Apify Twitter Scraper via Task ID [${APIFY_TASK_ID}]...`);
   console.log(`Target items to collect early: ${TARGET_ITEMS}`);
 
   let runId = null;
@@ -22,8 +22,8 @@ const TARGET_ITEMS = 345;
   try {
     console.log(`Triggering Apify Task...`);
 
-    // תיקון: שינוי הכתובת ל-tasks הרשמי של Apify
-    const runResponse = await fetch(`https://api.apify.com/v2/tasks/${APIFY_TASK_ID}/runs?token=${APIFY_TOKEN}`, {
+    // הכתובת הרשמית והמדויקת של Apify לניהול משימות
+    const runResponse = await fetch(`https://api.apify.com/v2/actor-tasks/${APIFY_TASK_ID}/runs?token=${APIFY_TOKEN}`, {
       method: 'POST'
     });
 
@@ -60,7 +60,7 @@ const TARGET_ITEMS = 345;
           itemCount = datasetInfo.data.itemCount;
         }
       } catch (e) {
-        // שגיאה לא קריטית, נמשיך בריצה
+        // שגיאה לא קריטית בתשאול הסטטוס, נמשיך בריצה
       }
 
       console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Items collected so far: ${itemCount !== null ? itemCount : 'unknown'}.`);
@@ -73,10 +73,10 @@ const TARGET_ITEMS = 345;
           break;
         }
 
-        // בדיקה 2: מנגנון הגנה מפני תקיעה של השרת
+        // בדיקה 2: מנגנון הגנה מפני תקיעה של השרת (3 דקות ללא שינוי)
         if (itemCount > 50 && itemCount === lastItemCount) {
           noProgressCycles++;
-          if (noProgressCycles >= 9) { // 3 דקות ללא שינוי
+          if (noProgressCycles >= 9) { 
             console.log(`\n[!] Progress stuck at ${itemCount} items. Exiting early to save collected data.`);
             earlyExit = true;
             break;
@@ -174,7 +174,7 @@ const TARGET_ITEMS = 345;
     fs.writeFileSync('tweets.json', JSON.stringify(finalTweets, null, 2));
     console.log(`\nFinished! Successfully processed tweets. Total tweets in database: ${finalTweets.length}`);
 
-    // כיבוי יזום במידה ויצאנו מוקדם כדי לחסוך Compute Units בחשבון החינמי
+    // כיבוי יזום של הקונטיינר במידה ועצרנו מוקדם כדי לשמור על הקרדיט החינמי שלך
     if (earlyExit && (status === 'RUNNING' || status === 'READY')) {
       console.log("Sending abort signal to Apify to terminate the active container and save credit...");
       await fetch(`https://api.apify.com/v2/runs/${runId}/abort?token=${APIFY_TOKEN}`, { method: 'POST' }).catch(() => {});
