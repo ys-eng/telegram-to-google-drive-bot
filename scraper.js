@@ -7,22 +7,20 @@ if (!APIFY_TOKEN) {
   process.exit(1);
 }
 
-// TODO: החלף את המחרוזת הזו ב-Task ID האלפאנומרי האמיתי שלך מה-Console (למשל: 'HG7ML7M8z78ycAPEB')
-const APIFY_TASK_ID = 'amfi7PaPz0Hk1maPX';
+// TODO: החלף את המחרוזת הזו ב-Task ID האלפאנומרי החדש שקיבלת מה-Console עבור האקטור החדש
+const APIFY_TASK_ID = 'knAaAfDNMgF4XVXLo'; 
 
-// היעד שלנו: 23 משתמשים כפול 15 ציוצים = 345.
+// היעד החדש שלנו: 23 משתמשים כפול 15 ציוצים = 345
 const TARGET_ITEMS = 345; 
 
 (async () => {
-  console.log(`Starting Apify Twitter Scraper via Task ID [${APIFY_TASK_ID}]...`);
-  console.log(`Target items to collect early: ${TARGET_ITEMS}`);
+  console.log(`Starting Microworlds Twitter Scraper via Task ID [${APIFY_TASK_ID}]...`);
 
   let runId = null;
 
   try {
     console.log(`Triggering Apify Task...`);
 
-    // הכתובת הרשמית והמדויקת של Apify לניהול משימות
     const runResponse = await fetch(`https://api.apify.com/v2/actor-tasks/${APIFY_TASK_ID}/runs?token=${APIFY_TOKEN}`, {
       method: 'POST'
     });
@@ -41,7 +39,7 @@ const TARGET_ITEMS = 345;
     // 2. המתנה לריצה עם מעקב התקדמות וחילוץ מוקדם
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 20 * 60 * 1000; // 20 דקות לגיבוי
+    const timeoutLimit = 15 * 60 * 1000; // 15 דקות לגיבוי
     
     let lastItemCount = 0;
     let noProgressCycles = 0;
@@ -59,25 +57,23 @@ const TARGET_ITEMS = 345;
           const datasetInfo = await datasetInfoResponse.json();
           itemCount = datasetInfo.data.itemCount;
         }
-      } catch (e) {
-        // שגיאה לא קריטית בתשאול הסטטוס, נמשיך בריצה
-      }
+      } catch (e) {}
 
       console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Items collected so far: ${itemCount !== null ? itemCount : 'unknown'}.`);
 
       if (itemCount !== null) {
-        // בדיקה 1: האם הגענו ליעד הציוצים שלנו?
+        // אם הגענו ליעד - נחלץ מוקדם כדי לחסוך זמן ומשאבים
         if (itemCount >= TARGET_ITEMS) {
-          console.log(`\n[✓] Target reached (${itemCount}/${TARGET_ITEMS}). Exiting loop early to process data and save limits!`);
+          console.log(`\n[✓] Target reached (${itemCount}/${TARGET_ITEMS}). Exiting loop early!`);
           earlyExit = true;
           break;
         }
 
-        // בדיקה 2: מנגנון הגנה מפני תקיעה של השרת (3 דקות ללא שינוי)
-        if (itemCount > 50 && itemCount === lastItemCount) {
+        // הגנה מפני תקיעה (3 דקות ללא שינוי)
+        if (itemCount > 20 && itemCount === lastItemCount) {
           noProgressCycles++;
           if (noProgressCycles >= 9) { 
-            console.log(`\n[!] Progress stuck at ${itemCount} items. Exiting early to save collected data.`);
+            console.log(`\n[!] Progress stuck at ${itemCount} items. Exiting early to save data.`);
             earlyExit = true;
             break;
           }
@@ -98,13 +94,7 @@ const TARGET_ITEMS = 345;
       }
     }
 
-    console.log(`Apify run loop exited. Final status check: ${status}`);
-
-    if (!earlyExit && status !== 'SUCCEEDED') {
-      throw new Error(`Apify run finished with non-success status: ${status}.`);
-    }
-
-    // 3. הורדת הנתונים שנאספו ב-Dataset
+    // 3. הורדת הנתונים
     console.log("Downloading scraped data from dataset...");
     const datasetResponse = await fetch(`https://api.apify.com/v2/datasets/${defaultDatasetId}/items?token=${APIFY_TOKEN}`);
 
@@ -115,36 +105,37 @@ const TARGET_ITEMS = 345;
     const rawItems = await datasetResponse.json();
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-    // 4. עיבוד המידע והתאמתו למבנה השדות של API Dojo
+    // 4. עיבוד המידע בהתאמה למבנה של microworlds
     const formattedTweets = rawItems
       .map(item => {
         if (!item) return null;
 
-        const text = item.fullText || item.text || (item.tweet && item.tweet.text) || '';
+        // האקטור הזה משתמש ב-text או full_text
+        const text = item.text || item.full_text || item.fullText || '';
         if (!text) return null;
 
-        const rawUsername = item.twitterUser?.username || (item.user && (item.user.username || item.user.screen_name)) || item.username || item.handle || 'unknown';
+        // חילוץ שם משתמש נקי מהמבנה של האקטור החדש
+        const rawUsername = item.user?.username || item.user?.screen_name || item.username || 'unknown';
         const username = String(rawUsername).replace('@', '');
         
-        const createdAt = item.createdAt || item.created_at || new Date().toUTCString();
+        const createdAt = item.created_at || item.createdAt || new Date().toUTCString();
         const timestamp = new Date(createdAt).getTime() || Date.now();
 
+        // חילוץ מדיה
         let media = [];
         if (Array.isArray(item.media)) {
-          media = item.media.map(m => m.url || m.media_url_https || m).filter(Boolean);
-        } else if (item.extendedEntities && Array.isArray(item.extendedEntities.media)) {
-          media = item.extendedEntities.media.map(m => m.media_url_https || m.url).filter(Boolean);
-        } else if (item.tweet && Array.isArray(item.tweet.media)) {
-          media = item.tweet.media;
+          media = item.media.map(m => m.media_url_https || m.url || m).filter(Boolean);
+        } else if (item.extended_entities?.media && Array.isArray(item.extended_entities.media)) {
+          media = item.extended_entities.media.map(m => m.media_url_https || m.url).filter(Boolean);
         }
 
         return {
-          id: item.id || String(item.tweetId) || String(timestamp),
+          id: item.id_str || item.id || String(timestamp),
           username: username,
           text: text,
           created_at: createdAt,
           timestamp: timestamp,
-          tweet_url: item.url || item.tweet_url || null,
+          tweet_url: item.url || (item.id_str ? `https://twitter.com/${username}/status/${item.id_str}` : null),
           media: [...new Set(media)]
         };
       })
@@ -152,7 +143,7 @@ const TARGET_ITEMS = 345;
 
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
 
-    // 5. מיזוג חכם עם קובץ ה-JSON הקיים
+    // 5. מיזוג ושמירה
     let existingTweets = [];
     if (fs.existsSync('tweets.json')) {
       try {
@@ -172,11 +163,11 @@ const TARGET_ITEMS = 345;
     const finalTweets = mergedTweets.slice(0, 150);
 
     fs.writeFileSync('tweets.json', JSON.stringify(finalTweets, null, 2));
-    console.log(`\nFinished! Successfully processed tweets. Total tweets in database: ${finalTweets.length}`);
+    console.log(`\nFinished! Total tweets in database: ${finalTweets.length}`);
 
-    // כיבוי יזום של הקונטיינר במידה ועצרנו מוקדם כדי לשמור על הקרדיט החינמי שלך
+    // ביטול הריצה במידה והיא עדיין פעילה ברקע כדי לחסוך Compute Units
     if (earlyExit && (status === 'RUNNING' || status === 'READY')) {
-      console.log("Sending abort signal to Apify to terminate the active container and save credit...");
+      console.log("Sending abort signal to Apify...");
       await fetch(`https://api.apify.com/v2/runs/${runId}/abort?token=${APIFY_TOKEN}`, { method: 'POST' }).catch(() => {});
     }
 
