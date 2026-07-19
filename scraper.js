@@ -8,7 +8,7 @@ if (!APIFY_TOKEN) {
 }
 
 // TODO: החלף את המחרוזת הזו ב-Task ID האלפאנומרי האמיתי שלך מה-Console (למשל: 'HG7ML7M8z78ycAPEB')
-const APIFY_TASK_ID = 'YOUR_ALPHANUMERIC_TASK_ID_HERE'; 
+const APIFY_TASK_ID = 'amfi7PaPz0Hk1maPX';
 
 // היעד שלנו: 23 משתמשים כפול 15 ציוצים = 345.
 const TARGET_ITEMS = 345; 
