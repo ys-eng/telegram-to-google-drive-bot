@@ -9,34 +9,36 @@ if (!APIFY_TOKEN) {
 
 // רשימת כל 23 המשתמשים
 const twitterUsernames = [
-  'yoelituv', 'avi__blum', 'arivlin1', 'AryeErlich', 'moshe_nayes', 
-  'Israelcohen911', 'ishaycoen', 'yankihebrew', 'yossilevii', 'YakiAdamker', 
-  'YinonMagal', 'amit_segal', 'AviMoskov', 'avrahamFriend', 'BismuthBoaz', 
-  'CohenBezalel02', 'BombachMenachem', 'YitzikCrombie', 'AvreymiYus', 
+  'yoelituv', 'avi__blum', 'arivlin1', 'AryeErlich', 'moshe_nayes',
+  'Israelcohen911', 'ishaycoen', 'yankihebrew', 'yossilevii', 'YakiAdamker',
+  'YinonMagal', 'amit_segal', 'AviMoskov', 'avrahamFriend', 'BismuthBoaz',
+  'CohenBezalel02', 'BombachMenachem', 'YitzikCrombie', 'AvreymiYus',
   'KemachIsrael', 'Machon_Haredi', 'yehuditmiletzky', 'mk_moshe_gafni'
 ];
+
+const TWEETS_PER_USER = 15;
 
 (async () => {
   console.log(`Starting Stable Apify Twitter Scraper (altimis/scweet) for ${twitterUsernames.length} users...`);
 
-  // המרת שמות המשתמשים לשאילתות חיפוש בפורמט שהאקטור scweet דורש (from:username)
-  const searchQueries = twitterUsernames.map(username => `from:${username}`);
-
-  // הגדרת הקלט (Input) המדויק עבור altimis/scweet
+  // הקלט הנכון עבור altimis/scweet:
+  // - source_mode: "search" + from_users (שדה מובנה) במקום searchQueries
+  // - max_items: מינימום 100 (האקטור אוכף זאת בעצמו)
+  // - search_sort: "Latest" מומלץ כשסורקים כמה משתמשים כדי לקבל טוויטים עדכניים מכולם
+  // - אין proxyConfig - מפתחות לא מוכרים נדחים על ידי הסכימה
   const input = {
-    "searchQueries": searchQueries,
-    "tweetsDesired": 15,
-    "proxyConfig": {
-      "useApifyProxy": true
-    }
+    "source_mode": "search",
+    "from_users": twitterUsernames,
+    "max_items": Math.max(100, twitterUsernames.length * TWEETS_PER_USER),
+    "search_sort": "Latest"
   };
 
-  const actorName = "altimis~scweet"; 
+  const actorName = "altimis~scweet";
   let runId = null;
 
   try {
     console.log(`Calling Apify Actor (${actorName.replace('~', '/')})...`);
-    
+
     // 1. הפעלת הריצה (Run) ב-Apify
     const runResponse = await fetch(`https://api.apify.com/v2/acts/${actorName}/runs?token=${APIFY_TOKEN}`, {
       method: 'POST',
@@ -57,7 +59,7 @@ const twitterUsernames = [
     // 2. המתנה לסיום הריצה ב-Apify
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 12 * 60 * 1000; 
+    const timeoutLimit = 12 * 60 * 1000;
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
@@ -91,14 +93,14 @@ const twitterUsernames = [
       } catch (logErr) {
         console.error("Could not fetch Apify run logs:", logErr.message);
       }
-      
+
       throw new Error(`Apify run finished with non-success status: ${status}`);
     }
 
     // 3. שליפת המידע הגולמי שנאסף (Dataset)
     console.log("Downloading scraped data from dataset...");
     const datasetResponse = await fetch(`https://api.apify.com/v2/datasets/${defaultDatasetId}/items?token=${APIFY_TOKEN}`);
-    
+
     if (!datasetResponse.ok) {
       throw new Error("Failed to download dataset items.");
     }
@@ -107,47 +109,30 @@ const twitterUsernames = [
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
     // 4. עיבוד וסינון המידע למבנה הרצוי
+    // סכימת הפלט של altimis/scweet: id, text, handle, created_at, tweet_url, tweet.media (מערך)
     const formattedTweets = rawItems
       .map(item => {
-        if (!item || item.noResults) return null;
+        if (!item) return null;
 
-        const text = item.text || item.fullText || item.full_text || '';
+        const text = item.text || '';
         if (!text) return null;
 
-        const username = item.username || item.screenName || (item.author && item.author.screen_name) || 'unknown';
-        const createdAt = item.createdAt || item.created_at || item.date || new Date().toUTCString();
+        const username = item.handle || 'unknown';
+        const createdAt = item.created_at || new Date().toUTCString();
         const timestamp = new Date(createdAt).getTime() || Date.now();
 
         let media = [];
-        
-        if (item.videoUrl || item.video_url) {
-          media.push(item.videoUrl || item.video_url);
-        } else if (item.extendedEntities && item.extendedEntities.media) {
-          item.extendedEntities.media.forEach(m => {
-            if (m.video_info && m.video_info.variants) {
-              const mp4s = m.video_info.variants
-                .filter(v => v.url && v.url.includes('.mp4'))
-                .sort((a, b) => (b.bitrate || 0) - (a.bitrate || 0));
-              if (mp4s.length > 0) media.push(mp4s[0].url);
-            }
-          });
-        }
-
-        if (item.images && Array.isArray(item.images)) {
-          media = media.concat(item.images);
-        } else if (item.media && Array.isArray(item.media)) {
-          item.media.forEach(m => {
-            if (typeof m === 'string') media.push(m);
-            else if (m.url || m.media_url_https) media.push(m.url || m.media_url_https);
-          });
+        if (item.tweet && Array.isArray(item.tweet.media)) {
+          media = item.tweet.media;
         }
 
         return {
-          id: item.id || item.id_str || String(timestamp),
+          id: item.id || String(timestamp),
           username: username.replace('@', ''),
           text: text,
           created_at: createdAt,
           timestamp: timestamp,
+          tweet_url: item.tweet_url || null,
           media: [...new Set(media.filter(Boolean))]
         };
       })
@@ -179,6 +164,6 @@ const twitterUsernames = [
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
-    process.exit(1); 
+    process.exit(1);
   }
 })();
