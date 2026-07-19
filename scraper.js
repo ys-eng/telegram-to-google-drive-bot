@@ -17,15 +17,16 @@ const twitterUsernames = [
 ];
 
 const TWEETS_PER_USER = 15;
+const TARGET_ITEMS = twitterUsernames.length * TWEETS_PER_USER; // 345 פריטים
 
 (async () => {
   console.log(`Starting Stable Apify Twitter Scraper (altimis/scweet) for ${twitterUsernames.length} users...`);
+  console.log(`Target items to collect: ${TARGET_ITEMS}`);
 
-  // הגדרת הקלט המותאם ל-altimis/scweet
   const input = {
     "source_mode": "search",
     "from_users": twitterUsernames,
-    "max_items": Math.max(100, twitterUsernames.length * TWEETS_PER_USER),
+    "max_items": Math.max(100, TARGET_ITEMS),
     "search_sort": "Latest"
   };
 
@@ -35,7 +36,7 @@ const TWEETS_PER_USER = 15;
   try {
     console.log(`Calling Apify Actor (${actorName.replace('~', '/')})...`);
 
-    // 1. הפעלת הריצה (Run) ב-Apify
+    // 1. הפעלת הריצה ב-Apify
     const runResponse = await fetch(`https://api.apify.com/v2/acts/${actorName}/runs?token=${APIFY_TOKEN}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -53,17 +54,20 @@ const TWEETS_PER_USER = 15;
     console.log(`Run started successfully! Run ID: ${runId}`);
     console.log(`You can monitor it live here: https://console.apify.com/actors/runs/${runId}`);
 
-    // 2. המתנה לסיום הריצה ב-Apify (עם מעקב התקדמות ו-Timeout של 25 דקות)
+    // 2. המתנה עם מנגנון הגנה וחילוץ מוקדם
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 25 * 60 * 1000; // 25 דקות עבור ריצה מרובת משתמשים ב-Free Plan
+    const timeoutLimit = 25 * 60 * 1000; 
+    
+    let lastItemCount = 0;
+    let noProgressCycles = 0;
+    let earlyExit = false;
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
-        throw new Error(`Timeout reached while waiting for Apify to finish. The run (${runId}) may still be active - check it directly at: https://console.apify.com/actors/runs/${runId}`);
+        throw new Error(`Timeout reached while waiting for Apify to finish. Check directly at: https://console.apify.com/actors/runs/${runId}`);
       }
 
-      // שליפת כמות הפריטים שנאספו עד כה כדי להציג התקדמות חיה בלוגים
       let itemCount = null;
       try {
         const datasetInfoResponse = await fetch(`https://api.apify.com/v2/datasets/${defaultDatasetId}?token=${APIFY_TOKEN}`);
@@ -72,10 +76,36 @@ const TWEETS_PER_USER = 15;
           itemCount = datasetInfo.data.itemCount;
         }
       } catch (e) {
-        // שגיאה לא קריטית, נדלג על הדפסת כמות הפריטים בסבב הנוכחי
+        // שגיאה לא קריטית בתשאול ה-dataset
       }
 
-      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Items collected so far: ${itemCount !== null ? itemCount : 'unknown'}. Waiting 20 seconds for next check...`);
+      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Items collected so far: ${itemCount !== null ? itemCount : 'unknown'}.`);
+
+      if (itemCount !== null) {
+        // בדיקה 1: האם הגענו ליעד המספרי של הציוצים?
+        if (itemCount >= TARGET_ITEMS) {
+          console.log(`\n[✓] Target reached (${itemCount}/${TARGET_ITEMS}). Exiting loop early to process data!`);
+          earlyExit = true;
+          break;
+        }
+
+        // בדיקה 2: האם הנתונים תקועים על מספר גבוה (מעל 100) ולא זזים במשך 3 דקות רצופות?
+        if (itemCount > 100 && itemCount === lastItemCount) {
+          noProgressCycles++;
+          // 9 מחזורים של 20 שניות = 3 דקות
+          if (noProgressCycles >= 9) {
+            console.log(`\n[!] Progress stuck at ${itemCount} items for 3 minutes. Exiting early to save collected data!`);
+            earlyExit = true;
+            break;
+          }
+        } else {
+          noProgressCycles = 0;
+        }
+        
+        lastItemCount = itemCount;
+      }
+
+      console.log(`Waiting 20 seconds for next check...`);
       await new Promise(resolve => setTimeout(resolve, 20000));
 
       const statusResponse = await fetch(`https://api.apify.com/v2/runs/${runId}?token=${APIFY_TOKEN}`);
@@ -85,9 +115,10 @@ const TWEETS_PER_USER = 15;
       }
     }
 
-    console.log(`Apify run finished with status: ${status}`);
+    console.log(`Apify run loop exited. Final status check: ${status}`);
 
-    if (status !== 'SUCCEEDED') {
+    // אם לא יצאנו מוקדם באופן יזום, נוודא שהריצה באמת הצליחה
+    if (!earlyExit && status !== 'SUCCEEDED') {
       console.log(`\n[!] Run failed with status: ${status}. Fetching internal Apify logs...`);
       try {
         const logResponse = await fetch(`https://api.apify.com/v2/run-logs/${runId}?token=${APIFY_TOKEN}`);
@@ -103,10 +134,10 @@ const TWEETS_PER_USER = 15;
         console.error("Could not fetch Apify run logs:", logErr.message);
       }
 
-      throw new Error(`Apify run finished with non-success status: ${status}. Check console: https://console.apify.com/actors/runs/${runId}`);
+      throw new Error(`Apify run finished with non-success status: ${status}.`);
     }
 
-    // 3. שליפת המידע הגולמי שנאסף (Dataset)
+    // 3. שליפת המידע מה-Dataset
     console.log("Downloading scraped data from dataset...");
     const datasetResponse = await fetch(`https://api.apify.com/v2/datasets/${defaultDatasetId}/items?token=${APIFY_TOKEN}`);
 
@@ -117,7 +148,7 @@ const TWEETS_PER_USER = 15;
     const rawItems = await datasetResponse.json();
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
-    // 4. עיבוד וסינון המידע למבנה הרצוי
+    // 4. עיבוד וסינון המידע
     const formattedTweets = rawItems
       .map(item => {
         if (!item) return null;
@@ -125,7 +156,6 @@ const TWEETS_PER_USER = 15;
         const text = item.text || '';
         if (!text) return null;
 
-        // שיפור: חילוץ בטוח של ה-username ומניעת קריסה במקרה של ערך ריק
         const rawUsername = item.handle || item.username || 'unknown';
         const username = String(rawUsername).replace('@', '');
         
@@ -172,6 +202,12 @@ const TWEETS_PER_USER = 15;
 
     fs.writeFileSync('tweets.json', JSON.stringify(finalTweets, null, 2));
     console.log(`\nFinished! Successfully processed tweets. Total tweets in database: ${finalTweets.length}`);
+
+    // (אופציונלי אך מומלץ): כיבוי יזום של הריצה ב-Apify כדי לא לבזבז Compute units בחינם
+    if (earlyExit && (status === 'RUNNING' || status === 'READY')) {
+      console.log("Sending abort signal to Apify to save your platform usage limits...");
+      await fetch(`https://api.apify.com/v2/runs/${runId}/abort?token=${APIFY_TOKEN}`, { method: 'POST' }).catch(() => {});
+    }
 
   } catch (error) {
     console.error("Critical Scraping Error:", error.message);
