@@ -21,11 +21,7 @@ const TWEETS_PER_USER = 15;
 (async () => {
   console.log(`Starting Stable Apify Twitter Scraper (altimis/scweet) for ${twitterUsernames.length} users...`);
 
-  // הקלט הנכון עבור altimis/scweet:
-  // - source_mode: "search" + from_users (שדה מובנה) במקום searchQueries
-  // - max_items: מינימום 100 (האקטור אוכף זאת בעצמו)
-  // - search_sort: "Latest" מומלץ כשסורקים כמה משתמשים כדי לקבל טוויטים עדכניים מכולם
-  // - אין proxyConfig - מפתחות לא מוכרים נדחים על ידי הסכימה
+  // הגדרת הקלט המותאם ל-altimis/scweet
   const input = {
     "source_mode": "search",
     "from_users": twitterUsernames,
@@ -55,18 +51,31 @@ const TWEETS_PER_USER = 15;
     runId = runData.data.id;
     const defaultDatasetId = runData.data.defaultDatasetId;
     console.log(`Run started successfully! Run ID: ${runId}`);
+    console.log(`You can monitor it live here: https://console.apify.com/actors/runs/${runId}`);
 
-    // 2. המתנה לסיום הריצה ב-Apify
+    // 2. המתנה לסיום הריצה ב-Apify (עם מעקב התקדמות ו-Timeout של 25 דקות)
     let status = 'RUNNING';
     const startTime = Date.now();
-    const timeoutLimit = 12 * 60 * 1000;
+    const timeoutLimit = 25 * 60 * 1000; // 25 דקות עבור ריצה מרובת משתמשים ב-Free Plan
 
     while (status === 'RUNNING' || status === 'READY') {
       if (Date.now() - startTime > timeoutLimit) {
-        throw new Error("Timeout reached while waiting for Apify to finish.");
+        throw new Error(`Timeout reached while waiting for Apify to finish. The run (${runId}) may still be active - check it directly at: https://console.apify.com/actors/runs/${runId}`);
       }
 
-      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Waiting 20 seconds for next check...`);
+      // שליפת כמות הפריטים שנאספו עד כה כדי להציג התקדמות חיה בלוגים
+      let itemCount = null;
+      try {
+        const datasetInfoResponse = await fetch(`https://api.apify.com/v2/datasets/${defaultDatasetId}?token=${APIFY_TOKEN}`);
+        if (datasetInfoResponse.ok) {
+          const datasetInfo = await datasetInfoResponse.json();
+          itemCount = datasetInfo.data.itemCount;
+        }
+      } catch (e) {
+        // שגיאה לא קריטית, נדלג על הדפסת כמות הפריטים בסבב הנוכחי
+      }
+
+      console.log(`[${new Date().toLocaleTimeString()}] Status: ${status}. Items collected so far: ${itemCount !== null ? itemCount : 'unknown'}. Waiting 20 seconds for next check...`);
       await new Promise(resolve => setTimeout(resolve, 20000));
 
       const statusResponse = await fetch(`https://api.apify.com/v2/runs/${runId}?token=${APIFY_TOKEN}`);
@@ -94,7 +103,7 @@ const TWEETS_PER_USER = 15;
         console.error("Could not fetch Apify run logs:", logErr.message);
       }
 
-      throw new Error(`Apify run finished with non-success status: ${status}`);
+      throw new Error(`Apify run finished with non-success status: ${status}. Check console: https://console.apify.com/actors/runs/${runId}`);
     }
 
     // 3. שליפת המידע הגולמי שנאסף (Dataset)
@@ -109,7 +118,6 @@ const TWEETS_PER_USER = 15;
     console.log(`Retrieved ${rawItems.length} items from Apify.`);
 
     // 4. עיבוד וסינון המידע למבנה הרצוי
-    // סכימת הפלט של altimis/scweet: id, text, handle, created_at, tweet_url, tweet.media (מערך)
     const formattedTweets = rawItems
       .map(item => {
         if (!item) return null;
@@ -117,7 +125,10 @@ const TWEETS_PER_USER = 15;
         const text = item.text || '';
         if (!text) return null;
 
-        const username = item.handle || 'unknown';
+        // שיפור: חילוץ בטוח של ה-username ומניעת קריסה במקרה של ערך ריק
+        const rawUsername = item.handle || item.username || 'unknown';
+        const username = String(rawUsername).replace('@', '');
+        
         const createdAt = item.created_at || new Date().toUTCString();
         const timestamp = new Date(createdAt).getTime() || Date.now();
 
@@ -128,7 +139,7 @@ const TWEETS_PER_USER = 15;
 
         return {
           id: item.id || String(timestamp),
-          username: username.replace('@', ''),
+          username: username,
           text: text,
           created_at: createdAt,
           timestamp: timestamp,
