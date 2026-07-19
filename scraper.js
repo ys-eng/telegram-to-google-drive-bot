@@ -7,7 +7,7 @@ if (!APIFY_TOKEN) {
   process.exit(1);
 }
 
-// רשימת כל 23 המשתמשים שלך - חוזרים להריץ את כולם ביחד!
+// רשימת כל 23 המשתמשים
 const twitterUsernames = [
   'yoelituv', 'avi__blum', 'arivlin1', 'AryeErlich', 'moshe_nayes', 
   'Israelcohen911', 'ishaycoen', 'yankihebrew', 'yossilevii', 'YakiAdamker', 
@@ -19,12 +19,17 @@ const twitterUsernames = [
 (async () => {
   console.log(`Starting Stable Apify Twitter Scraper (altimis/scweet) for ${twitterUsernames.length} users...`);
 
-  // הגדרת ה-Input התקני עבור האקטור altimis/scweet
+  // המרת שמות המשתמשים לכתובות URL בפורמט שהאקטורים של Apify מצפים לקבל
+  const startUrls = twitterUsernames.map(username => ({
+    url: `https://x.com/${username}`
+  }));
+
+  // הגדרת הקלט (Input) המעודכן עם startUrls במקום profiles
   const input = {
-    "profiles": twitterUsernames,
-    "tweetsDesired": 15, // 15 ציוצים אחרונים מכל פרופיל
+    "startUrls": startUrls,
+    "tweetsDesired": 15, // במידה והוא דורש משהו אחר לשליטה בכמות נעדכן, אבל זה מה שהיה מקודם
     "proxyConfig": {
-      "useApifyProxy": true // שימוש בפרוקסי של אפיפיי למניעת חסימות
+      "useApifyProxy": true
     }
   };
 
@@ -51,7 +56,7 @@ const twitterUsernames = [
     const defaultDatasetId = runData.data.defaultDatasetId;
     console.log(`Run started successfully! Run ID: ${runId}`);
 
-    // 2. המתנה לסיום הריצה ב-Apify (נשארים עם 12 דקות לביטחון, למרות שהוא אמור להיות מהיר)
+    // 2. המתנה לסיום הריצה ב-Apify (12 דקות למקסימום בטיחות)
     let status = 'RUNNING';
     const startTime = Date.now();
     const timeoutLimit = 12 * 60 * 1000; 
@@ -73,7 +78,6 @@ const twitterUsernames = [
 
     console.log(`Apify run finished with status: ${status}`);
 
-    // אם הריצה נכשלה - שולפים לוגים לאבחון
     if (status !== 'SUCCEEDED') {
       console.log(`\n[!] Run failed with status: ${status}. Fetching internal Apify logs...`);
       try {
@@ -109,21 +113,15 @@ const twitterUsernames = [
       .map(item => {
         if (!item || item.noResults) return null;
 
-        // חילוץ טקסט
         const text = item.text || item.fullText || item.full_text || '';
         if (!text) return null;
 
-        // חילוץ שם משתמש
         const username = item.username || item.screenName || (item.author && item.author.screen_name) || 'unknown';
-
-        // חילוץ תאריכים וחתימת זמן
         const createdAt = item.createdAt || item.created_at || item.date || new Date().toUTCString();
         const timestamp = new Date(createdAt).getTime() || Date.now();
 
-        // חילוץ מדיה (תמונות וסרטונים) מותאם למבנה המקובל של Scweet
         let media = [];
         
-        // בדיקת סרטונים (MP4)
         if (item.videoUrl || item.video_url) {
           media.push(item.videoUrl || item.video_url);
         } else if (item.extendedEntities && item.extendedEntities.media) {
@@ -137,7 +135,6 @@ const twitterUsernames = [
           });
         }
 
-        // בדיקת תמונות
         if (item.images && Array.isArray(item.images)) {
           media = media.concat(item.images);
         } else if (item.media && Array.isArray(item.media)) {
@@ -149,16 +146,15 @@ const twitterUsernames = [
 
         return {
           id: item.id || item.id_str || String(timestamp),
-          username: username.replace('@', ''), // ניקוי ה-@ אם קיים בשם
+          username: username.replace('@', ''),
           text: text,
           created_at: createdAt,
           timestamp: timestamp,
-          media: [...new Set(media.filter(Boolean))] // מניעת כפילויות במדיה
+          media: [...new Set(media.filter(Boolean))]
         };
       })
       .filter(item => item !== null);
 
-    // מיון מהחדש ביותר לישן ביותר
     formattedTweets.sort((a, b) => b.timestamp - a.timestamp);
 
     // 5. שמירה ומיזוג חכם עם קובץ קיים
@@ -178,7 +174,6 @@ const twitterUsernames = [
     const mergedTweets = Array.from(allTweetsMap.values());
     mergedTweets.sort((a, b) => b.timestamp - a.timestamp);
 
-    // שומרים את 150 הציוצים האחרונים במאגר
     const finalTweets = mergedTweets.slice(0, 150);
 
     fs.writeFileSync('tweets.json', JSON.stringify(finalTweets, null, 2));
