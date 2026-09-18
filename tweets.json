@@ -1,5 +1,941 @@
 [
   {
+    "id": "2100988827619733521",
+    "username": "unknown",
+    "text": "@AviMoskov טוב אז אל תקרא לזה מפלגה חרדית.",
+    "created_at": "Fri Sep 18 16:42:25 +0000 2026",
+    "timestamp": 1789749745000,
+    "tweet_url": "https://x.com/asafsha/status/2100988827619733521",
+    "media": []
+  },
+  {
+    "id": "2100988745692360724",
+    "username": "unknown",
+    "text": "@amit_segal https://t.co/kHZd884Ktz",
+    "created_at": "Fri Sep 18 16:42:06 +0000 2026",
+    "timestamp": 1789749726000,
+    "tweet_url": "https://x.com/CariMark4/status/2100988745692360724",
+    "media": []
+  },
+  {
+    "id": "2100988637148049606",
+    "username": "unknown",
+    "text": "@ShukrunAriel @YinonMagal אני לא עונה",
+    "created_at": "Fri Sep 18 16:41:40 +0000 2026",
+    "timestamp": 1789749700000,
+    "tweet_url": "https://x.com/yahelrothcohen/status/2100988637148049606",
+    "media": []
+  },
+  {
+    "id": "2100988503358128560",
+    "username": "unknown",
+    "text": "@adi7ch @C14_news @YinonMagal @ErelSegal בדצמבר 2015 בחרה ועדת האיתור ליועץ המשפטי לממשלה באביחי מנדלבליט כמועמד היחיד והסופי לתפקיד.\n\nשרת המשפטים תמכה בו וקידמה אותו.\n\nואתה שואל מי אישר?\n\nאתה מצפה שנתניהו יצא על כל מינוי למלחמת עולם?\nשיצפה ששי ניצן יתפוס את מנדלבליט בגרון?\nשיצפה שהמשטרה תחקור בניגוד לחוק?\n\nתהיה הגון.",
+    "created_at": "Fri Sep 18 16:41:08 +0000 2026",
+    "timestamp": 1789749668000,
+    "tweet_url": "https://x.com/TalOr314/status/2100988503358128560",
+    "media": []
+  },
+  {
+    "id": "2100987973655502885",
+    "username": "unknown",
+    "text": "@ruthlessrousso @yankihebrew בשגגה אומרים",
+    "created_at": "Fri Sep 18 16:39:02 +0000 2026",
+    "timestamp": 1789749542000,
+    "tweet_url": "https://x.com/MBrzyly19512/status/2100987973655502885",
+    "media": []
+  },
+  {
+    "id": "2100987698387337319",
+    "username": "unknown",
+    "text": "@YinonMagal גבר הבנתי נכון?! בגלל בן כספית הלכנו ל5 מערכות בחירות?! מילארדים מכספי ציבור וכאוס טוטאלי ושנאת חינם! הכל בגללו?!\n\nאתה מדבר על זה??",
+    "created_at": "Fri Sep 18 16:37:56 +0000 2026",
+    "timestamp": 1789749476000,
+    "tweet_url": "https://x.com/LionFromZi0n/status/2100987698387337319",
+    "media": []
+  },
+  {
+    "id": "2100987393017069697",
+    "username": "unknown",
+    "text": "@YinonMagal 100,000? Like the 6 million?",
+    "created_at": "Fri Sep 18 16:36:43 +0000 2026",
+    "timestamp": 1789749403000,
+    "tweet_url": "https://x.com/Adamsharqawy/status/2100987393017069697",
+    "media": []
+  },
+  {
+    "id": "2100987371093110946",
+    "username": "unknown",
+    "text": "@moshe_nayes \"למי רע כאן?\"",
+    "created_at": "Fri Sep 18 16:36:38 +0000 2026",
+    "timestamp": 1789749398000,
+    "tweet_url": "https://x.com/Real_Eran_A/status/2100987371093110946",
+    "media": []
+  },
+  {
+    "id": "2100987163764490473",
+    "username": "unknown",
+    "text": "@YinonMagal רגע, הפעם לא עושים את הסרטון הזה עם הטויוטות של דעא\"ש בדרום?",
+    "created_at": "Fri Sep 18 16:35:48 +0000 2026",
+    "timestamp": 1789749348000,
+    "tweet_url": "https://x.com/Skater2085/status/2100987163764490473",
+    "media": []
+  },
+  {
+    "id": "2100987047833964709",
+    "username": "unknown",
+    "text": "@YinonMagal איך האדם הזה מקבל 6 מנדטים..מי מצביע לו? אין לו הישג אחד...כלומניק!!..הפתעת הבחירות..לא עובר את אחוז החסימה..אמן אמן אמן",
+    "created_at": "Fri Sep 18 16:35:21 +0000 2026",
+    "timestamp": 1789749321000,
+    "tweet_url": "https://x.com/1231963b/status/2100987047833964709",
+    "media": []
+  },
+  {
+    "id": "2100985842558738672",
+    "username": "unknown",
+    "text": "@TalOr314 @C14_news @YinonMagal @ErelSegal שמאלנית מובהקת\nומי אישר?",
+    "created_at": "Fri Sep 18 16:30:33 +0000 2026",
+    "timestamp": 1789749033000,
+    "tweet_url": "https://x.com/adi7ch/status/2100985842558738672",
+    "media": []
+  },
+  {
+    "id": "2100985791786713197",
+    "username": "unknown",
+    "text": "@ruthlessrousso @yankihebrew יש גירסה שאני לא יודע אם היא נכונה שזה שוד שהסתבך",
+    "created_at": "Fri Sep 18 16:30:21 +0000 2026",
+    "timestamp": 1789749021000,
+    "tweet_url": "https://x.com/brosheli/status/2100985791786713197",
+    "media": []
+  },
+  {
+    "id": "2100985179607007726",
+    "username": "unknown",
+    "text": "שוב חלבני בהסצה ודיבה, כבר מזמן חייבים לתבוע לה את הצורה!\nhttps://t.co/q6IAPHTS2H\n@netanyahu \n@levyguy77 \n@YinonMagal \n@Likud_Party \n@YairNetanyahu",
+    "created_at": "Fri Sep 18 16:27:55 +0000 2026",
+    "timestamp": 1789748875000,
+    "tweet_url": "https://x.com/Mark_Burshtein/status/2100985179607007726",
+    "media": []
+  },
+  {
+    "id": "2100984708372820210",
+    "username": "unknown",
+    "text": "@C14_news @YinonMagal @YotYotam חנינה נותנים למי שמודה. זמרי הוא מוגבל נחות ולכן יושב במושב לצים.",
+    "created_at": "Fri Sep 18 16:26:03 +0000 2026",
+    "timestamp": 1789748763000,
+    "tweet_url": "https://x.com/thereject/status/2100984708372820210",
+    "media": []
+  },
+  {
+    "id": "2100984575727972764",
+    "username": "unknown",
+    "text": "@YinonMagal ענק !!!",
+    "created_at": "Fri Sep 18 16:25:31 +0000 2026",
+    "timestamp": 1789748731000,
+    "tweet_url": "https://x.com/HamermanNo11666/status/2100984575727972764",
+    "media": []
+  },
+  {
+    "id": "2100982424691724651",
+    "username": "unknown",
+    "text": "@YinonMagal נראה לך שיש לך מידע ויכולת ניתוח טובים יותר? מה ההוכחות שלך לכך?",
+    "created_at": "Fri Sep 18 16:16:59 +0000 2026",
+    "timestamp": 1789748219000,
+    "tweet_url": "https://x.com/AmitSheinf88416/status/2100982424691724651",
+    "media": []
+  },
+  {
+    "id": "2100981603220521019",
+    "username": "unknown",
+    "text": "@YinonMagal @avid550 היה עצום ומעצים\nמרגש ביותר\nפעם ראשונה בסליחות\nאשרי העם שהוא כזה\nהכי התרוממות רוח https://t.co/oudGyu54i5",
+    "created_at": "Fri Sep 18 16:13:43 +0000 2026",
+    "timestamp": 1789748023000,
+    "tweet_url": "https://x.com/ayala25094128/status/2100981603220521019",
+    "media": []
+  },
+  {
+    "id": "2100981512162124143",
+    "username": "unknown",
+    "text": "@YinonMagal The leftists are all idiots in every country",
+    "created_at": "Fri Sep 18 16:13:21 +0000 2026",
+    "timestamp": 1789748001000,
+    "tweet_url": "https://x.com/hank_lansky/status/2100981512162124143",
+    "media": []
+  },
+  {
+    "id": "2100981445938348218",
+    "username": "unknown",
+    "text": "@YinonMagal מדהים כמה רוע וטמטום יכול להתנקז למפלגה אחת. בוחרים אותם בפינצטה.",
+    "created_at": "Fri Sep 18 16:13:05 +0000 2026",
+    "timestamp": 1789747985000,
+    "tweet_url": "https://x.com/yaya_ggg/status/2100981445938348218",
+    "media": []
+  },
+  {
+    "id": "2100981223791141159",
+    "username": "unknown",
+    "text": "@adi7ch @C14_news @YinonMagal @ErelSegal איילת שקד.",
+    "created_at": "Fri Sep 18 16:12:12 +0000 2026",
+    "timestamp": 1789747932000,
+    "tweet_url": "https://x.com/TalOr314/status/2100981223791141159",
+    "media": []
+  },
+  {
+    "id": "2100981092584996930",
+    "username": "unknown",
+    "text": "@C14_news @YinonMagal @ErelSegal אתה יכול לוותר על הפוקפורן, להלן עדות מנדלבליט:\n\nלא יודע.\nלא זוכר.\nלא זוכר.\nלא אני.\nלא זוכר.\nלא יודע.\nלא זוכר.\nאני יצאתי בחמש.",
+    "created_at": "Fri Sep 18 16:11:41 +0000 2026",
+    "timestamp": 1789747901000,
+    "tweet_url": "https://x.com/TalOr314/status/2100981092584996930",
+    "media": []
+  },
+  {
+    "id": "2100981073337348323",
+    "username": "unknown",
+    "text": "@PalestineDruze @YinonMagal לשחרר את הגוש של אמא שלך בדמשק",
+    "created_at": "Fri Sep 18 16:11:36 +0000 2026",
+    "timestamp": 1789747896000,
+    "tweet_url": "https://x.com/Bibiking2024040/status/2100981073337348323",
+    "media": []
+  },
+  {
+    "id": "2100980996300579070",
+    "username": "unknown",
+    "text": "@DCohen455 @YinonMagal שמאלנים בוגדים",
+    "created_at": "Fri Sep 18 16:11:18 +0000 2026",
+    "timestamp": 1789747878000,
+    "tweet_url": "https://x.com/Bibiking2024040/status/2100980996300579070",
+    "media": []
+  },
+  {
+    "id": "2100980712610369975",
+    "username": "unknown",
+    "text": "@YinonMagal מחבלי השמאל",
+    "created_at": "Fri Sep 18 16:10:10 +0000 2026",
+    "timestamp": 1789747810000,
+    "tweet_url": "https://x.com/Bibiking2024040/status/2100980712610369975",
+    "media": []
+  },
+  {
+    "id": "2100980598919594413",
+    "username": "unknown",
+    "text": "@YinonMagal הוא צריך להיות על גרדום",
+    "created_at": "Fri Sep 18 16:09:43 +0000 2026",
+    "timestamp": 1789747783000,
+    "tweet_url": "https://x.com/Bibiking2024040/status/2100980598919594413",
+    "media": []
+  },
+  {
+    "id": "2100980206194332129",
+    "username": "unknown",
+    "text": "@yankihebrew כמה טוב שהוא חזר לרחובות שלנו.",
+    "created_at": "Fri Sep 18 16:08:10 +0000 2026",
+    "timestamp": 1789747690000,
+    "tweet_url": "https://x.com/ruthlessrousso/status/2100980206194332129",
+    "media": []
+  },
+  {
+    "id": "2100975154658529560",
+    "username": "unknown",
+    "text": "@YitzikCrombie פרס ישראל אוטומטי ומיידי לאדם שימציא דרך בטוחה ויעילה להתקין מזגנים בלי הקופסאות האיומות האלה שמכערות כל בניין בארץ ישראל.",
+    "created_at": "Fri Sep 18 15:48:05 +0000 2026",
+    "timestamp": 1789746485000,
+    "tweet_url": "https://x.com/inbalcohen/status/2100975154658529560",
+    "media": []
+  },
+  {
+    "id": "2100972981614690745",
+    "username": "unknown",
+    "text": "@AviMoskov שטויות במיץ\nבשום בחירות לועד הקהילה בחול הרבנים לא התערבו מאות שנים, אין שום צורך במכתב כלשהו",
+    "created_at": "Fri Sep 18 15:39:27 +0000 2026",
+    "timestamp": 1789745967000,
+    "tweet_url": "https://x.com/asd10127/status/2100972981614690745",
+    "media": []
+  },
+  {
+    "id": "2100972347578634714",
+    "username": "unknown",
+    "text": "@YitzikCrombie Much better",
+    "created_at": "Fri Sep 18 15:36:56 +0000 2026",
+    "timestamp": 1789745816000,
+    "tweet_url": "https://x.com/shersheial/status/2100972347578634714",
+    "media": []
+  },
+  {
+    "id": "2100971630054785473",
+    "username": "unknown",
+    "text": "@yankihebrew עד הנצחון \n@hatziburha \n\nהדרך קדימה לחרדים שיודעים ששחיתות  אסור מן התורה \nלאחות את הקרע \n\nשבת שובה שלום ומבורך \nגמר חתימה טובה",
+    "created_at": "Fri Sep 18 15:34:05 +0000 2026",
+    "timestamp": 1789745645000,
+    "tweet_url": "https://x.com/SacksDisa/status/2100971630054785473",
+    "media": []
+  },
+  {
+    "id": "2100970962464260227",
+    "username": "unknown",
+    "text": "@qsLEjeJsW90MRJQ @ishaycoen @shemeshmicha העניין הוא שגם לפי ה\"תיקו\" בסקר 13 זה לא באמת תיקו.\nזה הפסד של נתניהו.",
+    "created_at": "Fri Sep 18 15:31:26 +0000 2026",
+    "timestamp": 1789745486000,
+    "tweet_url": "https://x.com/NWeinryb/status/2100970962464260227",
+    "media": []
+  },
+  {
+    "id": "2100970286732488785",
+    "username": "unknown",
+    "text": "@yossilevii אממש, תודה ☺️",
+    "created_at": "Fri Sep 18 15:28:45 +0000 2026",
+    "timestamp": 1789745325000,
+    "tweet_url": "https://x.com/nehorailo/status/2100970286732488785",
+    "media": []
+  },
+  {
+    "id": "2100968984937968034",
+    "username": "unknown",
+    "text": "@AviMoskov הרה\"ג דוד לייבל שליט\"א לא נחשב? למה לא? כי הוא לא קיבל תואר ביתד?",
+    "created_at": "Fri Sep 18 15:23:34 +0000 2026",
+    "timestamp": 1789745014000,
+    "tweet_url": "https://x.com/SrulickHolmes/status/2100968984937968034",
+    "media": []
+  },
+  {
+    "id": "2100967173485154450",
+    "username": "unknown",
+    "text": "@eliau420 @YitzikCrombie אין שם לומדי תורה. רק לומדי גמרא.",
+    "created_at": "Fri Sep 18 15:16:22 +0000 2026",
+    "timestamp": 1789744582000,
+    "tweet_url": "https://x.com/BoredStas/status/2100967173485154450",
+    "media": []
+  },
+  {
+    "id": "2100966486437224526",
+    "username": "unknown",
+    "text": "@ruthlessrousso @yankihebrew רצח נהג מונית",
+    "created_at": "Fri Sep 18 15:13:39 +0000 2026",
+    "timestamp": 1789744419000,
+    "tweet_url": "https://x.com/protoskore/status/2100966486437224526",
+    "media": []
+  },
+  {
+    "id": "2100965899947708799",
+    "username": "unknown",
+    "text": "@AviMoskov The chareidi world chooses its own gedolim this is a 30 year post rav shach phenomenon and you know that",
+    "created_at": "Fri Sep 18 15:11:19 +0000 2026",
+    "timestamp": 1789744279000,
+    "tweet_url": "https://x.com/DannyABL/status/2100965899947708799",
+    "media": []
+  },
+  {
+    "id": "2100965748378091673",
+    "username": "unknown",
+    "text": "@YitzikCrombie איפה הביוב שזורם ברחובות?",
+    "created_at": "Fri Sep 18 15:10:43 +0000 2026",
+    "timestamp": 1789744243000,
+    "tweet_url": "https://x.com/VasiliuiS/status/2100965748378091673",
+    "media": []
+  },
+  {
+    "id": "2100964558063931805",
+    "username": "unknown",
+    "text": "@yossilevii אין חייל חרדי יותר ממני",
+    "created_at": "Fri Sep 18 15:05:59 +0000 2026",
+    "timestamp": 1789743959000,
+    "tweet_url": "https://x.com/nehorailo/status/2100964558063931805",
+    "media": []
+  },
+  {
+    "id": "2100964324135067992",
+    "username": "unknown",
+    "text": "@AviMoskov ליש חסד יש רבנים מאחוריהם?",
+    "created_at": "Fri Sep 18 15:05:03 +0000 2026",
+    "timestamp": 1789743903000,
+    "tweet_url": "https://x.com/moti_bir/status/2100964324135067992",
+    "media": []
+  },
+  {
+    "id": "2100964102084378824",
+    "username": "unknown",
+    "text": "@ruthlessrousso @yankihebrew לדעתי הלך להילחם נגד דעאש",
+    "created_at": "Fri Sep 18 15:04:10 +0000 2026",
+    "timestamp": 1789743850000,
+    "tweet_url": "https://x.com/ranyon7/status/2100964102084378824",
+    "media": []
+  },
+  {
+    "id": "2100963617105498402",
+    "username": "unknown",
+    "text": "@yossilevii @grok ?למה הסרטון לא המריא כאן\nהאם ישנה בעיה בX נגד חיילים דתיים? העם יש בעיה בX לגבי חרדים שכן מתגייסים? האם X רק מקפיץ תוכן מפלג? הסרטון מראה שמחה יהודית בשירה וריקוד חסידי בשירות צה\"ל",
+    "created_at": "Fri Sep 18 15:02:14 +0000 2026",
+    "timestamp": 1789743734000,
+    "tweet_url": "https://x.com/Jerusalemight/status/2100963617105498402",
+    "media": []
+  },
+  {
+    "id": "2100962133097713958",
+    "username": "unknown",
+    "text": "@amit_segal היי תראו מר צחנה מוסרית מחלק ציונים לאחרים בהתאם לאגנדה הפוליטית של מפעילו",
+    "created_at": "Fri Sep 18 14:56:21 +0000 2026",
+    "timestamp": 1789743381000,
+    "tweet_url": "https://x.com/Ribooa/status/2100962133097713958",
+    "media": []
+  },
+  {
+    "id": "2100961971176681619",
+    "username": "unknown",
+    "text": "@yossilevii בשנייה ה12, יש עסקן שנכנס לריקודים לנתב החיילים - כי העיקר זה לכוון , נכון ?",
+    "created_at": "Fri Sep 18 14:55:42 +0000 2026",
+    "timestamp": 1789743342000,
+    "tweet_url": "https://x.com/BetsaOlive25903/status/2100961971176681619",
+    "media": []
+  },
+  {
+    "id": "2100961463233876315",
+    "username": "unknown",
+    "text": "@arivlin1 חתיכת חלאה",
+    "created_at": "Fri Sep 18 14:53:41 +0000 2026",
+    "timestamp": 1789743221000,
+    "tweet_url": "https://x.com/MendyKl33438281/status/2100961463233876315",
+    "media": []
+  },
+  {
+    "id": "2100961381709156575",
+    "username": "unknown",
+    "text": "@moshe_nayes I know one animal you are not going to use???",
+    "created_at": "Fri Sep 18 14:53:22 +0000 2026",
+    "timestamp": 1789743202000,
+    "tweet_url": "https://x.com/ajweberman8/status/2100961381709156575",
+    "media": []
+  },
+  {
+    "id": "2100961312280826118",
+    "username": "unknown",
+    "text": "@yankihebrew חזק",
+    "created_at": "Fri Sep 18 14:53:05 +0000 2026",
+    "timestamp": 1789743185000,
+    "tweet_url": "https://x.com/9ii346jFCKplSWj/status/2100961312280826118",
+    "media": []
+  },
+  {
+    "id": "2100961263555608749",
+    "username": "unknown",
+    "text": "כך מזמין עסקן בחסידות סאטמר את ידידיו לקידוש לרגל הולדת בתו, על רקע המזרח של ההיכל החדש בבית הגדול בויליאמסבורג, ששופץ לאחרונה https://t.co/eObFW2TQF2",
+    "created_at": "Fri Sep 18 14:52:53 +0000 2026",
+    "timestamp": 1789743173000,
+    "tweet_url": "https://x.com/moshe_nayes/status/2100961263555608749",
+    "media": []
+  },
+  {
+    "id": "2100960291651465545",
+    "username": "unknown",
+    "text": "@amit_segal הם  מגישים הצעות חוק שונות רק על מנת שבגץ יפסול אותם כדי שהדבילים הביביסטים יאשימו את בג\"ץ.\nאבל לא מזכירים שבג\"ץ מנע את פסילתם של ביבי ושל בן גביר, טעות נוראית",
+    "created_at": "Fri Sep 18 14:49:02 +0000 2026",
+    "timestamp": 1789742942000,
+    "tweet_url": "https://x.com/55Yosi555/status/2100960291651465545",
+    "media": []
+  },
+  {
+    "id": "2100960284571468017",
+    "username": "unknown",
+    "text": "@moshe_nayes יש צ׳אט גיפיטי בשביל מה צריך רבנים",
+    "created_at": "Fri Sep 18 14:49:00 +0000 2026",
+    "timestamp": 1789742940000,
+    "tweet_url": "https://x.com/lisinnnnnnns/status/2100960284571468017",
+    "media": []
+  },
+  {
+    "id": "2100958878380822977",
+    "username": "unknown",
+    "text": "@amit_segal עמית מי כמוך מכיר ויודע\nלפני כל בחירות שבפתח אצים רצים להם חברי הקואליציה ובראשם ביבי סמוטריץ בן גביר אלמוג כהן להכריז שאוטוטו הם פוסלים את בל\"ד מלרוץ לבחירות,\nהמציאות:הם מגישים הצעות חוק לפסול ובורחים בהצבעה, כי לא פוסלים חברים\nhttps://t.co/SUKCgaG0hL",
+    "created_at": "Fri Sep 18 14:43:25 +0000 2026",
+    "timestamp": 1789742605000,
+    "tweet_url": "https://x.com/55Yosi555/status/2100958878380822977",
+    "media": []
+  },
+  {
+    "id": "2100958464482644181",
+    "username": "unknown",
+    "text": "@arivlin1 מזעזע.\nיהודי שמוכן למכור את ארץ ישראל לאויב,\nמוכן לעריצות משפטית עוינת.\nמוכן להתנתקות 2\nולאוסלו 3\n\nהכל בשביל כמה שקלים וג'ובים.",
+    "created_at": "Fri Sep 18 14:41:46 +0000 2026",
+    "timestamp": 1789742506000,
+    "tweet_url": "https://x.com/yaacovgross/status/2100958464482644181",
+    "media": []
+  },
+  {
+    "id": "2100958312237842643",
+    "username": "unknown",
+    "text": "דקות לשבת. הרבי מאמשינוב בתשליך כעת בבריכה במעונו של אחד מחברי קהילת נועם ה' בבית וגן https://t.co/NLmCfID2ao",
+    "created_at": "Fri Sep 18 14:41:10 +0000 2026",
+    "timestamp": 1789742470000,
+    "tweet_url": "https://x.com/moshe_nayes/status/2100958312237842643",
+    "media": []
+  },
+  {
+    "id": "2100957930132529597",
+    "username": "unknown",
+    "text": "@arivlin1 איזנקוט הוא התקווה האחרונה של החרדים",
+    "created_at": "Fri Sep 18 14:39:39 +0000 2026",
+    "timestamp": 1789742379000,
+    "tweet_url": "https://x.com/hm78993845/status/2100957930132529597",
+    "media": []
+  },
+  {
+    "id": "2100957237623575033",
+    "username": "unknown",
+    "text": "@ruthlessrousso @yankihebrew רצח \nהוא הגן על עצמו כשנהג מונית שמע שהוא יהודי",
+    "created_at": "Fri Sep 18 14:36:54 +0000 2026",
+    "timestamp": 1789742214000,
+    "tweet_url": "https://x.com/zb111222/status/2100957237623575033",
+    "media": []
+  },
+  {
+    "id": "2100956398964052120",
+    "username": "unknown",
+    "text": "@moshe_nayes המלך בשדה!",
+    "created_at": "Fri Sep 18 14:33:34 +0000 2026",
+    "timestamp": 1789742014000,
+    "tweet_url": "https://x.com/GmtDUpjdfhnoTVA/status/2100956398964052120",
+    "media": []
+  },
+  {
+    "id": "2100956046122524895",
+    "username": "unknown",
+    "text": "@AviMoskov למה צריך רב כדי לדאוג לחינוך נורמלי לילדים? למה צריך רב כדי לדאוג שינקו לך את השכונה? למה צריך רב כדי לדאוג אנשים עובדים?\nאיפה נכנס הרב לאירוע?",
+    "created_at": "Fri Sep 18 14:32:09 +0000 2026",
+    "timestamp": 1789741929000,
+    "tweet_url": "https://x.com/yakovhe/status/2100956046122524895",
+    "media": []
+  },
+  {
+    "id": "2100955957958222321",
+    "username": "unknown",
+    "text": "@AviMoskov בעיקרון צודק בכל מילה, אבל, אשמח שתמצא לי איזה רבנים תמחו בתחילת המהלך של שרה שנירר...",
+    "created_at": "Fri Sep 18 14:31:48 +0000 2026",
+    "timestamp": 1789741908000,
+    "tweet_url": "https://x.com/rashkbehat/status/2100955957958222321",
+    "media": []
+  },
+  {
+    "id": "2100955408277946487",
+    "username": "unknown",
+    "text": "@yankihebrew למה הוא היה בכלא?",
+    "created_at": "Fri Sep 18 14:29:37 +0000 2026",
+    "timestamp": 1789741777000,
+    "tweet_url": "https://x.com/ruthlessrousso/status/2100955408277946487",
+    "media": []
+  },
+  {
+    "id": "2100954677537820931",
+    "username": "unknown",
+    "text": "@moshe_nayes נדע למצוא אותו כשאחת תקרוס ותהרוג עשרה ילדים?",
+    "created_at": "Fri Sep 18 14:26:43 +0000 2026",
+    "timestamp": 1789741603000,
+    "tweet_url": "https://x.com/yossarianlivez/status/2100954677537820931",
+    "media": []
+  },
+  {
+    "id": "2100952872737280369",
+    "username": "unknown",
+    "text": "@yossilevii https://t.co/Dc8rSg9VEr",
+    "created_at": "Fri Sep 18 14:19:33 +0000 2026",
+    "timestamp": 1789741173000,
+    "tweet_url": "https://x.com/Vitaliko/status/2100952872737280369",
+    "media": []
+  },
+  {
+    "id": "2100952621821448624",
+    "username": "unknown",
+    "text": "@yankihebrew כל הכבוד",
+    "created_at": "Fri Sep 18 14:18:33 +0000 2026",
+    "timestamp": 1789741113000,
+    "tweet_url": "https://x.com/Jo97254/status/2100952621821448624",
+    "media": []
+  },
+  {
+    "id": "2100952500660473963",
+    "username": "unknown",
+    "text": "@moshe_nayes יתפשרו גם יתפשרו.\nעסקנים ישארו עסקנים והציבור המסכן שלהם ימשיך להאמין שהוא שומע לגדולי ישראל ובפועל שומע סינון של העסקנים.",
+    "created_at": "Fri Sep 18 14:18:04 +0000 2026",
+    "timestamp": 1789741084000,
+    "tweet_url": "https://x.com/Ani_V_Ani/status/2100952500660473963",
+    "media": []
+  },
+  {
+    "id": "2100951985432166655",
+    "username": "unknown",
+    "text": "@MeirCrombie @YitzikCrombie לא חח איפה..\nאני גר רחוק משם\nמתפלל עם מתי טוכפלד כל שבת בבוקר",
+    "created_at": "Fri Sep 18 14:16:01 +0000 2026",
+    "timestamp": 1789740961000,
+    "tweet_url": "https://x.com/yossilevii/status/2100951985432166655",
+    "media": []
+  },
+  {
+    "id": "2100951644414349393",
+    "username": "unknown",
+    "text": "@AviMoskov אז אין רב.\nלראש עיריית בני ברק ולמועצה שם היו מלא רבנים, איפה הם עכשיו?\nדי כבר לנפנף לנו עם רבנים.\nכשאין לאברך מה לאכול, הרבנים לא דואגים לו.\nתפסיקו לשקר לציבור, נמאסתם אתם והפוליטיקאים.",
+    "created_at": "Fri Sep 18 14:14:40 +0000 2026",
+    "timestamp": 1789740880000,
+    "tweet_url": "https://x.com/evyatarevi/status/2100951644414349393",
+    "media": []
+  },
+  {
+    "id": "2100951224887525825",
+    "username": "unknown",
+    "text": "@amit_segal נפקעו עיניי. זה רץ במשפחה?",
+    "created_at": "Fri Sep 18 14:13:00 +0000 2026",
+    "timestamp": 1789740780000,
+    "tweet_url": "https://x.com/ilindexbot/status/2100951224887525825",
+    "media": []
+  },
+  {
+    "id": "2100951111926481014",
+    "username": "unknown",
+    "text": "@moshe_nayes המגזרים שהכי אין להם ה' זה המגזר החרדי והמגזר הערבי. מעולם לא ראיתי אנשים שכל כך נהנים מלעבור על החוק, כולל כשהעבירה מסכנת את חייהם.",
+    "created_at": "Fri Sep 18 14:12:33 +0000 2026",
+    "timestamp": 1789740753000,
+    "tweet_url": "https://x.com/manda_lani/status/2100951111926481014",
+    "media": []
+  },
+  {
+    "id": "2100951072202264819",
+    "username": "unknown",
+    "text": "@yankihebrew אחלה של פרסומת. @yankihebrew הם מאוד יצירתיים.כל הכבוד להם.",
+    "created_at": "Fri Sep 18 14:12:24 +0000 2026",
+    "timestamp": 1789740744000,
+    "tweet_url": "https://x.com/HornMaoztehila/status/2100951072202264819",
+    "media": []
+  },
+  {
+    "id": "2100950596706505140",
+    "username": "unknown",
+    "text": "@yankihebrew עדכון חשוב ביותר",
+    "created_at": "Fri Sep 18 14:10:30 +0000 2026",
+    "timestamp": 1789740630000,
+    "tweet_url": "https://x.com/libifarber/status/2100950596706505140",
+    "media": []
+  },
+  {
+    "id": "2100950571184193589",
+    "username": "unknown",
+    "text": "@arisade94 ...״עוד לא ראיתי את הסרט...״-- רבים וטובים וגם אני לא קראנו את ״מיין קאמפף״ אבל יודעים בוודאות שזה זבל נוראי והרסני (זכויות יוצרים ל @amit_segal )",
+    "created_at": "Fri Sep 18 14:10:24 +0000 2026",
+    "timestamp": 1789740624000,
+    "tweet_url": "https://x.com/Gimmel20/status/2100950571184193589",
+    "media": []
+  },
+  {
+    "id": "2100950516620570858",
+    "username": "unknown",
+    "text": "@amit_segal מהרסייך ומחריבייך מקפלן המה עמית שבת שלום",
+    "created_at": "Fri Sep 18 14:10:11 +0000 2026",
+    "timestamp": 1789740611000,
+    "tweet_url": "https://x.com/ot6cmfoDFzcrc5r/status/2100950516620570858",
+    "media": []
+  },
+  {
+    "id": "2100950436358262839",
+    "username": "unknown",
+    "text": "@AviMoskov מצחיק לדבר על רבנים במפלגות החרדיות.\nדגל התורה נשלטת בידי דוד שפירא.\nשס בידי אריה דרעי.\nואילו על אגודת ישראל על שלל העמרצים (המכונים אדמו\"ר) אין טעם להרחיב",
+    "created_at": "Fri Sep 18 14:09:52 +0000 2026",
+    "timestamp": 1789740592000,
+    "tweet_url": "https://x.com/Who_am_I5454/status/2100950436358262839",
+    "media": []
+  },
+  {
+    "id": "2100950099450843163",
+    "username": "unknown",
+    "text": "@arivlin1 אדם מאמין מתפלל רק לדבר אחד וזה להמליך את ה",
+    "created_at": "Fri Sep 18 14:08:32 +0000 2026",
+    "timestamp": 1789740512000,
+    "tweet_url": "https://x.com/kobis770/status/2100950099450843163",
+    "media": []
+  },
+  {
+    "id": "2100949992814911525",
+    "username": "unknown",
+    "text": "@AviMoskov אבל אם הוא ירוץ עד הסוף, ויבזבז קולות לימין, הוא עלול לאבד את המפלגה. \n\nלא בטוח שהמצביעים שלו בבית שמש יתמכו בו אם יבזבז קולות לגוש הימין.",
+    "created_at": "Fri Sep 18 14:08:06 +0000 2026",
+    "timestamp": 1789740486000,
+    "tweet_url": "https://x.com/mic94496714/status/2100949992814911525",
+    "media": []
+  },
+  {
+    "id": "2100949319431966813",
+    "username": "unknown",
+    "text": "@ano_nimri @avishaigrinzaig @amit_segal אולי כי באופן כללי זה יחשוף דברים שלא יעשו לו טוב",
+    "created_at": "Fri Sep 18 14:05:26 +0000 2026",
+    "timestamp": 1789740326000,
+    "tweet_url": "https://x.com/YossiTheGoy/status/2100949319431966813",
+    "media": []
+  },
+  {
+    "id": "2100949212447793594",
+    "username": "unknown",
+    "text": "@yankihebrew שאפו.",
+    "created_at": "Fri Sep 18 14:05:00 +0000 2026",
+    "timestamp": 1789740300000,
+    "tweet_url": "https://x.com/yosefaranbayov/status/2100949212447793594",
+    "media": []
+  },
+  {
+    "id": "2100948579183468871",
+    "username": "unknown",
+    "text": "@WWydy60479 @hatziburha @AviMoskov אוקיי למעט הפלג\nובוא נגיד רק בזכותם מפלגת הציבור החרדי בכלל נוסדה",
+    "created_at": "Fri Sep 18 14:02:29 +0000 2026",
+    "timestamp": 1789740149000,
+    "tweet_url": "https://x.com/Yosssia123/status/2100948579183468871",
+    "media": []
+  },
+  {
+    "id": "2100948464137830911",
+    "username": "unknown",
+    "text": "@AviMoskov המציאות הפוכה, הציבור החרדי התרגל למפלגה ועסקנים שמובילים את הרבנים",
+    "created_at": "Fri Sep 18 14:02:02 +0000 2026",
+    "timestamp": 1789740122000,
+    "tweet_url": "https://x.com/ReligionIsEvill/status/2100948464137830911",
+    "media": []
+  },
+  {
+    "id": "2100948306302038065",
+    "username": "unknown",
+    "text": "@AviMoskov אני חושבת שהמאמר הזה מאת הרב פיני דאנר מתייחס היטב לנקודה הזו. 👇",
+    "created_at": "Fri Sep 18 14:01:24 +0000 2026",
+    "timestamp": 1789740084000,
+    "tweet_url": "https://x.com/Abigailouise00/status/2100948306302038065",
+    "media": []
+  },
+  {
+    "id": "2100948272307192215",
+    "username": "unknown",
+    "text": "@arivlin1 https://t.co/GYqNHB0uk1",
+    "created_at": "Fri Sep 18 14:01:16 +0000 2026",
+    "timestamp": 1789740076000,
+    "tweet_url": "https://x.com/Yosssia123/status/2100948272307192215",
+    "media": []
+  },
+  {
+    "id": "2100948268683321523",
+    "username": "unknown",
+    "text": "@NWeinryb @ishaycoen @shemeshmicha היום במעריב לנתניהו 50 מנדטים כולל וינטר שלא יעבור",
+    "created_at": "Fri Sep 18 14:01:15 +0000 2026",
+    "timestamp": 1789740075000,
+    "tweet_url": "https://x.com/qsLEjeJsW90MRJQ/status/2100948268683321523",
+    "media": []
+  },
+  {
+    "id": "2100947431940608135",
+    "username": "unknown",
+    "text": "@Yosssia123 @WWydy60479 @hatziburha @AviMoskov מה שהיה לפני 7 שנים  לא רלוונטי להיום",
+    "created_at": "Fri Sep 18 13:57:56 +0000 2026",
+    "timestamp": 1789739876000,
+    "tweet_url": "https://x.com/choni_co/status/2100947431940608135",
+    "media": []
+  },
+  {
+    "id": "2100947373513994533",
+    "username": "unknown",
+    "text": "@AviMoskov לרב האחרון שתמך במפלגה חדשה קראו זקן ממרא",
+    "created_at": "Fri Sep 18 13:57:42 +0000 2026",
+    "timestamp": 1789739862000,
+    "tweet_url": "https://x.com/shimonco99/status/2100947373513994533",
+    "media": []
+  },
+  {
+    "id": "2100946884068028533",
+    "username": "unknown",
+    "text": "האדמו\"ר מצאנז זימגארד בתשליך עם חסידיו במתחם שבע טחנות מעל פארק הירקון (צילום: איתי קצב) https://t.co/YEXYaShhAK",
+    "created_at": "Fri Sep 18 13:55:45 +0000 2026",
+    "timestamp": 1789739745000,
+    "tweet_url": "https://x.com/moshe_nayes/status/2100946884068028533",
+    "media": []
+  },
+  {
+    "id": "2100946209590382875",
+    "username": "unknown",
+    "text": "@arivlin1 אני חושב שהכי טוב לחרדים באמת שמפלגת הציבור החרדי תהיה גדולה\nהם מאמין שידאגו לציבור",
+    "created_at": "Fri Sep 18 13:53:04 +0000 2026",
+    "timestamp": 1789739584000,
+    "tweet_url": "https://x.com/Shlomis5/status/2100946209590382875",
+    "media": []
+  },
+  {
+    "id": "2100944856478568809",
+    "username": "unknown",
+    "text": "@yossilevii הטענה שאין שם חרדי אמיתי יותר חרדלניקים",
+    "created_at": "Fri Sep 18 13:47:42 +0000 2026",
+    "timestamp": 1789739262000,
+    "tweet_url": "https://x.com/ORY76698114/status/2100944856478568809",
+    "media": []
+  },
+  {
+    "id": "2100943827708043745",
+    "username": "unknown",
+    "text": "@Israelcohen911 למה המשרת התימני מוטי אברם נתקע מאחוריו בכל תמונה עם פני המחבל שלו והורס את הפריים?",
+    "created_at": "Fri Sep 18 13:43:36 +0000 2026",
+    "timestamp": 1789739016000,
+    "tweet_url": "https://x.com/ezrachkatan/status/2100943827708043745",
+    "media": []
+  },
+  {
+    "id": "2100943005595181164",
+    "username": "unknown",
+    "text": "בצל הגזירה על ברית המילה. המוהל הנודע רבי אהרן עקשטיין מאנטוורפן יצא לתשליך בסאטאץ פארק המקומי https://t.co/YICiCAYQez",
+    "created_at": "Fri Sep 18 13:40:20 +0000 2026",
+    "timestamp": 1789738820000,
+    "tweet_url": "https://x.com/moshe_nayes/status/2100943005595181164",
+    "media": []
+  },
+  {
+    "id": "2100942828675256401",
+    "username": "unknown",
+    "text": "@Yosssia123 @hatziburha @AviMoskov תגיד אתה לא זוכר היסטוריה\n\nאין ילד בנברקי שלא מכיר את הנייעס סביבו \nעם כל הבלאגן דאז עם הרב שטיינמן",
+    "created_at": "Fri Sep 18 13:39:38 +0000 2026",
+    "timestamp": 1789738778000,
+    "tweet_url": "https://x.com/WWydy60479/status/2100942828675256401",
+    "media": []
+  },
+  {
+    "id": "2100942740187910261",
+    "username": "unknown",
+    "text": "@AviMoskov איזה קבלות שנתיים בעיריית בית שמש?",
+    "created_at": "Fri Sep 18 13:39:17 +0000 2026",
+    "timestamp": 1789738757000,
+    "tweet_url": "https://x.com/ShmuelGuigui/status/2100942740187910261",
+    "media": []
+  },
+  {
+    "id": "2100942512214995193",
+    "username": "unknown",
+    "text": "@yankihebrew המסר  בסרטון מדויק . כל מי שקופץ ממטוס מתרסק",
+    "created_at": "Fri Sep 18 13:38:23 +0000 2026",
+    "timestamp": 1789738703000,
+    "tweet_url": "https://x.com/hezki3131/status/2100942512214995193",
+    "media": []
+  },
+  {
+    "id": "2100942420955271551",
+    "username": "unknown",
+    "text": "@amit_segal למי אכפת מה אחים לנשק אמרו או לא אמרו . הם היו בממשלה ? יש להם חשיבות כלשהי ,יש להם כח שילטוני?",
+    "created_at": "Fri Sep 18 13:38:01 +0000 2026",
+    "timestamp": 1789738681000,
+    "tweet_url": "https://x.com/TheAlexTsvetkov/status/2100942420955271551",
+    "media": []
+  },
+  {
+    "id": "2100941870704599289",
+    "username": "unknown",
+    "text": "@AviMoskov ויש תלמידי חכמים בפנים , אבל זה מההחלטות הראשונות שלהם לא לפרסם את שמם, ואסור לדבר נגד גדולי ישראל...",
+    "created_at": "Fri Sep 18 13:35:50 +0000 2026",
+    "timestamp": 1789738550000,
+    "tweet_url": "https://x.com/lomedmko/status/2100941870704599289",
+    "media": []
+  },
+  {
+    "id": "2100941671328338133",
+    "username": "unknown",
+    "text": "@AviMoskov חשוב לזכור שהסקרים משמאל יתנו לו תחזית טובה בכדי שישרוף קולות, ולגוש הימין הוא בוודאי לא מקשיב ולא מאמין",
+    "created_at": "Fri Sep 18 13:35:02 +0000 2026",
+    "timestamp": 1789738502000,
+    "tweet_url": "https://x.com/Fishelroz/status/2100941671328338133",
+    "media": []
+  },
+  {
+    "id": "2100941531188244795",
+    "username": "unknown",
+    "text": "@AviMoskov מאותו סיבה שועד בית אינו נצרך לרב, ק\"ו להיות חבר כנסת ולעזור לעמך בית ישראל להתפרנס, מה שגילנו במערכת הקיימת , שכאשר רבנים מנהלים את הפוליטיקה, הכל מושחת עד היסוד, אם יהיה שאלה הלכתית אמיתית , יש ברוך ה' המון רבנים תלמידי חכמים מופלגים , ללא עסקונה מושחתת באמצע",
+    "created_at": "Fri Sep 18 13:34:29 +0000 2026",
+    "timestamp": 1789738469000,
+    "tweet_url": "https://x.com/lomedmko/status/2100941531188244795",
+    "media": []
+  },
+  {
+    "id": "2100941336274702392",
+    "username": "unknown",
+    "text": "@yossilevii 💙🇮🇱🙏 https://t.co/jQTJMhI0Dl",
+    "created_at": "Fri Sep 18 13:33:42 +0000 2026",
+    "timestamp": 1789738422000,
+    "tweet_url": "https://x.com/Lous1492625/status/2100941336274702392",
+    "media": []
+  },
+  {
+    "id": "2100939804460351858",
+    "username": "unknown",
+    "text": "@amit_segal תיקון קטן ברשותך, האיש הזה הוא לא 'תומך טרור', הוא תומך במאבק מזויין נגד מדינת ישראל ואזרחיה. זו ההגדרה המדויקת.",
+    "created_at": "Fri Sep 18 13:27:37 +0000 2026",
+    "timestamp": 1789738057000,
+    "tweet_url": "https://x.com/avnercohen1972/status/2100939804460351858",
+    "media": []
+  },
+  {
+    "id": "2100939455884382668",
+    "username": "unknown",
+    "text": "@Israelcohen911 אאוצ",
+    "created_at": "Fri Sep 18 13:26:14 +0000 2026",
+    "timestamp": 1789737974000,
+    "tweet_url": "https://x.com/PlsYwnh/status/2100939455884382668",
+    "media": []
+  },
+  {
+    "id": "2100938514296647687",
+    "username": "unknown",
+    "text": "@arivlin1 אין דבר כזה בחירות גורליות",
+    "created_at": "Fri Sep 18 13:22:30 +0000 2026",
+    "timestamp": 1789737750000,
+    "tweet_url": "https://x.com/aviysv/status/2100938514296647687",
+    "media": []
+  },
+  {
+    "id": "2100935719183061049",
+    "username": "unknown",
+    "text": "@arivlin1 אולי להתפלל שמפלגת הציבור החרדי תעבור את אחוז החסימה.",
+    "created_at": "Fri Sep 18 13:11:23 +0000 2026",
+    "timestamp": 1789737083000,
+    "tweet_url": "https://x.com/der_shtudierter/status/2100935719183061049",
+    "media": []
+  },
+  {
+    "id": "2100935641785610406",
+    "username": "unknown",
+    "text": "@yossilevii משתפת",
+    "created_at": "Fri Sep 18 13:11:05 +0000 2026",
+    "timestamp": 1789737065000,
+    "tweet_url": "https://x.com/HadaraLevTov/status/2100935641785610406",
+    "media": []
+  },
+  {
+    "id": "2100933119981367648",
+    "username": "unknown",
+    "text": "@BuckMulligan117 @moshe_nayes אני הבנתי את הרוב, הוא מדבר בלשון הקודש, ובהברה אשכנזית. יש לו מעט שגיאות בדיקדוק, עקב היותו אמריקאי.",
+    "created_at": "Fri Sep 18 13:01:03 +0000 2026",
+    "timestamp": 1789736463000,
+    "tweet_url": "https://x.com/BrymyK/status/2100933119981367648",
+    "media": []
+  },
+  {
+    "id": "2100929448887419256",
+    "username": "unknown",
+    "text": "אם מפלגת הציבור החרדי לא היתה פקטור, לא היו תוקפים ומזלזלים בה באותה הנשימה בתקשורת המיינסטרים החרדית. כנראה יש מי שנמצא בלחץ https://t.co/eCeukZsZR7",
+    "created_at": "Fri Sep 18 12:46:28 +0000 2026",
+    "timestamp": 1789735588000,
+    "tweet_url": "https://x.com/yankihebrew/status/2100929448887419256",
+    "media": []
+  },
+  {
+    "id": "2100928266924064887",
+    "username": "unknown",
+    "text": "@Israelcohen911 אני תמיד מתבאס שמערכת ה\"חינוך\" שולחת ילדים להתרים כסף.\nזו הדרך היחידה שהם מלמדים אותך לעשות כסף.\n)אם כי סטראטאפיסטים הם גם סוג של שנוררים כל הסמן מנסים לגרד כסף ממשקיעים, אז אולי זה חיובי)",
+    "created_at": "Fri Sep 18 12:41:46 +0000 2026",
+    "timestamp": 1789735306000,
+    "tweet_url": "https://x.com/chaimbloch150/status/2100928266924064887",
+    "media": []
+  },
+  {
+    "id": "2100926090260685045",
+    "username": "unknown",
+    "text": "@moshe_nayes אני לא מאמין שאני עובד באקס טריטוריה הזאת\n\nאבל תכלס מה יש להתפלא על עיר שבה מדרכה זה כביש וכביש זה מדרכה.",
+    "created_at": "Fri Sep 18 12:33:07 +0000 2026",
+    "timestamp": 1789734787000,
+    "tweet_url": "https://x.com/moshe199610/status/2100926090260685045",
+    "media": []
+  },
+  {
     "id": "2100924518331998605",
     "username": "unknown",
     "text": "ינון מגל Yinon Magal@YinonMagal·17 בספט׳\n\nבכיר בצוות ההגנה של נתניהו:  ההחלטה לזמן את מנדלבליט להעיד התקבלה \"בלב כבד. בלב כבד אמנם, אך גם בלב שלם מתוך תחושת מחויבות עמוקה לשלטון החוק, לאינטרס הציבורי ולאזרחיה של מדינת ישראל\"  חקירתו תהיה כמובן בלב פתוח ובנפש חפצה😉",
@@ -411,942 +1347,6 @@
     "created_at": "Fri Sep 18 11:26:56 +0000 2026",
     "timestamp": 1789730816000,
     "tweet_url": "https://x.com/11chaim11/status/2100909433643585958",
-    "media": []
-  },
-  {
-    "id": "2100908814056759335",
-    "username": "unknown",
-    "text": "@YitzikCrombie @yossilevii ועוד ברמת שלמההה",
-    "created_at": "Fri Sep 18 11:24:28 +0000 2026",
-    "timestamp": 1789730668000,
-    "tweet_url": "https://x.com/MeirCrombie/status/2100908814056759335",
-    "media": []
-  },
-  {
-    "id": "2100908434958803317",
-    "username": "unknown",
-    "text": "@yossilevii אין כמו 770.",
-    "created_at": "Fri Sep 18 11:22:58 +0000 2026",
-    "timestamp": 1789730578000,
-    "tweet_url": "https://x.com/img770/status/2100908434958803317",
-    "media": []
-  },
-  {
-    "id": "2100905657654251681",
-    "username": "unknown",
-    "text": "@yossilevii הם שטופי מוח יוסי שטופי מוח שנים קשה לשנות להם תקו מחשבה…",
-    "created_at": "Fri Sep 18 11:11:56 +0000 2026",
-    "timestamp": 1789729916000,
-    "tweet_url": "https://x.com/ry954070614380/status/2100905657654251681",
-    "media": []
-  },
-  {
-    "id": "2100905054538490199",
-    "username": "unknown",
-    "text": "@YitzikCrombie תושבי בני ברק בחרו בראש העירייה ובאנשיו אז שיבואו בטענות רק לעצמם. אתה אם אני לא טועה (ככה שמעתי פעם) גר לא רחוק ממני פה בעיר חילונית נאורה וליברלית שמשרתת את כל תושביה דתיים וחילוניים.",
-    "created_at": "Fri Sep 18 11:09:32 +0000 2026",
-    "timestamp": 1789729772000,
-    "tweet_url": "https://x.com/EllaKone/status/2100905054538490199",
-    "media": []
-  },
-  {
-    "id": "2100904929388826878",
-    "username": "unknown",
-    "text": "@avishaigrinzaig @amit_segal בהחלט חומר למחשבה. אין ספק שיש פה הרבה חורים. אבל עומדת בעינה השאלה: למה נתניהו לא תובע דיבה?",
-    "created_at": "Fri Sep 18 11:09:02 +0000 2026",
-    "timestamp": 1789729742000,
-    "tweet_url": "https://x.com/ano_nimri/status/2100904929388826878",
-    "media": []
-  },
-  {
-    "id": "2100904724677419208",
-    "username": "unknown",
-    "text": "@petatikva @ishaycoen @shemeshmicha זה עדיין לא תיקו",
-    "created_at": "Fri Sep 18 11:08:13 +0000 2026",
-    "timestamp": 1789729693000,
-    "tweet_url": "https://x.com/NWeinryb/status/2100904724677419208",
-    "media": []
-  },
-  {
-    "id": "2100904511950774470",
-    "username": "unknown",
-    "text": "@Israelcohen911 https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 11:07:23 +0000 2026",
-    "timestamp": 1789729643000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100904511950774470",
-    "media": []
-  },
-  {
-    "id": "2100904286586585555",
-    "username": "unknown",
-    "text": "הנגיד שלמה (סול) ורדיגר יו״ר אגודת ישראל בארה״ב שהגיע לארץ נפגש עם שגריר ארה״ב בישראל מייק האקבי לדיון מדיני https://t.co/DTSVwsdbze",
-    "created_at": "Fri Sep 18 11:06:29 +0000 2026",
-    "timestamp": 1789729589000,
-    "tweet_url": "https://x.com/Israelcohen911/status/2100904286586585555",
-    "media": []
-  },
-  {
-    "id": "2100902699373900030",
-    "username": "unknown",
-    "text": "@YitzikCrombie וזה בעיקר אומר שהאדריכלות לא טובה כי היא לא עונה על צרכים של אנשים",
-    "created_at": "Fri Sep 18 11:00:11 +0000 2026",
-    "timestamp": 1789729211000,
-    "tweet_url": "https://x.com/Ortal_Nizri/status/2100902699373900030",
-    "media": []
-  },
-  {
-    "id": "2100902678310093026",
-    "username": "unknown",
-    "text": "@amit_segal יש לך ספק שלא יאשרו???????",
-    "created_at": "Fri Sep 18 11:00:06 +0000 2026",
-    "timestamp": 1789729206000,
-    "tweet_url": "https://x.com/turgeman_r7824/status/2100902678310093026",
-    "media": []
-  },
-  {
-    "id": "2100901639108386908",
-    "username": "unknown",
-    "text": "@YitzikCrombie תוריד את העצים",
-    "created_at": "Fri Sep 18 10:55:58 +0000 2026",
-    "timestamp": 1789728958000,
-    "tweet_url": "https://x.com/Mrcat1034331/status/2100901639108386908",
-    "media": []
-  },
-  {
-    "id": "2100900321170002247",
-    "username": "unknown",
-    "text": "@yossilevii ראיתי הנשק שלך אמרתי אין מצבבבב ואז קלטתי שגם בארץ יש 😂",
-    "created_at": "Fri Sep 18 10:50:44 +0000 2026",
-    "timestamp": 1789728644000,
-    "tweet_url": "https://x.com/er0wine/status/2100900321170002247",
-    "media": []
-  },
-  {
-    "id": "2100896670099595735",
-    "username": "unknown",
-    "text": "@Israelcohen911 רק שתדע רוב חברות תרופות כמו זה הם שותפים לרצח עם \nהם דוחפים תרופות שהורסים בשביל הכיס שלהם \nומה שמציל מחייבים מלא כסף ולא עלה להם לפתח את זה כי זה מסובסד",
-    "created_at": "Fri Sep 18 10:36:13 +0000 2026",
-    "timestamp": 1789727773000,
-    "tweet_url": "https://x.com/HalasHamasNow2/status/2100896670099595735",
-    "media": []
-  },
-  {
-    "id": "2100896553045049638",
-    "username": "unknown",
-    "text": "@amit_segal לא משנה מה תפמפם או מה יקרה בעולם.  נתניהו היה ראש הממשלה ב-7/10 זה כל מה שחשוב ושצריך לדעת.  הוא צריך ללכת הבייתה, אחרי זה נוכל להתמקד בכל השאר",
-    "created_at": "Fri Sep 18 10:35:45 +0000 2026",
-    "timestamp": 1789727745000,
-    "tweet_url": "https://x.com/LiorMarash/status/2100896553045049638",
-    "media": []
-  },
-  {
-    "id": "2100896043038642186",
-    "username": "unknown",
-    "text": "הזמר יהודה מנהיים מתברך מהאדמו\"ר מבעלזא, לרגל השמחה הגדולה בהולדת בנו בכורו בשעטומ\"צ. שמחת השלום זכר בליל שבת בבית המדרש הגדול בקרית בעלזא בירושלים, בהשתתפות רבים מידידיו ומכריו https://t.co/D5psWVU162",
-    "created_at": "Fri Sep 18 10:33:44 +0000 2026",
-    "timestamp": 1789727624000,
-    "tweet_url": "https://x.com/moshe_nayes/status/2100896043038642186",
-    "media": []
-  },
-  {
-    "id": "2100895146627801316",
-    "username": "unknown",
-    "text": "@amit_segal איך אחים לנשק הגיעו לרעיון ההזוי שלא ניתן לסמוך על שיקול הדעת של ההנהגה בהיבטים של מוסר לחימה? https://t.co/tnLGhbv5Qy",
-    "created_at": "Fri Sep 18 10:30:10 +0000 2026",
-    "timestamp": 1789727410000,
-    "tweet_url": "https://x.com/Thomas_Hobbs/status/2100895146627801316",
-    "media": []
-  },
-  {
-    "id": "2100894337064112306",
-    "username": "unknown",
-    "text": "@YitzikCrombie הכל חוץ מהצלחות לויין....",
-    "created_at": "Fri Sep 18 10:26:57 +0000 2026",
-    "timestamp": 1789727217000,
-    "tweet_url": "https://x.com/tirzadar/status/2100894337064112306",
-    "media": []
-  },
-  {
-    "id": "2100893981471064497",
-    "username": "unknown",
-    "text": "@YitzikCrombie סתם שאלה למה אין בדיחות כאלו על הבנייה ברהט או בפזרה הבדואית, זה מגיע משנאה ללומדי התורה שגרים בבניינים האלו?",
-    "created_at": "Fri Sep 18 10:25:32 +0000 2026",
-    "timestamp": 1789727132000,
-    "tweet_url": "https://x.com/eliau420/status/2100893981471064497",
-    "media": []
-  },
-  {
-    "id": "2100893592847847602",
-    "username": "unknown",
-    "text": "@moshe_nayes https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 10:23:59 +0000 2026",
-    "timestamp": 1789727039000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100893592847847602",
-    "media": []
-  },
-  {
-    "id": "2100893296050520462",
-    "username": "unknown",
-    "text": "@amit_segal לאט לאט חברי הקפלניסטים נגעלים ממע המשפט השגנו הרבה ב3 שנים האחרונות  \nמע המשפט מוקצה מקצה לקצה . רק בתקשורת עדין מפרגנים,הם יד אחת,אבל הציבור הבין ראו את הפסיקות החברתיות שלא קשורות לפוליטיקה כמו אנסים מהשבט האהוב בעזה או האמנה שהיתה צריכה להוציא את כל הפנסיה שלה לשוהה בלתי חוקי",
-    "created_at": "Fri Sep 18 10:22:49 +0000 2026",
-    "timestamp": 1789726969000,
-    "tweet_url": "https://x.com/mokacarli1/status/2100893296050520462",
-    "media": []
-  },
-  {
-    "id": "2100892712408850500",
-    "username": "unknown",
-    "text": "הצדיק רבי נחמן בידרמן במעמד התשליך מסביר מדוע עושים תשליך עם דגים חיים כי הם לא חטאו. נראה גם החסיד ישראל פרוש https://t.co/vTW31fDjNo",
-    "created_at": "Fri Sep 18 10:20:29 +0000 2026",
-    "timestamp": 1789726829000,
-    "tweet_url": "https://x.com/moshe_nayes/status/2100892712408850500",
-    "media": []
-  },
-  {
-    "id": "2100892406862291073",
-    "username": "unknown",
-    "text": "@yossilevii https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 10:19:17 +0000 2026",
-    "timestamp": 1789726757000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100892406862291073",
-    "media": []
-  },
-  {
-    "id": "2100892297382477926",
-    "username": "unknown",
-    "text": "@yoelituv https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 10:18:51 +0000 2026",
-    "timestamp": 1789726731000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100892297382477926",
-    "media": []
-  },
-  {
-    "id": "2100891657679909208",
-    "username": "unknown",
-    "text": "בני ברק: בניחום אבלים אצל מנהל לשכת סגן ראש העיר יצחק פרץ ניחמו: הגאון הצדיק חכם ניסים בן שמעון, הגאון רבי שבתי לוי רבה של רמת אהרן וראש מוסדות הליכות משה, יו\"ר ש\"ס אריה דרעי וראש העיר חנוך זייברט https://t.co/3iqHj2r1hp",
-    "created_at": "Fri Sep 18 10:16:18 +0000 2026",
-    "timestamp": 1789726578000,
-    "tweet_url": "https://x.com/moshe_nayes/status/2100891657679909208",
-    "media": []
-  },
-  {
-    "id": "2100889620821004686",
-    "username": "unknown",
-    "text": "@amit_segal אז מה אם הוא טועה? זה מה שטוב לו וזה מה שהוא יעשה.",
-    "created_at": "Fri Sep 18 10:08:12 +0000 2026",
-    "timestamp": 1789726092000,
-    "tweet_url": "https://x.com/prym_khn67587/status/2100889620821004686",
-    "media": []
-  },
-  {
-    "id": "2100885691517309219",
-    "username": "unknown",
-    "text": "@yossilevii ועוד בחצר של 770",
-    "created_at": "Fri Sep 18 09:52:36 +0000 2026",
-    "timestamp": 1789725156000,
-    "tweet_url": "https://x.com/YitzikCrombie/status/2100885691517309219",
-    "media": []
-  },
-  {
-    "id": "2100885457827442899",
-    "username": "unknown",
-    "text": "@amit_segal עמית סגל: \"זה שמסוכן בהרבה להיות יהודי מאשר מוסלמי ביהודה ושומרון, זה ברור\" שקר גמור!",
-    "created_at": "Fri Sep 18 09:51:40 +0000 2026",
-    "timestamp": 1789725100000,
-    "tweet_url": "https://x.com/benisra91364090/status/2100885457827442899",
-    "media": []
-  },
-  {
-    "id": "2100885014334276056",
-    "username": "unknown",
-    "text": "@YitzikCrombie השרטוט בסדר, אהבתי את האופטימיות של ההדמיה (בתגובות)",
-    "created_at": "Fri Sep 18 09:49:54 +0000 2026",
-    "timestamp": 1789724994000,
-    "tweet_url": "https://x.com/itzikdev/status/2100885014334276056",
-    "media": []
-  },
-  {
-    "id": "2100884904481313140",
-    "username": "unknown",
-    "text": "@amit_segal מתי עובר ל14?",
-    "created_at": "Fri Sep 18 09:49:28 +0000 2026",
-    "timestamp": 1789724968000,
-    "tweet_url": "https://x.com/BajayoDorit/status/2100884904481313140",
-    "media": []
-  },
-  {
-    "id": "2100884827524256228",
-    "username": "unknown",
-    "text": "@amit_segal https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 09:49:10 +0000 2026",
-    "timestamp": 1789724950000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100884827524256228",
-    "media": []
-  },
-  {
-    "id": "2100884117415965074",
-    "username": "unknown",
-    "text": "@amit_segal 2)הם טענו שהם סומכים על המערכת המשפטית שהם לא יהרגו ילדים אלא בלית ברירה, והנה מערכת המשפט פסלה אפילו חוק הסבירות והרפורמה לא קרתה כלל . כל ילד עזתי שנהרג על ידי הטייסים עברו את צוות המשפטנים שעל שמם נלחמת להגן. והנה כאשר טוענים שהטייסים מבצעים פשעים את נאלמים דום.",
-    "created_at": "Fri Sep 18 09:46:20 +0000 2026",
-    "timestamp": 1789724780000,
-    "tweet_url": "https://x.com/benisra91364090/status/2100884117415965074",
-    "media": []
-  },
-  {
-    "id": "2100883834455593223",
-    "username": "unknown",
-    "text": "@pkmark @amit_segal לדעתך בן גביר הוא סכנה לדמוקרטיה, מבלי לנמק,\nושהוא נשמע לך קיצוני, מבלי לנמק,\nמה שאני יכול לומר על חלקים נרחבים בשמאל, ועדיין אני לא אמנע מהם להיבחר לכנסת.\nמהצד השני, סמי אבו שחאדה הוא אויב תומך טרור, שמתנגד למדינה היהודית, ולפי החוק אלו שני טיעונים למנוע ממנו להיבחר לכנסת.",
-    "created_at": "Fri Sep 18 09:45:13 +0000 2026",
-    "timestamp": 1789724713000,
-    "tweet_url": "https://x.com/eyalsiman/status/2100883834455593223",
-    "media": []
-  },
-  {
-    "id": "2100883734723469525",
-    "username": "unknown",
-    "text": "הסרטון הזה שהעליתי, חורך את הרשתות המקבילות. \nמשום מה כאן הוא לא המריא.",
-    "created_at": "Fri Sep 18 09:44:49 +0000 2026",
-    "timestamp": 1789724689000,
-    "tweet_url": "https://x.com/yossilevii/status/2100883734723469525",
-    "media": []
-  },
-  {
-    "id": "2100883207835058557",
-    "username": "unknown",
-    "text": "@ishaycoen https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 09:42:43 +0000 2026",
-    "timestamp": 1789724563000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100883207835058557",
-    "media": []
-  },
-  {
-    "id": "2100883145847386411",
-    "username": "unknown",
-    "text": "@avrahamFriend https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 09:42:29 +0000 2026",
-    "timestamp": 1789724549000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100883145847386411",
-    "media": []
-  },
-  {
-    "id": "2100882961834869068",
-    "username": "unknown",
-    "text": "@YitzikCrombie @tzeirei_tzibur https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 09:41:45 +0000 2026",
-    "timestamp": 1789724505000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100882961834869068",
-    "media": []
-  },
-  {
-    "id": "2100882684092309855",
-    "username": "unknown",
-    "text": "@Israelcohen911 https://t.co/GYqNHB0uk1",
-    "created_at": "Fri Sep 18 09:40:39 +0000 2026",
-    "timestamp": 1789724439000,
-    "tweet_url": "https://x.com/Yosssia123/status/2100882684092309855",
-    "media": []
-  },
-  {
-    "id": "2100882419456815529",
-    "username": "unknown",
-    "text": "@RomBraslavski @amit_segal @RavivDrucker נראה לי שהתבלבלת באפס.",
-    "created_at": "Fri Sep 18 09:39:35 +0000 2026",
-    "timestamp": 1789724375000,
-    "tweet_url": "https://x.com/TMWSDW/status/2100882419456815529",
-    "media": []
-  },
-  {
-    "id": "2100882011791438026",
-    "username": "unknown",
-    "text": "@amit_segal הבוגדים לנשק",
-    "created_at": "Fri Sep 18 09:37:58 +0000 2026",
-    "timestamp": 1789724278000,
-    "tweet_url": "https://x.com/yzioni_II/status/2100882011791438026",
-    "media": []
-  },
-  {
-    "id": "2100880819271111024",
-    "username": "unknown",
-    "text": "עבודות אחרונות להרחבת שוק ד' מינים בזופניק https://t.co/WI0AuhuFmS",
-    "created_at": "Fri Sep 18 09:33:14 +0000 2026",
-    "timestamp": 1789723994000,
-    "tweet_url": "https://x.com/moshe_nayes/status/2100880819271111024",
-    "media": []
-  },
-  {
-    "id": "2100880761255592288",
-    "username": "unknown",
-    "text": "@amit_segal למה תמיד השמאל צריך להתנצל גם שהוא עושה דברים לקהילה?",
-    "created_at": "Fri Sep 18 09:33:00 +0000 2026",
-    "timestamp": 1789723980000,
-    "tweet_url": "https://x.com/ruthyc60/status/2100880761255592288",
-    "media": []
-  },
-  {
-    "id": "2100880129538826448",
-    "username": "unknown",
-    "text": "@YitzikCrombie וביבי כן???? 🙄",
-    "created_at": "Fri Sep 18 09:30:30 +0000 2026",
-    "timestamp": 1789723830000,
-    "tweet_url": "https://x.com/AvielX266/status/2100880129538826448",
-    "media": []
-  },
-  {
-    "id": "2100880090095603835",
-    "username": "unknown",
-    "text": "@amit_segal באנגלית רהוטה שיש אפשרות ממשית שישראל תהרוג תינוקות ערבים עקב היעדר מוסר!! למה אתה לא מדייק? הם לא טענו כך. הם טענו היות והם צריכים להרוג ילדים בנזק אגבי, הם סומכים רק על היועצים המשפטים. אבל ברגע שיחלפו את המשפטנים הם לא יכולים לבצע את תפקידם מחשש להרג חפים מפשע שלא לצורך מבצעי&gt;",
-    "created_at": "Fri Sep 18 09:30:20 +0000 2026",
-    "timestamp": 1789723820000,
-    "tweet_url": "https://x.com/benisra91364090/status/2100880090095603835",
-    "media": []
-  },
-  {
-    "id": "2100879539769417943",
-    "username": "unknown",
-    "text": "אדריכלים: בואו נעצב בניין חדש שיתאים לאופי של בני ברק\n\nהמציאות: https://t.co/fU1KaF3lLq",
-    "created_at": "Fri Sep 18 09:28:09 +0000 2026",
-    "timestamp": 1789723689000,
-    "tweet_url": "https://x.com/YitzikCrombie/status/2100879539769417943",
-    "media": []
-  },
-  {
-    "id": "2100879387239268550",
-    "username": "unknown",
-    "text": "@PointOffVue @amit_segal ליבת העניין....מממ\nליבת העניין היא לא לתת לאדם שהוביל אותנו לטבח האחרון ועשה כל מה שיכל כדי למשוך את הזמן על הכיסא כדי לשלוט בנרטיב...להמשיך להוביל",
-    "created_at": "Fri Sep 18 09:27:33 +0000 2026",
-    "timestamp": 1789723653000,
-    "tweet_url": "https://x.com/ZRonron_zr/status/2100879387239268550",
-    "media": []
-  },
-  {
-    "id": "2100879228573024662",
-    "username": "unknown",
-    "text": "@amit_segal תמשיך עם מסך העשן.\nהלוואי והיית נלחם מלחמת חורמה במי שמקדם והצביע בעד חוק שפוטר חרדים מגיוס, בחוק למניעת מאסר עריקים, בהארכת שירות הסדיר והמילואים כמו באחים לנשק.",
-    "created_at": "Fri Sep 18 09:26:55 +0000 2026",
-    "timestamp": 1789723615000,
-    "tweet_url": "https://x.com/amirlevy89/status/2100879228573024662",
-    "media": []
-  },
-  {
-    "id": "2100875821053325684",
-    "username": "unknown",
-    "text": "הגה\"צ חכם ניסים בן שמעון מקבל את האתרוג המרוקאי מבית באדוש אתרוגי מרוקו והתפעל מיופיו הנדיר https://t.co/5JbxgCtYJV",
-    "created_at": "Fri Sep 18 09:13:22 +0000 2026",
-    "timestamp": 1789722802000,
-    "tweet_url": "https://x.com/moshe_nayes/status/2100875821053325684",
-    "media": []
-  },
-  {
-    "id": "2100870546728599563",
-    "username": "unknown",
-    "text": "@YitzikCrombie שהחילונים נהיו מיעוט?",
-    "created_at": "Fri Sep 18 08:52:25 +0000 2026",
-    "timestamp": 1789721545000,
-    "tweet_url": "https://x.com/ielishacohen/status/2100870546728599563",
-    "media": []
-  },
-  {
-    "id": "2100862981177290887",
-    "username": "unknown",
-    "text": "@YitzikCrombie בחור שיקבל 7000 קולות בלחץ\n\nבסך הכל פרוקסי של ממשלת הטבח והשתמטות שנועד לשרוף קולות ליברלים",
-    "created_at": "Fri Sep 18 08:22:21 +0000 2026",
-    "timestamp": 1789719741000,
-    "tweet_url": "https://x.com/Madinadi1874/status/2100862981177290887",
-    "media": []
-  },
-  {
-    "id": "2100862410655482135",
-    "username": "unknown",
-    "text": "@Mishpacha_M ברוך שכיוונתי @yoelituv",
-    "created_at": "Fri Sep 18 08:20:05 +0000 2026",
-    "timestamp": 1789719605000,
-    "tweet_url": "https://x.com/RobertAbrahams/status/2100862410655482135",
-    "media": []
-  },
-  {
-    "id": "2100861346325692712",
-    "username": "unknown",
-    "text": "@moshe_nayes מת להבין מה אתה חושב שמדהים פה. שני אנשים מדברים, לא שומעים מה הוא אומר, לא רואים משהו מעניין במיוחד. אתה פשוט מתלהב שרב מדבר עם תלמיד. זה מביך",
-    "created_at": "Fri Sep 18 08:15:51 +0000 2026",
-    "timestamp": 1789719351000,
-    "tweet_url": "https://x.com/BuckMulligan117/status/2100861346325692712",
-    "media": []
-  },
-  {
-    "id": "2100860512967741452",
-    "username": "unknown",
-    "text": "@Israelcohen911 למה הם היו בנתק?",
-    "created_at": "Fri Sep 18 08:12:33 +0000 2026",
-    "timestamp": 1789719153000,
-    "tweet_url": "https://x.com/OrbachShlomo/status/2100860512967741452",
-    "media": []
-  },
-  {
-    "id": "2100858176161677407",
-    "username": "unknown",
-    "text": "✡️ --  WATCH: Slabodka Rosh Yeshivah Reb Moshe Hillel Hirsch is seen talking with a Talmid this morning about Avodas Hashem ahead of Yom Kippur https://t.co/qcixYnoVZQ",
-    "created_at": "Fri Sep 18 08:03:15 +0000 2026",
-    "timestamp": 1789718595000,
-    "tweet_url": "https://x.com/TheBelaaz/status/2100858176161677407",
-    "media": []
-  },
-  {
-    "id": "2100857085936140764",
-    "username": "unknown",
-    "text": "מפגש מיוחד התקיים בין נציגי חברת התרופות הבינלאומית באייר למרכז לפוריות ומצוות הבית בראשות הרב אברהם זילברברג בבית שמש. נציגות החברה התרשמו מהמערך המקצועי המסייע למשפחות ושוחחו אודות מגוון המוצרים האיכותי של באייר והתאמתם לציבור החרדי. https://t.co/enzV57CDse",
-    "created_at": "Fri Sep 18 07:58:55 +0000 2026",
-    "timestamp": 1789718335000,
-    "tweet_url": "https://x.com/Israelcohen911/status/2100857085936140764",
-    "media": []
-  },
-  {
-    "id": "2100853569977000181",
-    "username": "unknown",
-    "text": "בא לשכונה בחור חדש! https://t.co/X25OBKkUvZ",
-    "created_at": "Fri Sep 18 07:44:57 +0000 2026",
-    "timestamp": 1789717497000,
-    "tweet_url": "https://x.com/YitzikCrombie/status/2100853569977000181",
-    "media": []
-  },
-  {
-    "id": "2100853183631278486",
-    "username": "unknown",
-    "text": "בשבוע הבא אשתף כמה שיחות שהיו לי עם מפגיני הפלג הירושלמי הקיצוני בזמן התארגנות להפגנה מחוץ לכנס שעשינו ללוחמים החרדים.\n\nשימו לב שהיהודי עימו אני משוחח (שבהחלט כואב את הגיוס ולא פופוליסט), כמעט משתכנע שאנחנו עושים טוב…\n\nמדובר באחד המפגינים הקבועים בהפגנות נגד הגיוס. https://t.co/LqBMI8gJfu",
-    "created_at": "Fri Sep 18 07:43:25 +0000 2026",
-    "timestamp": 1789717405000,
-    "tweet_url": "https://x.com/yossilevii/status/2100853183631278486",
-    "media": []
-  },
-  {
-    "id": "2100852301778809187",
-    "username": "unknown",
-    "text": "@YakiAdamker יאקי איזה מקום אתה חמוד?\nמועמד לאיזה תפקיד?\nהמתלקק הלאומי?",
-    "created_at": "Fri Sep 18 07:39:55 +0000 2026",
-    "timestamp": 1789717195000,
-    "tweet_url": "https://x.com/OriTwig/status/2100852301778809187",
-    "media": []
-  },
-  {
-    "id": "2100852261790335464",
-    "username": "unknown",
-    "text": "@yossilevii God bless ISRAEL.\nAMEN!",
-    "created_at": "Fri Sep 18 07:39:45 +0000 2026",
-    "timestamp": 1789717185000,
-    "tweet_url": "https://x.com/DonaldHarr22150/status/2100852261790335464",
-    "media": []
-  },
-  {
-    "id": "2100849275877880156",
-    "username": "unknown",
-    "text": "@Turh676 @Israelcohen911 מלך זה לא מדינה .",
-    "created_at": "Fri Sep 18 07:27:53 +0000 2026",
-    "timestamp": 1789716473000,
-    "tweet_url": "https://x.com/MRbynwbyz17237/status/2100849275877880156",
-    "media": []
-  },
-  {
-    "id": "2100844445100822657",
-    "username": "unknown",
-    "text": "@YinonMagal היועמ\"שית נובעת משיקולים פוליטיים.",
-    "created_at": "Fri Sep 18 07:08:42 +0000 2026",
-    "timestamp": 1789715322000,
-    "tweet_url": "https://x.com/DannyHendler/status/2100844445100822657",
-    "media": []
-  },
-  {
-    "id": "2100844441242128848",
-    "username": "unknown",
-    "text": "כמסורת של שנים: עשרות רבנים, פוסקי הלכה ומורי הוראה השתתפו בוועידה השנתית של מכון ׳יד הרמה׳ ו׳מאוחדת׳ שעסקה בנושאי צום יו״כ. בוועידה שהתקיימה בבית שמש נשאו דברים: הגר״מ דייטש ראש המכון, הגר״נ קופשיץ והגר״ש ברנסדורפר. בצוות המקצועי בלטו: בכירי הרופאים של ׳מאוחדת׳ וטובי הפרופסורים של ביה״ח ׳הדסה׳",
-    "created_at": "Fri Sep 18 07:08:41 +0000 2026",
-    "timestamp": 1789715321000,
-    "tweet_url": "https://x.com/moshe_nayes/status/2100844441242128848",
-    "media": []
-  },
-  {
-    "id": "2100844361063841793",
-    "username": "unknown",
-    "text": "@YossefSolimani @amit_segal צודק, זה באמת מאוד משנה באיזה ארגון או הפגנה או ראיון ב60 דקות הם קראו לפרק את צהל ולפגוע בבטחון של כולנו.",
-    "created_at": "Fri Sep 18 07:08:22 +0000 2026",
-    "timestamp": 1789715302000,
-    "tweet_url": "https://x.com/AbuYoYo91/status/2100844361063841793",
-    "media": []
-  },
-  {
-    "id": "2100844061208821770",
-    "username": "unknown",
-    "text": "@AbuYoYo91 @amit_segal אבל אף אחד מהם לא היה באמת חלק מוצהר מהארגון.",
-    "created_at": "Fri Sep 18 07:07:10 +0000 2026",
-    "timestamp": 1789715230000,
-    "tweet_url": "https://x.com/YossefSolimani/status/2100844061208821770",
-    "media": []
-  },
-  {
-    "id": "2100843540569817430",
-    "username": "unknown",
-    "text": "@YossefSolimani @amit_segal יאיר גולן, יאיא פינק, נמרוד שפר.",
-    "created_at": "Fri Sep 18 07:05:06 +0000 2026",
-    "timestamp": 1789715106000,
-    "tweet_url": "https://x.com/AbuYoYo91/status/2100843540569817430",
-    "media": []
-  },
-  {
-    "id": "2100843459691065852",
-    "username": "unknown",
-    "text": "@YinonMagal האם לדעתך ראש מזבלת \"חמאס הוא נכס\" כבר גמור? . אגב הוא נראה גמור.",
-    "created_at": "Fri Sep 18 07:04:47 +0000 2026",
-    "timestamp": 1789715087000,
-    "tweet_url": "https://x.com/dror811/status/2100843459691065852",
-    "media": []
-  },
-  {
-    "id": "2100843387226063233",
-    "username": "unknown",
-    "text": "@amit_segal https://t.co/J4D15VUPWs",
-    "created_at": "Fri Sep 18 07:04:29 +0000 2026",
-    "timestamp": 1789715069000,
-    "tweet_url": "https://x.com/romkri/status/2100843387226063233",
-    "media": []
-  },
-  {
-    "id": "2100843359229083706",
-    "username": "unknown",
-    "text": "@AbuYoYo91 @amit_segal סליחה אבל מעבר לעומרי רונן שהיה פעיל מוצהר שלהם (ואגב גינה את הסרט) איזה גנרלים התגלגלו לדמוקרטים והיו חלק מאחים לנשק ושותפים לעלילת הדם הזאת?",
-    "created_at": "Fri Sep 18 07:04:23 +0000 2026",
-    "timestamp": 1789715063000,
-    "tweet_url": "https://x.com/YossefSolimani/status/2100843359229083706",
-    "media": []
-  },
-  {
-    "id": "2100843214060093670",
-    "username": "unknown",
-    "text": "@amit_segal כל מי שלוקח חלק באורגיה הפאשיסטית של רדיפת יוצרי הסרט שלהגיד עליה ״זה יגמר ברצח״ זה משנה זהירות, דופק עוד מסמר בקבורה של מדינת ישראל.",
-    "created_at": "Fri Sep 18 07:03:48 +0000 2026",
-    "timestamp": 1789715028000,
-    "tweet_url": "https://x.com/InbalKeidar/status/2100843214060093670",
-    "media": []
-  },
-  {
-    "id": "2100843142928896033",
-    "username": "unknown",
-    "text": "@y0506650250 @yankihebrew אל דאגה. החרדים שיבואו לצבא, יהיו ברובם חרדים מודרנים שלא שואפים לשנות את האופי הליברלי של המערכות.",
-    "created_at": "Fri Sep 18 07:03:31 +0000 2026",
-    "timestamp": 1789715011000,
-    "tweet_url": "https://x.com/sharp_questions/status/2100843142928896033",
-    "media": []
-  },
-  {
-    "id": "2100843011970097379",
-    "username": "unknown",
-    "text": "@YinonMagal היא לא מנתיבות??",
-    "created_at": "Fri Sep 18 07:03:00 +0000 2026",
-    "timestamp": 1789714980000,
-    "tweet_url": "https://x.com/LocoBoedo/status/2100843011970097379",
-    "media": []
-  },
-  {
-    "id": "2100842307469607154",
-    "username": "unknown",
-    "text": "@amit_segal @HaiShmuel פושעים https://t.co/kAXzMzIybl",
-    "created_at": "Fri Sep 18 07:00:12 +0000 2026",
-    "timestamp": 1789714812000,
-    "tweet_url": "https://x.com/Dana120169/status/2100842307469607154",
-    "media": []
-  },
-  {
-    "id": "2100842240482410914",
-    "username": "unknown",
-    "text": "@YinonMagal אז איך זה יבוא לידי ביטוי בבחירות? \nלמי יש לה להצביע? כל מפלגות השמאל בברית עם תומכי הטבח הערבים",
-    "created_at": "Fri Sep 18 06:59:56 +0000 2026",
-    "timestamp": 1789714796000,
-    "tweet_url": "https://x.com/agent_smiley005/status/2100842240482410914",
-    "media": []
-  },
-  {
-    "id": "2100841617296929162",
-    "username": "unknown",
-    "text": "@YinonMagal אנחנו יודעים שאתם בצד של קטאר, בוגדים.",
-    "created_at": "Fri Sep 18 06:57:27 +0000 2026",
-    "timestamp": 1789714647000,
-    "tweet_url": "https://x.com/Kobi33325254/status/2100841617296929162",
-    "media": []
-  },
-  {
-    "id": "2100841310596817044",
-    "username": "unknown",
-    "text": "@amit_segal https://t.co/tyTbMWrfzy",
-    "created_at": "Fri Sep 18 06:56:14 +0000 2026",
-    "timestamp": 1789714574000,
-    "tweet_url": "https://x.com/mbynh70778/status/2100841310596817044",
-    "media": []
-  },
-  {
-    "id": "2100841034942931312",
-    "username": "unknown",
-    "text": "@YinonMagal ינון אני מתפלא עלייך זהו כלל ידוע במערב הפרוע תכלית התקפית רק במידה ומעבר ל2 פאקינג אקדחים נדרשם גם להחזיק טנק מרכבה ומטוס f35 החמקן \n\nקל\n\nחתימה טובה!!!",
-    "created_at": "Fri Sep 18 06:55:09 +0000 2026",
-    "timestamp": 1789714509000,
-    "tweet_url": "https://x.com/KorenYaacov/status/2100841034942931312",
-    "media": []
-  },
-  {
-    "id": "2100840422985638314",
-    "username": "unknown",
-    "text": "@oferpo @amit_segal אוי חבר מתוק\nאתה צריך חיבוקי או מנה?",
-    "created_at": "Fri Sep 18 06:52:43 +0000 2026",
-    "timestamp": 1789714363000,
-    "tweet_url": "https://x.com/ZRonron_zr/status/2100840422985638314",
-    "media": []
-  },
-  {
-    "id": "2100840147705012661",
-    "username": "unknown",
-    "text": "@ahimlaneshek1 אשכרה כל מילה בסלע \n@amit_segal\nאיך לוחמים שקוראים לעצמם אחים לנשק\n\nלא מצאו פנאי לגנות את הסרט יוצריו ותוכנו \nשל \"נזא\"....\n\nאשכרה הם אומרים שחלקכם רוצחים בשיטיות כלומר רצח עם .ואתם שותקים??\nתהיו עינינים פעם אחת\nולא כל הזמן ביבי זיבי ...\nפעם אחת תהיו עם ישראל https://t.co/JPRFxpjBwy",
-    "created_at": "Fri Sep 18 06:51:37 +0000 2026",
-    "timestamp": 1789714297000,
-    "tweet_url": "https://x.com/kaw7pOq3pPQtSWi/status/2100840147705012661",
-    "media": []
-  },
-  {
-    "id": "2100839886123131344",
-    "username": "unknown",
-    "text": "@C14_news @YinonMagal @YotYotam https://t.co/uGc4nlDJDI",
-    "created_at": "Fri Sep 18 06:50:35 +0000 2026",
-    "timestamp": 1789714235000,
-    "tweet_url": "https://x.com/Greeneyes653015/status/2100839886123131344",
-    "media": []
-  },
-  {
-    "id": "2100839568195158220",
-    "username": "unknown",
-    "text": "@ZRonron_zr @amit_segal אמא שלך",
-    "created_at": "Fri Sep 18 06:49:19 +0000 2026",
-    "timestamp": 1789714159000,
-    "tweet_url": "https://x.com/oferpo/status/2100839568195158220",
-    "media": []
-  },
-  {
-    "id": "2100839434820243619",
-    "username": "unknown",
-    "text": "@YinonMagal Magic; pure magic.  Nothing on earth surpasses the Jewish love- and celebration of life. Thanks for sharing this 🩶",
-    "created_at": "Fri Sep 18 06:48:47 +0000 2026",
-    "timestamp": 1789714127000,
-    "tweet_url": "https://x.com/adrienneFirth59/status/2100839434820243619",
-    "media": []
-  },
-  {
-    "id": "2100839058251407441",
-    "username": "unknown",
-    "text": "@amit_segal https://t.co/08MKusfy4n",
-    "created_at": "Fri Sep 18 06:47:17 +0000 2026",
-    "timestamp": 1789714037000,
-    "tweet_url": "https://x.com/ShlomoLevy9/status/2100839058251407441",
-    "media": []
-  },
-  {
-    "id": "2100838988894351778",
-    "username": "unknown",
-    "text": "@amit_segal על דבר כזה אתה נוהג לתבוע, נכון?\nhttps://t.co/ghIc7mr3kS",
-    "created_at": "Fri Sep 18 06:47:01 +0000 2026",
-    "timestamp": 1789714021000,
-    "tweet_url": "https://x.com/JustMeg4now/status/2100838988894351778",
-    "media": []
-  },
-  {
-    "id": "2100838584517337093",
-    "username": "unknown",
-    "text": "@Bibiking2024040 @YinonMagal ערבים מוסלמים  עם תעודת זהות כחולה",
-    "created_at": "Fri Sep 18 06:45:24 +0000 2026",
-    "timestamp": 1789713924000,
-    "tweet_url": "https://x.com/Israelalways48/status/2100838584517337093",
-    "media": []
-  },
-  {
-    "id": "2100838471099453858",
-    "username": "unknown",
-    "text": "@amit_segal אוי עמית איזה ספינים שאתה עושה . חבל שאיש חכם כמוך שבוי בקונספירציות ולא מתאמץ לראות את המציאות . הרגו בעזה כמויות אדירות של לא מעורבים בלי שהיתה אסטרטגיה ועשו נזק ענק לדימוי של ישראל וזה למרות שהיו צריכים להגיב על האסון שקרה . שני דברים יכולים להיות נכונים באותו הזמן .",
-    "created_at": "Fri Sep 18 06:44:57 +0000 2026",
-    "timestamp": 1789713897000,
-    "tweet_url": "https://x.com/smaviv/status/2100838471099453858",
-    "media": []
-  },
-  {
-    "id": "2100838306309132461",
-    "username": "unknown",
-    "text": "וידאו מדהים שתיעד הבוקר הצלם יעקב נחומי בגבעת ישיבת סלבודקה. מנהיג עולם התורה הגרמ\"ה הירש עונה לבחור צעיר על שאלה ששאל בעבודת השם לקראת יום הכיפורים https://t.co/WlLlL1jQHK",
-    "created_at": "Fri Sep 18 06:44:18 +0000 2026",
-    "timestamp": 1789713858000,
-    "tweet_url": "https://x.com/moshe_nayes/status/2100838306309132461",
-    "media": []
-  },
-  {
-    "id": "2100837968785076520",
-    "username": "unknown",
-    "text": "@ZRonron_zr @amit_segal דברים שבמהות הם בעיניך זוטות. לא לא. אתה הוא זה שמפמפם מסרים של קמפיין ומתעלם מליבת העניין",
-    "created_at": "Fri Sep 18 06:42:58 +0000 2026",
-    "timestamp": 1789713778000,
-    "tweet_url": "https://x.com/PointOffVue/status/2100837968785076520",
-    "media": []
-  },
-  {
-    "id": "2100837451887448449",
-    "username": "unknown",
-    "text": "@AlcobiRaz @amit_segal 1. כי הוא לא התעלם 2. תפקד מעולה מאותו יום ולאורך כל המלחמה",
-    "created_at": "Fri Sep 18 06:40:54 +0000 2026",
-    "timestamp": 1789713654000,
-    "tweet_url": "https://x.com/PointOffVue/status/2100837451887448449",
-    "media": []
-  },
-  {
-    "id": "2100836881042665872",
-    "username": "unknown",
-    "text": "@moshe_nayes הישג דרמטי בבני ברק: אם יקרה אסון, המדינה תשלם פיצויים כי היא אשמה שלא הצילה אותנו מעצמנו",
-    "created_at": "Fri Sep 18 06:38:38 +0000 2026",
-    "timestamp": 1789713518000,
-    "tweet_url": "https://x.com/HDMI_2412/status/2100836881042665872",
-    "media": []
-  },
-  {
-    "id": "2100836390699221147",
-    "username": "unknown",
-    "text": "@amit_segal הגדרה לאובססיה על זוטות\nאתה תמשיך לזרוע חול....אבל מחדל כמו ה7.10 וחוק ההשתמטות....אתה תצטרך חוף שלם כדי להסתיר",
-    "created_at": "Fri Sep 18 06:36:41 +0000 2026",
-    "timestamp": 1789713401000,
-    "tweet_url": "https://x.com/ZRonron_zr/status/2100836390699221147",
-    "media": []
-  },
-  {
-    "id": "2100836102659563904",
-    "username": "unknown",
-    "text": "@yossilevii לא תשמע מאריה תוכנית להוצאת חרדים ממעל עוני ע\"י חכות ולא דגים והטמעת תרבות  של חברה שנהנית מיגיע כפה ונושאת בעול עם חבריה.",
-    "created_at": "Fri Sep 18 06:35:33 +0000 2026",
-    "timestamp": 1789713333000,
-    "tweet_url": "https://x.com/12345oshi/status/2100836102659563904",
-    "media": []
-  },
-  {
-    "id": "2100835702514556967",
-    "username": "unknown",
-    "text": "@YinonMagal https://t.co/Wp13GfhUDD",
-    "created_at": "Fri Sep 18 06:33:57 +0000 2026",
-    "timestamp": 1789713237000,
-    "tweet_url": "https://x.com/Win_ston_Smi_th/status/2100835702514556967",
-    "media": []
-  },
-  {
-    "id": "2100835544406036954",
-    "username": "unknown",
-    "text": "@bezalelsm @YinonMagal @YotYotam You cannot kill everyone in plain sight, demolish the homes of the local people one by one, and then act as if nothing happened. What you are committing is occupation, genocide, and savagery. And it is your primitive tribal god who drives you to do this. You scum.",
-    "created_at": "Fri Sep 18 06:33:20 +0000 2026",
-    "timestamp": 1789713200000,
-    "tweet_url": "https://x.com/zazaoglu_23/status/2100835544406036954",
-    "media": []
-  },
-  {
-    "id": "2100835452320198832",
-    "username": "unknown",
-    "text": "@YinonMagal @pelg130246 אבל מותר למנדלבליט לעשות מסיבת עיתונאים כשביבי בארה״ב בהסכמי אברהם ולפני בחירות  לעשות מסיבת עיתונאים ולהודיע על כתב אישום לנתניהו? זה לא פוליטי? חלאה",
-    "created_at": "Fri Sep 18 06:32:58 +0000 2026",
-    "timestamp": 1789713178000,
-    "tweet_url": "https://x.com/viv65837170/status/2100835452320198832",
-    "media": []
-  },
-  {
-    "id": "2100835310582059046",
-    "username": "unknown",
-    "text": "@AlcobiRaz @amit_segal עמית העלה נקודה מעניינת ומעוררת מחשבה. ובדיוק על החוסר נחות הזו שלך הוא כותב כן אתה שכתבת \" עמית מפמפם \" בהחלט תגובה מבולבלת שלך. נקודה חריפה ומדוייקת שלו.",
-    "created_at": "Fri Sep 18 06:32:24 +0000 2026",
-    "timestamp": 1789713144000,
-    "tweet_url": "https://x.com/NorseBergen/status/2100835310582059046",
-    "media": []
-  },
-  {
-    "id": "2100835166721544590",
-    "username": "unknown",
-    "text": "@YinonMagal לא פשוש רמאי.\n\nהעולם זה רוב אזרחי מדינות המערב שבוחרים ימין בארצם עקב הבנתם מיהו האויב האסלמונאצי המהגר לארצם❗️...ועם מה היהודים בישראל מתמודדים❗️\n\nפשוש רמאי,טייל ב-X ותראה מה קורה באנגליה באירופה ובארה\"ב נגד האסלם ובעד ישראל☝️\n\nהכת הציונאצית שלחהו אותך❓️\nכמה החזירים משלמים❓️",
-    "created_at": "Fri Sep 18 06:31:50 +0000 2026",
-    "timestamp": 1789713110000,
-    "tweet_url": "https://x.com/orbitpro72/status/2100835166721544590",
-    "media": []
-  },
-  {
-    "id": "2100835088275476583",
-    "username": "unknown",
-    "text": "@arivlin1 ולמה ה\"רקע מסוים שכל כתבי המפלגות יודעים\" אינו נחלת הכלל?\nמה יש לך להסתיר ומדוע?",
-    "created_at": "Fri Sep 18 06:31:31 +0000 2026",
-    "timestamp": 1789713091000,
-    "tweet_url": "https://x.com/Shaya_Rosenblum/status/2100835088275476583",
-    "media": []
-  },
-  {
-    "id": "2100834967659934057",
-    "username": "unknown",
-    "text": "@hrn144190 @YinonMagal מה קשור שנה מעוברת לחודש חשון",
-    "created_at": "Fri Sep 18 06:31:02 +0000 2026",
-    "timestamp": 1789713062000,
-    "tweet_url": "https://x.com/bsidish/status/2100834967659934057",
-    "media": []
-  },
-  {
-    "id": "2100834955496415661",
-    "username": "unknown",
-    "text": "@moshe_nayes הטלנובלה שאני רוצה בטלוויזיה שלי",
-    "created_at": "Fri Sep 18 06:30:59 +0000 2026",
-    "timestamp": 1789713059000,
-    "tweet_url": "https://x.com/Zelda_Pseudonym/status/2100834955496415661",
-    "media": []
-  },
-  {
-    "id": "2100834832196530561",
-    "username": "unknown",
-    "text": "@amit_segal מיליציית הגנרלים של אחים לנשק והגלגלול הפוליטי שלהם למפלגת הסרבנים של הבוגד הבזוי יאיר גולן, מייצגים את כל הרע והגועל שיש בחברה הישראלית. \nאליטה זחוחה ונבובה שבטוחה שגנבו לה מדינה, ובשל כך מוכנה לפגוע אנושות בבטחונה של זו, ולהיות שותפה לעלילות דם אנטישמיות על חייליה.",
-    "created_at": "Fri Sep 18 06:30:30 +0000 2026",
-    "timestamp": 1789713030000,
-    "tweet_url": "https://x.com/AbuYoYo91/status/2100834832196530561",
-    "media": []
-  },
-  {
-    "id": "2100834804748927018",
-    "username": "unknown",
-    "text": "@YinonMagal ליברמן חפש משהו בעזה שינענע אותך",
-    "created_at": "Fri Sep 18 06:30:23 +0000 2026",
-    "timestamp": 1789713023000,
-    "tweet_url": "https://x.com/asul83772/status/2100834804748927018",
-    "media": []
-  },
-  {
-    "id": "2100834668144644353",
-    "username": "unknown",
-    "text": "@Yosssia123 @meirbenshush @Israelcohen911 השם שלו לא מזרחי מספיק אז אנשים לא מבינים את זה, לצערנו זה עדיין משנה למישהו",
-    "created_at": "Fri Sep 18 06:29:51 +0000 2026",
-    "timestamp": 1789712991000,
-    "tweet_url": "https://x.com/BorkowskiNatan/status/2100834668144644353",
-    "media": []
-  },
-  {
-    "id": "2100834533436269003",
-    "username": "unknown",
-    "text": "@YakSaba14 @moshe_nayes מטומטם זנאי",
-    "created_at": "Fri Sep 18 06:29:19 +0000 2026",
-    "timestamp": 1789712959000,
-    "tweet_url": "https://x.com/isis148148/status/2100834533436269003",
-    "media": []
-  },
-  {
-    "id": "2100834315475075532",
-    "username": "unknown",
-    "text": "@YinonMagal יש אירועי סליחות בהפרדה בבתי הכנסת, מרחק כמה דקות הליכה מהחוף. שמחתי לעזור",
-    "created_at": "Fri Sep 18 06:28:27 +0000 2026",
-    "timestamp": 1789712907000,
-    "tweet_url": "https://x.com/nogaor/status/2100834315475075532",
-    "media": []
-  },
-  {
-    "id": "2100834308860559424",
-    "username": "unknown",
-    "text": "@amit_segal כרגיל כתיבה מעולה חדה ומדוייקת. שלך עמית.",
-    "created_at": "Fri Sep 18 06:28:25 +0000 2026",
-    "timestamp": 1789712905000,
-    "tweet_url": "https://x.com/NorseBergen/status/2100834308860559424",
     "media": []
   }
 ]
